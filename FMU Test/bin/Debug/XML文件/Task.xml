@@ -1,0 +1,11 @@
+<Tasks xmlns:tasks="http://www.hollysys.com/IAS/control">
+  <Task Name="task">
+    <Rule TaskType="once" TaskTrigger="Periodevent" TaskPeriod="10">
+      <Event Eventname="event1" Type="Tag" Tag="a" Judge="&gt;" Value="20" />
+      <Event Eventname="event2" Type="Tag" Tag="b" Judge="=" Value="10" />
+    </Rule>
+    <Cals>
+      <Cal Name="cal1" URI="\cal\cal1.py" />
+    </Cals>
+  </Task>
+</Tasks>
