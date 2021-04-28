@@ -113,35 +113,35 @@ namespace FMU_Test
             this.textBoxname.Location = new System.Drawing.Point(140, 18);
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(234, 25);
-            this.textBoxname.TabIndex = 7;
+            this.textBoxname.TabIndex = 0;
             // 
             // textBoxtype
             // 
             this.textBoxtype.Location = new System.Drawing.Point(140, 48);
             this.textBoxtype.Name = "textBoxtype";
             this.textBoxtype.Size = new System.Drawing.Size(234, 25);
-            this.textBoxtype.TabIndex = 8;
+            this.textBoxtype.TabIndex = 1;
             // 
             // textBoxtag
             // 
             this.textBoxtag.Location = new System.Drawing.Point(140, 78);
             this.textBoxtag.Name = "textBoxtag";
             this.textBoxtag.Size = new System.Drawing.Size(234, 25);
-            this.textBoxtag.TabIndex = 9;
+            this.textBoxtag.TabIndex = 2;
             // 
             // textBoxjudge
             // 
             this.textBoxjudge.Location = new System.Drawing.Point(140, 108);
             this.textBoxjudge.Name = "textBoxjudge";
             this.textBoxjudge.Size = new System.Drawing.Size(234, 25);
-            this.textBoxjudge.TabIndex = 10;
+            this.textBoxjudge.TabIndex = 3;
             // 
             // textBoxvalue
             // 
             this.textBoxvalue.Location = new System.Drawing.Point(140, 138);
             this.textBoxvalue.Name = "textBoxvalue";
             this.textBoxvalue.Size = new System.Drawing.Size(234, 25);
-            this.textBoxvalue.TabIndex = 11;
+            this.textBoxvalue.TabIndex = 4;
             // 
             // GetEvent
             // 
@@ -165,6 +165,7 @@ namespace FMU_Test
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GetEvent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加触发条件";
             this.ResumeLayout(false);
             this.PerformLayout();

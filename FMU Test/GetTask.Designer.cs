@@ -52,7 +52,7 @@ namespace FMU_Test
             this.buttonOK.Location = new System.Drawing.Point(59, 285);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(150, 25);
-            this.buttonOK.TabIndex = 0;
+            this.buttonOK.TabIndex = 6;
             this.buttonOK.Text = "生成xml";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -62,7 +62,7 @@ namespace FMU_Test
             this.buttonAddevent.Location = new System.Drawing.Point(59, 188);
             this.buttonAddevent.Name = "buttonAddevent";
             this.buttonAddevent.Size = new System.Drawing.Size(150, 25);
-            this.buttonAddevent.TabIndex = 1;
+            this.buttonAddevent.TabIndex = 4;
             this.buttonAddevent.Text = "添加触发条件";
             this.buttonAddevent.UseVisualStyleBackColor = true;
             this.buttonAddevent.Click += new System.EventHandler(this.buttonAddevent_Click);
@@ -72,7 +72,7 @@ namespace FMU_Test
             this.buttonAddcal.Location = new System.Drawing.Point(59, 231);
             this.buttonAddcal.Name = "buttonAddcal";
             this.buttonAddcal.Size = new System.Drawing.Size(150, 25);
-            this.buttonAddcal.TabIndex = 2;
+            this.buttonAddcal.TabIndex = 5;
             this.buttonAddcal.Text = "添加计算任务";
             this.buttonAddcal.UseVisualStyleBackColor = true;
             this.buttonAddcal.Click += new System.EventHandler(this.buttonAddcal_Click);
@@ -103,7 +103,7 @@ namespace FMU_Test
             this.textBoxevecount.Name = "textBoxevecount";
             this.textBoxevecount.ReadOnly = true;
             this.textBoxevecount.Size = new System.Drawing.Size(100, 18);
-            this.textBoxevecount.TabIndex = 5;
+            this.textBoxevecount.TabIndex = 8;
             this.textBoxevecount.Text = "0";
             // 
             // textBoxcalcount
@@ -114,7 +114,7 @@ namespace FMU_Test
             this.textBoxcalcount.Name = "textBoxcalcount";
             this.textBoxcalcount.ReadOnly = true;
             this.textBoxcalcount.Size = new System.Drawing.Size(100, 18);
-            this.textBoxcalcount.TabIndex = 6;
+            this.textBoxcalcount.TabIndex = 9;
             this.textBoxcalcount.Text = "0";
             // 
             // label3
@@ -158,38 +158,38 @@ namespace FMU_Test
             this.textBoxname.Location = new System.Drawing.Point(153, 20);
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(338, 25);
-            this.textBoxname.TabIndex = 11;
+            this.textBoxname.TabIndex = 0;
             // 
             // textBoxtype
             // 
             this.textBoxtype.Location = new System.Drawing.Point(153, 56);
             this.textBoxtype.Name = "textBoxtype";
             this.textBoxtype.Size = new System.Drawing.Size(338, 25);
-            this.textBoxtype.TabIndex = 11;
+            this.textBoxtype.TabIndex = 1;
             // 
             // textBoxtrigger
             // 
             this.textBoxtrigger.Location = new System.Drawing.Point(153, 92);
             this.textBoxtrigger.Name = "textBoxtrigger";
             this.textBoxtrigger.Size = new System.Drawing.Size(338, 25);
-            this.textBoxtrigger.TabIndex = 11;
+            this.textBoxtrigger.TabIndex = 2;
             // 
             // textBoxperiod
             // 
             this.textBoxperiod.Location = new System.Drawing.Point(153, 128);
             this.textBoxperiod.Name = "textBoxperiod";
             this.textBoxperiod.Size = new System.Drawing.Size(338, 25);
-            this.textBoxperiod.TabIndex = 11;
+            this.textBoxperiod.TabIndex = 3;
             // 
             // buttoncancel
             // 
-            this.buttoncancel.Location = new System.Drawing.Point(276, 285);
+            this.buttoncancel.Location = new System.Drawing.Point(285, 285);
             this.buttoncancel.Name = "buttoncancel";
-            this.buttoncancel.Size = new System.Drawing.Size(150, 25);
-            this.buttoncancel.TabIndex = 0;
+            this.buttoncancel.Size = new System.Drawing.Size(125, 25);
+            this.buttoncancel.TabIndex = 7;
             this.buttoncancel.Text = "取消";
             this.buttoncancel.UseVisualStyleBackColor = true;
-            this.buttoncancel.Click += new System.EventHandler(this.buttonOK_Click);
+            this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
             // GetTask
             // 
@@ -197,6 +197,7 @@ namespace FMU_Test
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(514, 334);
+            this.Controls.Add(this.buttoncancel);
             this.Controls.Add(this.textBoxperiod);
             this.Controls.Add(this.textBoxtrigger);
             this.Controls.Add(this.textBoxtype);
@@ -211,7 +212,6 @@ namespace FMU_Test
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonAddcal);
             this.Controls.Add(this.buttonAddevent);
-            this.Controls.Add(this.buttoncancel);
             this.Controls.Add(this.buttonOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

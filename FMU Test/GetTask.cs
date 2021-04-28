@@ -101,6 +101,11 @@ namespace FMU_Test
                 textBoxcalcount.Text = calcount.ToString();
             }
         }
+
+        private void buttoncancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
     }
 
     public class Task

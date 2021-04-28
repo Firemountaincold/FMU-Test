@@ -16,3 +16,6 @@ C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.exe
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.pdb
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetCal.resources
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetEvent.resources
+C:\Users\lenovo\source\repos\FMU Test\FMU Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lenovo\source\repos\FMU Test\FMU Test\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.LogIn.resources

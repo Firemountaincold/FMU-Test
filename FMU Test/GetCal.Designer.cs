@@ -42,7 +42,7 @@ namespace FMU_Test
             this.buttonadd.Location = new System.Drawing.Point(52, 100);
             this.buttonadd.Name = "buttonadd";
             this.buttonadd.Size = new System.Drawing.Size(125, 25);
-            this.buttonadd.TabIndex = 0;
+            this.buttonadd.TabIndex = 2;
             this.buttonadd.Text = "添加";
             this.buttonadd.UseVisualStyleBackColor = true;
             this.buttonadd.Click += new System.EventHandler(this.buttonadd_Click);
@@ -52,7 +52,7 @@ namespace FMU_Test
             this.buttoncancel.Location = new System.Drawing.Point(221, 100);
             this.buttoncancel.Name = "buttoncancel";
             this.buttoncancel.Size = new System.Drawing.Size(125, 25);
-            this.buttoncancel.TabIndex = 0;
+            this.buttoncancel.TabIndex = 3;
             this.buttoncancel.Text = "取消";
             this.buttoncancel.UseVisualStyleBackColor = true;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
@@ -80,14 +80,14 @@ namespace FMU_Test
             this.textBoxname.Location = new System.Drawing.Point(140, 18);
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(234, 25);
-            this.textBoxname.TabIndex = 2;
+            this.textBoxname.TabIndex = 0;
             // 
             // textBoxuri
             // 
             this.textBoxuri.Location = new System.Drawing.Point(140, 48);
             this.textBoxuri.Name = "textBoxuri";
             this.textBoxuri.Size = new System.Drawing.Size(234, 25);
-            this.textBoxuri.TabIndex = 2;
+            this.textBoxuri.TabIndex = 1;
             // 
             // GetCal
             // 
@@ -105,6 +105,7 @@ namespace FMU_Test
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GetCal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "添加计算任务";
             this.ResumeLayout(false);
             this.PerformLayout();
