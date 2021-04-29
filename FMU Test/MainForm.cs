@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FMU_Test
 {
@@ -15,6 +17,7 @@ namespace FMU_Test
     {
         public InfoTools info;
         public RESTful restful = new RESTful();
+        public SFTPHelper sftp;
         public string FMUpath = "";
         public string Callpath = "";
         public string ip;
@@ -22,6 +25,7 @@ namespace FMU_Test
         public string userid;
         public string password;
         public string token;
+        public bool logflag = false;
         public MainForm()
         {
             InitializeComponent();
@@ -73,7 +77,15 @@ namespace FMU_Test
             //用SFTP部署文件
             if (FMUpath != "" && Callpath != "" && textBoxRemotePath.Text != "")
             {
-
+                sftp.Put(FMUpath, textBoxRemotePath.Text);
+                info.AddInfo("已上传dll文件。", 1);
+                sftp.Put(Callpath, textBoxRemotePath.Text);
+                info.AddInfo("已上传py文件。", 1);
+                if (checkBoxtask.Checked)
+                {
+                    sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", textBoxRemotePath.Text);
+                    info.AddInfo("已上传Task.xml。", 1);
+                }
             }
             else
             {
@@ -141,6 +153,7 @@ namespace FMU_Test
             try
             {
                 LogIn logIn = new LogIn();
+                logIn.Text = "登录RESTful API";
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
                     ip = logIn.ip;
@@ -154,6 +167,7 @@ namespace FMU_Test
                     info.AddInfo("已获得令牌" + token + "，登陆成功。", 1);
                     textBoxlogstatus.Text = "已登录";
                     textBoxlogstatus.ForeColor = Color.Green;
+                    logflag = true;
                     timerNOP.Start();
                 }
                 else
@@ -198,48 +212,62 @@ namespace FMU_Test
             }
         }
 
-        private void buttondo_Click(object sender, EventArgs e)
+        private async void buttondo_Click(object sender, EventArgs e)
         {
-            if (radioButtonget.Checked)
+            //执行相应的API命令
+            if (logflag)
             {
-                //GET命令
-                switch (comboBoxtask.SelectedItem)
+                if (radioButtonget.Checked)
                 {
-                    case "获取控制器运行状态":
-
-                        break;
-                    case "获取控制器的诊断状态":
-
-                        break;
-                    case "获取PyTask的路径":
-
-                        break;
-                    case "获取Python已安装的库":
-
-                        break;
+                    //GET命令
+                    JObject json = new JObject();
+                    switch (comboBoxtask.SelectedItem)
+                    {
+                        case "获取控制器运行状态":
+                            json = await restful.GetInfo(userid, token, RESTful.Order.PyRunStat);
+                            break;
+                        case "获取控制器的诊断状态":
+                            json = await restful.GetInfo(userid, token, RESTful.Order.Diagstat);
+                            break;
+                        case "获取PyTask的路径":
+                            json = await restful.GetInfo(userid, token, RESTful.Order.PyTaskFile);
+                            break;
+                        case "获取Python已安装的库":
+                            json = await restful.GetInfo(userid, token, RESTful.Order.PyLib);
+                            break;
+                    }
+                    info.AddInfo(json.ToString(), 1);
+                }
+                else
+                {
+                    //POST命令
+                    JObject json = new JObject();
+                    string post1 = textBoxpost1.Text;
+                    string post2 = textBoxpost2.Text;
+                    switch (comboBoxtask.SelectedItem)
+                    {
+                        case "修改密码":
+                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.Password);
+                            break;
+                        case "设置控制器的控制程序的运行调度":
+                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyRunStat);
+                            break;
+                        case "设置PyTask的路径":
+                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyTaskFile);
+                            break;
+                        case "安装Python库":
+                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib);
+                            break;
+                        case "卸载Python库":
+                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib2);
+                            break;
+                    }
+                    info.AddInfo(json.ToString(), 1);
                 }
             }
             else
             {
-                //POST命令
-                switch (comboBoxtask.SelectedItem)
-                {
-                    case "修改密码":
-
-                        break;
-                    case "设置控制器的控制程序的运行调度":
-
-                        break;
-                    case "设置PyTask的路径":
-
-                        break;
-                    case "安装Python库":
-
-                        break;
-                    case "卸载Python库":
-
-                        break;
-                }
+                MessageBox.Show("请先登录。", "警告");
             }
         }
 
@@ -247,6 +275,7 @@ namespace FMU_Test
         {
             if (radioButtonpost.Checked)
             {
+                textBoxpost2.Enabled = true;
                 switch (comboBoxtask.SelectedItem)
                 {
                     case "修改密码":
@@ -254,18 +283,52 @@ namespace FMU_Test
                         labelpost2.Text = "新密码：";
                         break;
                     case "设置控制器的控制程序的运行调度":
-
+                        labelpost1.Text = "运行状态：";
+                        labelpost2.Text = "运行任务：";
                         break;
                     case "设置PyTask的路径":
-
+                        labelpost1.Text = "目录：";
+                        labelpost2.Text = "全路径：";
                         break;
                     case "安装Python库":
-
+                        labelpost1.Text = "安装路径：";
+                        labelpost2.Text = "";
+                        textBoxpost2.Enabled = false;
                         break;
                     case "卸载Python库":
-
+                        labelpost1.Text = "卸载库名：";
+                        labelpost2.Text = "";
+                        textBoxpost2.Enabled = false;
                         break;
                 }
+            }
+            else
+            {
+                labelpost1.Text = "post字段1：";
+                labelpost2.Text = "post字段2：";
+            }
+        }
+
+        private void buttonlogsftp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogIn logIn = new LogIn();
+                logIn.Text = "登录SFTP";
+                if (logIn.ShowDialog() == DialogResult.OK)
+                {
+                    sftp = new SFTPHelper(logIn.ip, logIn.port, logIn.userid, logIn.password);
+                    sftp.Connect();
+                    info.AddInfo("SFTP服务器登陆成功。", 1);
+                }
+                else
+                {
+                    info.AddInfo("登录已取消。", 2);
+                }
+            }
+            catch (Exception ex)
+            {
+                info.AddInfo(ex.Message, 2);
             }
         }
     }

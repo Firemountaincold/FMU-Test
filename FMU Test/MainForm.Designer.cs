@@ -46,19 +46,20 @@ namespace FMU_Test
             this.buttonGetTask = new System.Windows.Forms.Button();
             this.richTextBoxinfo = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBoxtask = new System.Windows.Forms.ComboBox();
+            this.radioButtonpost = new System.Windows.Forms.RadioButton();
+            this.textBoxlogstatus = new System.Windows.Forms.TextBox();
+            this.radioButtonget = new System.Windows.Forms.RadioButton();
+            this.buttondo = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxpost2 = new System.Windows.Forms.TextBox();
+            this.textBoxpost1 = new System.Windows.Forms.TextBox();
+            this.labelpost2 = new System.Windows.Forms.Label();
+            this.labelpost1 = new System.Windows.Forms.Label();
             this.buttonlogin = new System.Windows.Forms.Button();
             this.buttonexit = new System.Windows.Forms.Button();
             this.timerNOP = new System.Windows.Forms.Timer(this.components);
-            this.labelpost1 = new System.Windows.Forms.Label();
-            this.labelpost2 = new System.Windows.Forms.Label();
-            this.textBoxpost1 = new System.Windows.Forms.TextBox();
-            this.textBoxpost2 = new System.Windows.Forms.TextBox();
-            this.buttondo = new System.Windows.Forms.Button();
-            this.radioButtonget = new System.Windows.Forms.RadioButton();
-            this.radioButtonpost = new System.Windows.Forms.RadioButton();
-            this.comboBoxtask = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBoxlogstatus = new System.Windows.Forms.TextBox();
+            this.buttonlogsftp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,6 +67,7 @@ namespace FMU_Test
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonlogsftp);
             this.groupBox1.Controls.Add(this.checkBoxtask);
             this.groupBox1.Controls.Add(this.textBoxCallstatus);
             this.groupBox1.Controls.Add(this.textBoxFMUstatus);
@@ -156,7 +158,7 @@ namespace FMU_Test
             // 
             this.textBoxRemotePath.Location = new System.Drawing.Point(112, 63);
             this.textBoxRemotePath.Name = "textBoxRemotePath";
-            this.textBoxRemotePath.Size = new System.Drawing.Size(570, 25);
+            this.textBoxRemotePath.Size = new System.Drawing.Size(450, 25);
             this.textBoxRemotePath.TabIndex = 1;
             // 
             // buttonCall
@@ -239,6 +241,110 @@ namespace FMU_Test
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "测试";
             // 
+            // comboBoxtask
+            // 
+            this.comboBoxtask.FormattingEnabled = true;
+            this.comboBoxtask.Items.AddRange(new object[] {
+            "获取控制器运行状态",
+            "获取控制器的诊断状态",
+            "获取PyTask的路径",
+            "获取Python已安装的库"});
+            this.comboBoxtask.Location = new System.Drawing.Point(169, 68);
+            this.comboBoxtask.Name = "comboBoxtask";
+            this.comboBoxtask.Size = new System.Drawing.Size(356, 23);
+            this.comboBoxtask.TabIndex = 16;
+            this.comboBoxtask.SelectedIndexChanged += new System.EventHandler(this.comboBoxtask_SelectedIndexChanged);
+            // 
+            // radioButtonpost
+            // 
+            this.radioButtonpost.AutoSize = true;
+            this.radioButtonpost.Location = new System.Drawing.Point(100, 71);
+            this.radioButtonpost.Name = "radioButtonpost";
+            this.radioButtonpost.Size = new System.Drawing.Size(58, 19);
+            this.radioButtonpost.TabIndex = 15;
+            this.radioButtonpost.Text = "设置";
+            this.radioButtonpost.UseVisualStyleBackColor = true;
+            this.radioButtonpost.CheckedChanged += new System.EventHandler(this.radioButtonpost_CheckedChanged);
+            // 
+            // textBoxlogstatus
+            // 
+            this.textBoxlogstatus.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxlogstatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxlogstatus.Location = new System.Drawing.Point(253, 29);
+            this.textBoxlogstatus.Name = "textBoxlogstatus";
+            this.textBoxlogstatus.ReadOnly = true;
+            this.textBoxlogstatus.Size = new System.Drawing.Size(68, 18);
+            this.textBoxlogstatus.TabIndex = 6;
+            this.textBoxlogstatus.Text = "未登录";
+            // 
+            // radioButtonget
+            // 
+            this.radioButtonget.AutoSize = true;
+            this.radioButtonget.Checked = true;
+            this.radioButtonget.Location = new System.Drawing.Point(36, 71);
+            this.radioButtonget.Name = "radioButtonget";
+            this.radioButtonget.Size = new System.Drawing.Size(58, 19);
+            this.radioButtonget.TabIndex = 14;
+            this.radioButtonget.TabStop = true;
+            this.radioButtonget.Text = "获取";
+            this.radioButtonget.UseVisualStyleBackColor = true;
+            this.radioButtonget.CheckedChanged += new System.EventHandler(this.radioButtonget_CheckedChanged);
+            // 
+            // buttondo
+            // 
+            this.buttondo.Location = new System.Drawing.Point(558, 68);
+            this.buttondo.Name = "buttondo";
+            this.buttondo.Size = new System.Drawing.Size(125, 25);
+            this.buttondo.TabIndex = 13;
+            this.buttondo.Text = "执行";
+            this.buttondo.UseVisualStyleBackColor = true;
+            this.buttondo.Click += new System.EventHandler(this.buttondo_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(195, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "状态：";
+            // 
+            // textBoxpost2
+            // 
+            this.textBoxpost2.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxpost2.Enabled = false;
+            this.textBoxpost2.Location = new System.Drawing.Point(453, 114);
+            this.textBoxpost2.Name = "textBoxpost2";
+            this.textBoxpost2.Size = new System.Drawing.Size(230, 25);
+            this.textBoxpost2.TabIndex = 11;
+            // 
+            // textBoxpost1
+            // 
+            this.textBoxpost1.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxpost1.Enabled = false;
+            this.textBoxpost1.Location = new System.Drawing.Point(131, 114);
+            this.textBoxpost1.Name = "textBoxpost1";
+            this.textBoxpost1.Size = new System.Drawing.Size(218, 25);
+            this.textBoxpost1.TabIndex = 10;
+            // 
+            // labelpost2
+            // 
+            this.labelpost2.AutoSize = true;
+            this.labelpost2.Location = new System.Drawing.Point(355, 117);
+            this.labelpost2.Name = "labelpost2";
+            this.labelpost2.Size = new System.Drawing.Size(92, 15);
+            this.labelpost2.TabIndex = 9;
+            this.labelpost2.Text = "post字段2：";
+            // 
+            // labelpost1
+            // 
+            this.labelpost1.AutoSize = true;
+            this.labelpost1.Location = new System.Drawing.Point(33, 117);
+            this.labelpost1.Name = "labelpost1";
+            this.labelpost1.Size = new System.Drawing.Size(92, 15);
+            this.labelpost1.TabIndex = 8;
+            this.labelpost1.Text = "post字段1：";
+            // 
             // buttonlogin
             // 
             this.buttonlogin.Location = new System.Drawing.Point(36, 24);
@@ -263,109 +369,15 @@ namespace FMU_Test
             // 
             this.timerNOP.Tick += new System.EventHandler(this.timerNOP_Tick);
             // 
-            // labelpost1
+            // buttonlogsftp
             // 
-            this.labelpost1.AutoSize = true;
-            this.labelpost1.Location = new System.Drawing.Point(33, 117);
-            this.labelpost1.Name = "labelpost1";
-            this.labelpost1.Size = new System.Drawing.Size(92, 15);
-            this.labelpost1.TabIndex = 8;
-            this.labelpost1.Text = "post字段1：";
-            // 
-            // labelpost2
-            // 
-            this.labelpost2.AutoSize = true;
-            this.labelpost2.Location = new System.Drawing.Point(355, 117);
-            this.labelpost2.Name = "labelpost2";
-            this.labelpost2.Size = new System.Drawing.Size(92, 15);
-            this.labelpost2.TabIndex = 9;
-            this.labelpost2.Text = "post字段2：";
-            // 
-            // textBoxpost1
-            // 
-            this.textBoxpost1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxpost1.Enabled = false;
-            this.textBoxpost1.Location = new System.Drawing.Point(131, 114);
-            this.textBoxpost1.Name = "textBoxpost1";
-            this.textBoxpost1.Size = new System.Drawing.Size(218, 25);
-            this.textBoxpost1.TabIndex = 10;
-            // 
-            // textBoxpost2
-            // 
-            this.textBoxpost2.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxpost2.Enabled = false;
-            this.textBoxpost2.Location = new System.Drawing.Point(453, 114);
-            this.textBoxpost2.Name = "textBoxpost2";
-            this.textBoxpost2.Size = new System.Drawing.Size(230, 25);
-            this.textBoxpost2.TabIndex = 11;
-            // 
-            // buttondo
-            // 
-            this.buttondo.Location = new System.Drawing.Point(558, 68);
-            this.buttondo.Name = "buttondo";
-            this.buttondo.Size = new System.Drawing.Size(125, 25);
-            this.buttondo.TabIndex = 13;
-            this.buttondo.Text = "执行";
-            this.buttondo.UseVisualStyleBackColor = true;
-            this.buttondo.Click += new System.EventHandler(this.buttondo_Click);
-            // 
-            // radioButtonget
-            // 
-            this.radioButtonget.AutoSize = true;
-            this.radioButtonget.Checked = true;
-            this.radioButtonget.Location = new System.Drawing.Point(36, 71);
-            this.radioButtonget.Name = "radioButtonget";
-            this.radioButtonget.Size = new System.Drawing.Size(58, 19);
-            this.radioButtonget.TabIndex = 14;
-            this.radioButtonget.TabStop = true;
-            this.radioButtonget.Text = "获取";
-            this.radioButtonget.UseVisualStyleBackColor = true;
-            this.radioButtonget.CheckedChanged += new System.EventHandler(this.radioButtonget_CheckedChanged);
-            // 
-            // radioButtonpost
-            // 
-            this.radioButtonpost.AutoSize = true;
-            this.radioButtonpost.Location = new System.Drawing.Point(100, 71);
-            this.radioButtonpost.Name = "radioButtonpost";
-            this.radioButtonpost.Size = new System.Drawing.Size(58, 19);
-            this.radioButtonpost.TabIndex = 15;
-            this.radioButtonpost.Text = "设置";
-            this.radioButtonpost.UseVisualStyleBackColor = true;
-            this.radioButtonpost.CheckedChanged += new System.EventHandler(this.radioButtonpost_CheckedChanged);
-            // 
-            // comboBoxtask
-            // 
-            this.comboBoxtask.FormattingEnabled = true;
-            this.comboBoxtask.Items.AddRange(new object[] {
-            "获取控制器运行状态",
-            "获取控制器的诊断状态",
-            "获取PyTask的路径",
-            "获取Python已安装的库"});
-            this.comboBoxtask.Location = new System.Drawing.Point(169, 68);
-            this.comboBoxtask.Name = "comboBoxtask";
-            this.comboBoxtask.Size = new System.Drawing.Size(356, 23);
-            this.comboBoxtask.TabIndex = 16;
-            this.comboBoxtask.SelectedIndexChanged += new System.EventHandler(this.comboBoxtask_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(195, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "状态：";
-            // 
-            // textBoxlogstatus
-            // 
-            this.textBoxlogstatus.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxlogstatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxlogstatus.Location = new System.Drawing.Point(253, 29);
-            this.textBoxlogstatus.Name = "textBoxlogstatus";
-            this.textBoxlogstatus.ReadOnly = true;
-            this.textBoxlogstatus.Size = new System.Drawing.Size(68, 18);
-            this.textBoxlogstatus.TabIndex = 6;
-            this.textBoxlogstatus.Text = "未登录";
+            this.buttonlogsftp.Location = new System.Drawing.Point(613, 63);
+            this.buttonlogsftp.Name = "buttonlogsftp";
+            this.buttonlogsftp.Size = new System.Drawing.Size(125, 25);
+            this.buttonlogsftp.TabIndex = 8;
+            this.buttonlogsftp.Text = "登录SFTP";
+            this.buttonlogsftp.UseVisualStyleBackColor = true;
+            this.buttonlogsftp.Click += new System.EventHandler(this.buttonlogsftp_Click);
             // 
             // MainForm
             // 
@@ -423,6 +435,7 @@ namespace FMU_Test
         private System.Windows.Forms.Label labelpost1;
         private System.Windows.Forms.TextBox textBoxlogstatus;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonlogsftp;
     }
 }
 
