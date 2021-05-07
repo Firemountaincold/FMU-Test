@@ -31,6 +31,7 @@ namespace FMU_Test
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonlogsftp = new System.Windows.Forms.Button();
             this.checkBoxtask = new System.Windows.Forms.CheckBox();
             this.textBoxCallstatus = new System.Windows.Forms.TextBox();
             this.textBoxFMUstatus = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@ namespace FMU_Test
             this.buttonlogin = new System.Windows.Forms.Button();
             this.buttonexit = new System.Windows.Forms.Button();
             this.timerNOP = new System.Windows.Forms.Timer(this.components);
-            this.buttonlogsftp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -84,6 +84,16 @@ namespace FMU_Test
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SFTP文件部署";
+            // 
+            // buttonlogsftp
+            // 
+            this.buttonlogsftp.Location = new System.Drawing.Point(613, 63);
+            this.buttonlogsftp.Name = "buttonlogsftp";
+            this.buttonlogsftp.Size = new System.Drawing.Size(125, 25);
+            this.buttonlogsftp.TabIndex = 8;
+            this.buttonlogsftp.Text = "登录SFTP";
+            this.buttonlogsftp.UseVisualStyleBackColor = true;
+            this.buttonlogsftp.Click += new System.EventHandler(this.buttonlogsftp_Click);
             // 
             // checkBoxtask
             // 
@@ -246,7 +256,7 @@ namespace FMU_Test
             this.comboBoxtask.FormattingEnabled = true;
             this.comboBoxtask.Items.AddRange(new object[] {
             "获取控制器运行状态",
-            "获取控制器的诊断状态",
+            "获取平台版本信息",
             "获取PyTask的路径",
             "获取Python已安装的库"});
             this.comboBoxtask.Location = new System.Drawing.Point(169, 68);
@@ -367,17 +377,8 @@ namespace FMU_Test
             // 
             // timerNOP
             // 
+            this.timerNOP.Interval = 100000;
             this.timerNOP.Tick += new System.EventHandler(this.timerNOP_Tick);
-            // 
-            // buttonlogsftp
-            // 
-            this.buttonlogsftp.Location = new System.Drawing.Point(613, 63);
-            this.buttonlogsftp.Name = "buttonlogsftp";
-            this.buttonlogsftp.Size = new System.Drawing.Size(125, 25);
-            this.buttonlogsftp.TabIndex = 8;
-            this.buttonlogsftp.Text = "登录SFTP";
-            this.buttonlogsftp.UseVisualStyleBackColor = true;
-            this.buttonlogsftp.Click += new System.EventHandler(this.buttonlogsftp_Click);
             // 
             // MainForm
             // 

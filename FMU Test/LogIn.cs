@@ -12,6 +12,10 @@ namespace FMU_Test
         public LogIn()
         {
             InitializeComponent();
+            textBoxip.Text = "10.66.210.30";
+            textBoxport.Text = "8899";
+            textBoxuserid.Text = "user1";
+            textBoxpassword.Text = "hollysys";
         }
 
         private void buttonok_Click(object sender, EventArgs e)

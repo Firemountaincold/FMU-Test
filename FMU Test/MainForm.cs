@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace FMU_Test
 {
@@ -25,18 +22,29 @@ namespace FMU_Test
         public string userid;
         public string password;
         public string token;
+        public string rn = "\r\n                       ";
         public bool logflag = false;
+
         public MainForm()
         {
             InitializeComponent();
             info = new InfoTools(richTextBoxinfo);
+            if (DateTime.Now.Hour > 9)
+            {
+                rn = rn + " ";
+            }
+        }
+
+        public static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
+        {   // 总是接受  
+            return true;
         }
 
         private void buttonFMU_Click(object sender, EventArgs e)
         {
             //选择FMU.dll
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (!Directory.Exists(Application.StartupPath + "\\配置文件")) 
+            if (!Directory.Exists(Application.StartupPath + "\\配置文件"))
             {
                 Directory.CreateDirectory(Application.StartupPath + "\\配置文件");
             }
@@ -143,8 +151,11 @@ namespace FMU_Test
         private void timerNOP_Tick(object sender, EventArgs e)
         {
             //保持连接
-            timerNOP.Interval = restful.GetTokenTime() * 1000;
-            restful.GetNOP(userid, token);
+            if (restful.GetTokenTime() > 0)
+            {
+                timerNOP.Interval = restful.GetTokenTime() * 1000;
+            }
+            restful.GetNOP(userid, token, password);
         }
 
         private async void buttonlogin_ClickAsync(object sender, EventArgs e)
@@ -152,6 +163,7 @@ namespace FMU_Test
             //登录
             try
             {
+                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证
                 LogIn logIn = new LogIn();
                 logIn.Text = "登录RESTful API";
                 if (logIn.ShowDialog() == DialogResult.OK)
@@ -161,6 +173,7 @@ namespace FMU_Test
                     userid = logIn.userid;
                     password = logIn.password;
                     info.AddInfo("开始登录……", 1);
+                    restful.GetClient(ip, port);
                     string seed = await restful.GetSeed(userid, "W");
                     info.AddInfo("已获得种子:" + seed, 1);
                     token = await restful.GetToken(userid, password, seed);
@@ -175,7 +188,7 @@ namespace FMU_Test
                     info.AddInfo("登录已取消。", 2);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 info.AddInfo(ex.Message, 2);
             }
@@ -188,7 +201,7 @@ namespace FMU_Test
             {
                 comboBoxtask.Items.Clear();
                 comboBoxtask.Items.Add("获取控制器运行状态");
-                comboBoxtask.Items.Add("获取控制器的诊断状态");
+                comboBoxtask.Items.Add("获取平台版本信息");
                 comboBoxtask.Items.Add("获取PyTask的路径");
                 comboBoxtask.Items.Add("获取Python已安装的库");
                 textBoxpost1.Enabled = false;
@@ -215,59 +228,71 @@ namespace FMU_Test
         private async void buttondo_Click(object sender, EventArgs e)
         {
             //执行相应的API命令
-            if (logflag)
+            try
             {
-                if (radioButtonget.Checked)
+                if (logflag)
                 {
-                    //GET命令
-                    JObject json = new JObject();
-                    switch (comboBoxtask.SelectedItem)
+                    info.AddInfo("当前SN号为：" + restful.SN + "，MD5为：" + restful.GetMD5(restful.SN.ToString() + password), 1);
+                    if (radioButtonget.Checked)
                     {
-                        case "获取控制器运行状态":
-                            json = await restful.GetInfo(userid, token, RESTful.Order.PyRunStat);
-                            break;
-                        case "获取控制器的诊断状态":
-                            json = await restful.GetInfo(userid, token, RESTful.Order.Diagstat);
-                            break;
-                        case "获取PyTask的路径":
-                            json = await restful.GetInfo(userid, token, RESTful.Order.PyTaskFile);
-                            break;
-                        case "获取Python已安装的库":
-                            json = await restful.GetInfo(userid, token, RESTful.Order.PyLib);
-                            break;
+                        //GET命令
+                        JObject json = new JObject();
+                        switch (comboBoxtask.SelectedItem)
+                        {
+                            case "获取控制器运行状态":
+                                json = await restful.GetInfo(userid, token, RESTful.Order.PyRunStat, password);
+                                info.AddInfo("控制器运行状态为：" + json["data"]["Stat"].ToString(), 1);
+                                break;
+                            case "获取平台版本信息":
+                                json = await restful.GetInfo(userid, token, RESTful.Order.SysVersion, password);
+                                info.AddInfo("平台系统：" + json["data"]["OS"].ToString() + rn + "Os版本：" + json["data"]["OsVer"] +
+                                     rn + "Python版本：" + json["data"]["PythonVer"] + rn + "Gcc版本：" + json["data"]["GccVer"] + rn + "AI版本：" + json["data"]["AIVer"], 1);
+                                break;
+                            case "获取PyTask的路径":
+                                json = await restful.GetInfo(userid, token, RESTful.Order.PyTaskFile, password);
+                                info.AddInfo("根目录为：" + json["data"]["RootPath"].ToString() + rn + "文件目录为：" + json["data"]["FullFileName"].ToString(), 1);
+                                break;
+                            case "获取Python已安装的库":
+                                json = await restful.GetInfo(userid, token, RESTful.Order.PyLib, password);
+                                info.AddInfo("已安装的库有：" + json["data"]["Libs"].ToString(), 1);
+                                break;
+                        }
                     }
-                    info.AddInfo(json.ToString(), 1);
+                    else
+                    {
+                        //POST命令
+                        JObject json = new JObject();
+                        string post1 = textBoxpost1.Text;
+                        string post2 = textBoxpost2.Text;
+                        switch (comboBoxtask.SelectedItem)
+                        {
+                            case "修改密码":
+                                json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.Password, password);
+                                break;
+                            case "设置控制器的控制程序的运行调度":
+                                json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyRunStat, password);
+                                break;
+                            case "设置PyTask的路径":
+                                json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyTaskFile, password);
+                                break;
+                            case "安装Python库":
+                                json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib, password);
+                                break;
+                            case "卸载Python库":
+                                json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib2, password);
+                                break;
+                        }
+                        info.AddInfo("返回消息：" + json["msg"].ToString(), 1);
+                    }
                 }
                 else
                 {
-                    //POST命令
-                    JObject json = new JObject();
-                    string post1 = textBoxpost1.Text;
-                    string post2 = textBoxpost2.Text;
-                    switch (comboBoxtask.SelectedItem)
-                    {
-                        case "修改密码":
-                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.Password);
-                            break;
-                        case "设置控制器的控制程序的运行调度":
-                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyRunStat);
-                            break;
-                        case "设置PyTask的路径":
-                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyTaskFile);
-                            break;
-                        case "安装Python库":
-                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib);
-                            break;
-                        case "卸载Python库":
-                            json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib2);
-                            break;
-                    }
-                    info.AddInfo(json.ToString(), 1);
+                    MessageBox.Show("请先登录。", "警告");
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("请先登录。", "警告");
+                info.AddInfo(ex.Message, 2);
             }
         }
 
