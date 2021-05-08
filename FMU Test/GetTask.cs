@@ -26,9 +26,16 @@ namespace FMU_Test
         {
             try
             {
-                Task task = new Task(textBoxname.Text, textBoxtype.Text, textBoxtrigger.Text, textBoxperiod.Text, ee, cc);
-                CreateTask(xmlDocument, root, task);
-                DialogResult = DialogResult.OK;
+                if (evecount != 0 && calcount != 0)
+                {
+                    Task task = new Task(textBoxname.Text, textBoxtype.Text, textBoxtrigger.Text, textBoxperiod.Text, ee, cc);
+                    CreateTask(xmlDocument, root, task);
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("请添加触发条件和计算任务。", "警告");
+                }
             }
             catch (Exception)
             {

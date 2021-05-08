@@ -98,7 +98,7 @@ namespace FMU_Test
             // checkBoxtask
             // 
             this.checkBoxtask.AutoSize = true;
-            this.checkBoxtask.Location = new System.Drawing.Point(771, 24);
+            this.checkBoxtask.Location = new System.Drawing.Point(771, 27);
             this.checkBoxtask.Name = "checkBoxtask";
             this.checkBoxtask.Size = new System.Drawing.Size(123, 19);
             this.checkBoxtask.TabIndex = 7;
@@ -177,7 +177,7 @@ namespace FMU_Test
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(150, 25);
             this.buttonCall.TabIndex = 0;
-            this.buttonCall.Text = "选择cal1.py";
+            this.buttonCall.Text = "选择py文件";
             this.buttonCall.UseVisualStyleBackColor = true;
             this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
             // 
@@ -187,7 +187,7 @@ namespace FMU_Test
             this.buttonFMU.Name = "buttonFMU";
             this.buttonFMU.Size = new System.Drawing.Size(150, 25);
             this.buttonFMU.TabIndex = 0;
-            this.buttonFMU.Text = "选择FMU.dll";
+            this.buttonFMU.Text = "选择dll文件";
             this.buttonFMU.UseVisualStyleBackColor = true;
             this.buttonFMU.Click += new System.EventHandler(this.buttonFMU_Click);
             // 

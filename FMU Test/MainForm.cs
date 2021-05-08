@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FMU_Test
 {
-    public partial class MainForm : System.Windows.Forms.Form
+    public partial class MainForm : Form
     {
         public InfoTools info;
         public RESTful restful = new RESTful();
@@ -23,11 +24,12 @@ namespace FMU_Test
         public string password;
         public string token;
         public string rn = "\r\n                       ";
-        public bool logflag = false;
+        public bool logflag = false;     
 
         public MainForm()
         {
             InitializeComponent();
+            textBoxRemotePath.Text = ConfigurationManager.AppSettings["sftppath"];
             info = new InfoTools(richTextBoxinfo);
             if (DateTime.Now.Hour > 9)
             {
@@ -83,21 +85,39 @@ namespace FMU_Test
         private void buttonUpload_Click(object sender, EventArgs e)
         {
             //用SFTP部署文件
-            if (FMUpath != "" && Callpath != "" && textBoxRemotePath.Text != "")
+            try
             {
-                sftp.Put(FMUpath, textBoxRemotePath.Text);
-                info.AddInfo("已上传dll文件。", 1);
-                sftp.Put(Callpath, textBoxRemotePath.Text);
-                info.AddInfo("已上传py文件。", 1);
-                if (checkBoxtask.Checked)
+                if (FMUpath != "" || Callpath != "" || textBoxRemotePath.Text != "")
                 {
-                    sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", textBoxRemotePath.Text);
-                    info.AddInfo("已上传Task.xml。", 1);
+                    string rp = textBoxRemotePath.Text;
+                    if (!rp.EndsWith("/"))
+                    {
+                        rp = rp + "/";
+                    }
+                    if (FMUpath != "")
+                    {
+                        sftp.Put(FMUpath, rp + Path.GetFileName(FMUpath));
+                        info.AddInfo("已上传" + Path.GetFileName(FMUpath) + "。", 1);
+                    }
+                    if (Callpath != "")
+                    {
+                        sftp.Put(Callpath, rp + Path.GetFileName(Callpath));
+                        info.AddInfo("已上传" + Path.GetFileName(Callpath) + "。", 1);
+                    }
+                    if (checkBoxtask.Checked)
+                    {
+                        sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", rp + "Task.xml");
+                        info.AddInfo("已上传Task.xml。", 1);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请选择好要部署的文件和目录。", "警告");
                 }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("请选择好要部署的文件和目录。", "警告");
+                info.AddInfo(ex.Message, 2);
             }
         }
 
@@ -164,7 +184,7 @@ namespace FMU_Test
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证
-                LogIn logIn = new LogIn();
+                LogIn logIn = new LogIn("fmu");
                 logIn.Text = "登录RESTful API";
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
@@ -232,7 +252,6 @@ namespace FMU_Test
             {
                 if (logflag)
                 {
-                    info.AddInfo("当前SN号为：" + restful.SN + "，MD5为：" + restful.GetMD5(restful.SN.ToString() + password), 1);
                     if (radioButtonget.Checked)
                     {
                         //GET命令
@@ -241,20 +260,24 @@ namespace FMU_Test
                         {
                             case "获取控制器运行状态":
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyRunStat, password);
-                                info.AddInfo("控制器运行状态为：" + json["data"]["Stat"].ToString(), 1);
+                                info.AddInfo("启动PyRunStat GET操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn + 
+                                    "控制器运行状态为：" + json["data"]["Stat"].ToString(), 1);
                                 break;
                             case "获取平台版本信息":
                                 json = await restful.GetInfo(userid, token, RESTful.Order.SysVersion, password);
-                                info.AddInfo("平台系统：" + json["data"]["OS"].ToString() + rn + "Os版本：" + json["data"]["OsVer"] +
+                                info.AddInfo("启动SysVersion GET操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn + 
+                                    "平台系统：" + json["data"]["OS"].ToString() + rn + "系统版本：" + json["data"]["OsVer"] +
                                      rn + "Python版本：" + json["data"]["PythonVer"] + rn + "Gcc版本：" + json["data"]["GccVer"] + rn + "AI版本：" + json["data"]["AIVer"], 1);
                                 break;
                             case "获取PyTask的路径":
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyTaskFile, password);
-                                info.AddInfo("根目录为：" + json["data"]["RootPath"].ToString() + rn + "文件目录为：" + json["data"]["FullFileName"].ToString(), 1);
+                                info.AddInfo("启动PyTaskFile GET操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn + 
+                                    "根目录为：" + json["data"]["RootPath"].ToString() + rn + "文件目录为：" + json["data"]["FullFileName"].ToString(), 1);
                                 break;
                             case "获取Python已安装的库":
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyLib, password);
-                                info.AddInfo("已安装的库有：" + json["data"]["Libs"].ToString(), 1);
+                                info.AddInfo("启动PyLib GET操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn + 
+                                    "已安装的库有：" + json["data"]["Libs"].ToString(), 1);
                                 break;
                         }
                     }
@@ -268,21 +291,70 @@ namespace FMU_Test
                         {
                             case "修改密码":
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.Password, password);
+                                if (json["msg"].ToString() == "success")
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：密码修改成功！", 1);
+                                }
+                                else
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：密码修改失败，原因：" + json["msg"].ToString(), 1);
+                                }
                                 break;
                             case "设置控制器的控制程序的运行调度":
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyRunStat, password);
+                                if (json["msg"].ToString() == "success")
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：运行调度成功！", 1);
+                                }
+                                else
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：调度失败，原因：" + json["msg"].ToString(), 1);
+                                }
                                 break;
                             case "设置PyTask的路径":
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyTaskFile, password);
+                                if (json["msg"].ToString() == "success")
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：路径设置成功！", 1);
+                                }
+                                else
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：设置失败，原因：" + json["msg"].ToString(), 1);
+                                }
                                 break;
                             case "安装Python库":
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib, password);
+                                if (json["msg"].ToString() == "success")
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：路径设置成功！", 1);
+                                }
+                                else
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：安装失败，原因：" + json["msg"].ToString(), 1);
+                                }
                                 break;
                             case "卸载Python库":
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.PyLib2, password);
+                                if (json["msg"].ToString() == "success")
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：路径设置成功！", 1);
+                                }
+                                else
+                                {
+                                    info.AddInfo("启动POST操作。当前流水号为：" + restful.SN + "，加密流水号为：" + restful.GetMD5(restful.SN.ToString() + password) + rn +
+                                        "返回消息：卸载失败，原因：" + json["msg"].ToString(), 1);
+                                }
                                 break;
                         }
-                        info.AddInfo("返回消息：" + json["msg"].ToString(), 1);
                     }
                 }
                 else
@@ -338,7 +410,7 @@ namespace FMU_Test
         {
             try
             {
-                LogIn logIn = new LogIn();
+                LogIn logIn = new LogIn("sftp");
                 logIn.Text = "登录SFTP";
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {

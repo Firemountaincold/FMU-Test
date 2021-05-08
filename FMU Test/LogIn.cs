@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace FMU_Test
@@ -9,13 +10,23 @@ namespace FMU_Test
         public string port;
         public string userid;
         public string password;
-        public LogIn()
+        public LogIn(string type)
         {
             InitializeComponent();
-            textBoxip.Text = "10.66.210.30";
-            textBoxport.Text = "8899";
-            textBoxuserid.Text = "user1";
-            textBoxpassword.Text = "hollysys";
+            if (type == "fmu")
+            {
+                textBoxip.Text = ConfigurationManager.AppSettings["fmuip"]; 
+                textBoxport.Text = ConfigurationManager.AppSettings["fmuport"];
+                textBoxuserid.Text = ConfigurationManager.AppSettings["fmuuser"];
+                textBoxpassword.Text = ConfigurationManager.AppSettings["fmupw"];
+            }
+            else if (type == "sftp")
+            {
+                textBoxip.Text = ConfigurationManager.AppSettings["sftpip"];
+                textBoxport.Text = ConfigurationManager.AppSettings["sftpport"];
+                textBoxuserid.Text = ConfigurationManager.AppSettings["sftpuser"];
+                textBoxpassword.Text = ConfigurationManager.AppSettings["sftppw"];
+            }
         }
 
         private void buttonok_Click(object sender, EventArgs e)

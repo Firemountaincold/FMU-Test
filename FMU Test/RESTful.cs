@@ -127,7 +127,11 @@ namespace FMU_Test
         public async Task<JObject> PostInfo(string userid, string token, string order1, string order2, Order order, string password)
         {
             //发送信息
-            JObject json = PostAPI(order1, order2, order);
+            JObject json = new JObject();
+            if (order == Order.PyRunStat)
+            {
+                json = PostAPI(order1, order2, order);
+            }
             HttpContent content = new StringContent(json.ToString());
             HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password), content);
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -176,7 +180,7 @@ namespace FMU_Test
             {
                 case Order.Password:
                     order2 = GetEncrypt(order2, order1);
-                    order1 = GetMD516(order1);
+                    order1 = GetMD5(order1);
                     json["OldPassword"] = order1;
                     json["NewPassword"] = order2;
                     return json;
@@ -191,7 +195,6 @@ namespace FMU_Test
                     json["UninstallName"] = order1;
                     return json;
                 case Order.PyRunStat:
-                    json["Stat"] = order1;
                     json["TaskNames"] = order2;
                     return json;
             }
@@ -205,7 +208,7 @@ namespace FMU_Test
             {
                 case Order.Password:
                     string api = "Password?UserId=" + userid + "&Token=" + token + "&SN=" + GetMD5(SN.ToString() + password) +
-                        "&OldPassword=" + GetMD516(password) + "&NewPassword=" + GetEncrypt(order2, password);
+                        "&OldPassword=" + GetMD5(order1) + "&NewPassword=" + GetEncrypt(order2, order1);
                     SN++;
                     return api;
                 case Order.PyTaskFile:
@@ -225,7 +228,7 @@ namespace FMU_Test
                     return api4;
                 case Order.PyRunStat:
                     string api5 = "PyRunStat?UserId=" + userid + "&Token=" + token + "&SN=" + GetMD5(SN.ToString() + password) +
-                        "&Stat=" + order1 + "&TaskNames=" + order2;
+                        "&Stat=" + order1;
                     SN++;
                     return api5;
             }
