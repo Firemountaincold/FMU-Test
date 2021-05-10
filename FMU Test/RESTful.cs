@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace FMU_Test
 {
@@ -18,8 +19,14 @@ namespace FMU_Test
         public void GetClient(string ip, string port)
         {
             //初始化
+            client = new HttpClient();
             client.BaseAddress = new Uri("https://" + ip + ":" + port + "/V0/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+        public void DisConnect()
+        {
+            client.Dispose();
         }
 
         public int GetTokenTime()
@@ -50,7 +57,7 @@ namespace FMU_Test
             return t2;
         }
 
-        private string GetEncrypt(string content, string secretKey)
+        public string GetEncrypt(string content, string secretKey)
         {
             //获取异或加密
             char[] data = content.ToCharArray();
@@ -60,7 +67,7 @@ namespace FMU_Test
                 data[i] ^= key[i % key.Length];
             }
             string str = new string(data);
-            return str;
+            return HttpUtility.UrlDecode(str);
         }
 
         public async Task<string> GetSeed(string userid, string permission)
@@ -94,7 +101,7 @@ namespace FMU_Test
                 string responseBody = await response.Content.ReadAsStringAsync();
                 JObject json = (JObject)JsonConvert.DeserializeObject(responseBody);
                 string msg = json["msg"].ToString();
-                tokentime = Convert.ToInt32(json["data"]["PeriodOfValidity"]);
+                tokentime = Convert.ToInt32(json["data"]["PeriodOfValidity"]) - 1;
                 if (msg == "success")
                 {
                     return json["data"]["Token"].ToString();
@@ -124,7 +131,7 @@ namespace FMU_Test
             return json;
         }
 
-        public async Task<JObject> PostInfo(string userid, string token, string order1, string order2, Order order, string password)
+        public async Task<JObject> PostInfo(string userid, string token, string order1, string order2, Order order, string password, string seed="")
         {
             //发送信息
             JObject json = new JObject();
@@ -133,7 +140,7 @@ namespace FMU_Test
                 json = PostAPI(order1, order2, order);
             }
             HttpContent content = new StringContent(json.ToString());
-            HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password), content);
+            HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password, seed), content);
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject returnjson = (JObject)JsonConvert.DeserializeObject(responseBody);
             if (returnjson["msg"].ToString() != "success" && returnjson["msg"].ToString() != "msg not match!") 
@@ -201,14 +208,14 @@ namespace FMU_Test
             return json;
         }
 
-        public string PostAPI(string userid, string token, string order1, string order2, Order order, string password)
+        public string PostAPI(string userid, string token, string order1, string order2, Order order, string password, string seed="")
         {
             //获取Post命令的字符串
             switch (order)
             {
                 case Order.Password:
                     string api = "Password?UserId=" + userid + "&Token=" + token + "&SN=" + GetMD5(SN.ToString() + password) +
-                        "&OldPassword=" + GetMD5(order1) + "&NewPassword=" + GetEncrypt(order2, order1);
+                        "&OldPassword=" + GetMD5(seed + order1) + "&NewPassword=" + GetEncrypt(order2, order1);
                     SN++;
                     return api;
                 case Order.PyTaskFile:
