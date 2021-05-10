@@ -3,6 +3,7 @@ FMU测试工具，用于HollySys公司的边缘智能控制器系统。
 ## 功能：使用RESTful接口，测试边缘控制器系统。  
 包括部署，创建任务，执行任务等功能。
 ## 窗口：
+![image](https://github.com/Firemountaincold/PLC-Test/blob/main/Image.png)（1.4）
 ## 更新日志：
 ### 2021.4.27：
 #### 1.0：
