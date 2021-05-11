@@ -27,6 +27,7 @@ namespace FMU_Test
         public void DisConnect()
         {
             client.Dispose();
+            SN = 1;
         }
 
         public int GetTokenTime()

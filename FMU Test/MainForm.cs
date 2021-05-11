@@ -36,6 +36,10 @@ namespace FMU_Test
             {
                 rn = rn + " ";
             }
+            if (!Directory.Exists(Application.StartupPath + "\\运行日志"))
+            {
+                Directory.CreateDirectory(Application.StartupPath + "\\运行日志");
+            }
         }
 
         public static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -97,18 +101,18 @@ namespace FMU_Test
                     }
                     if (FMUpath != "")
                     {
-                        sftp.Put(FMUpath, rp + Path.GetFileName(FMUpath));
-                        info.AddInfo("已上传" + Path.GetFileName(FMUpath) + "。", 1);
+                        long fmulength = sftp.Put(FMUpath, rp + Path.GetFileName(FMUpath));
+                        info.AddInfo("已上传" + Path.GetFileName(FMUpath) + "。共" + fmulength + "字节。", 1);
                     }
                     if (Callpath != "")
                     {
-                        sftp.Put(Callpath, rp + Path.GetFileName(Callpath));
-                        info.AddInfo("已上传" + Path.GetFileName(Callpath) + "。", 1);
+                        long callength = sftp.Put(Callpath, rp + Path.GetFileName(Callpath));
+                        info.AddInfo("已上传" + Path.GetFileName(Callpath) + "。共" + callength + "字节。", 1);
                     }
                     if (checkBoxtask.Checked)
                     {
-                        sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", rp + "Task.xml");
-                        info.AddInfo("已上传Task.xml。", 1);
+                        long tasklength = sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", rp + "Task.xml");
+                        info.AddInfo("已上传Task.xml。共" + tasklength + "字节。", 1);
                     }
                 }
                 else
@@ -150,6 +154,10 @@ namespace FMU_Test
             //关闭窗口
             if (MessageBox.Show("是否退出？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
+                if (checkBoxsavelog.Checked)
+                {
+                    Savelog();
+                }
                 Process.GetCurrentProcess().Kill();
                 Application.Exit();
             }
@@ -160,6 +168,10 @@ namespace FMU_Test
             //关闭窗口
             if (MessageBox.Show("是否退出？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
+                if (checkBoxsavelog.Checked)
+                {
+                    Savelog();
+                }
                 Process.GetCurrentProcess().Kill();
                 Application.Exit();
             }
@@ -248,7 +260,7 @@ namespace FMU_Test
                 comboBoxtask.Items.Add("修改密码");
                 comboBoxtask.Items.Add("设置控制器的控制程序的运行调度");
                 comboBoxtask.Items.Add("设置PyTask的路径");
-                comboBoxtask.Items.Add("安装Python库");
+                comboBoxtask.Items.Add("安装Python库"); 
                 comboBoxtask.Items.Add("卸载Python库");
                 textBoxpost1.Enabled = true;
                 textBoxpost2.Enabled = true;
@@ -332,6 +344,11 @@ namespace FMU_Test
                         switch (comboBoxtask.SelectedItem)
                         {
                             case "修改密码":
+                                if (post1.Length != post2.Length)
+                                {
+                                    MessageBox.Show("请保持新旧密码长度相同！", "警告");
+                                    break;
+                                }
                                 json = await restful.PostInfo(userid, token, post1, post2, RESTful.Order.Password, password, seed);
                                 if (json["msg"].ToString() == "success")
                                 {
@@ -494,6 +511,41 @@ namespace FMU_Test
                 textBoxlogstatus.Text = "未登录";
                 textBoxlogstatus.ForeColor = Color.Black;
             }
+            else
+            {
+                MessageBox.Show("FMU未连接！", "警告");
+            }
+        }
+
+        private void checkBoxsavelog_CheckedChanged(object sender, EventArgs e)
+        {
+            //选择是否保存日志
+            if (checkBoxsavelog.Checked)
+            {
+                timersavelog.Start();
+            }
+            else
+            {
+                timersavelog.Stop();
+            }
+        }
+
+        private void timersavelog_Tick(object sender, EventArgs e)
+        {
+            //开启后每5秒自动保存日志
+            timersavelog.Interval = 5000;
+            Savelog();
+        }
+
+        public void Savelog()
+        {
+            //保存日志
+            string path = Application.StartupPath + "\\运行日志\\" + DateTime.Today.ToString("yyyy-MM-dd") + ".txt";
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.Flush();
+            sw.Write(info.tb.Text);
+            sw.Close();
         }
     }
 }

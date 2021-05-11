@@ -30,7 +30,9 @@ namespace FMU_Test
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttondisconnsftp = new System.Windows.Forms.Button();
             this.buttonlogsftp = new System.Windows.Forms.Button();
             this.checkBoxtask = new System.Windows.Forms.CheckBox();
             this.textBoxCallstatus = new System.Windows.Forms.TextBox();
@@ -47,6 +49,9 @@ namespace FMU_Test
             this.buttonGetTask = new System.Windows.Forms.Button();
             this.richTextBoxinfo = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxsavelog = new System.Windows.Forms.CheckBox();
+            this.buttondisconnfmu = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.comboBoxtask = new System.Windows.Forms.ComboBox();
             this.radioButtonpost = new System.Windows.Forms.RadioButton();
             this.textBoxlogstatus = new System.Windows.Forms.TextBox();
@@ -60,9 +65,7 @@ namespace FMU_Test
             this.buttonlogin = new System.Windows.Forms.Button();
             this.buttonexit = new System.Windows.Forms.Button();
             this.timerNOP = new System.Windows.Forms.Timer(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.buttondisconnsftp = new System.Windows.Forms.Button();
-            this.buttondisconnfmu = new System.Windows.Forms.Button();
+            this.timersavelog = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -88,6 +91,16 @@ namespace FMU_Test
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SFTP文件部署";
+            // 
+            // buttondisconnsftp
+            // 
+            this.buttondisconnsftp.Location = new System.Drawing.Point(734, 63);
+            this.buttondisconnsftp.Name = "buttondisconnsftp";
+            this.buttondisconnsftp.Size = new System.Drawing.Size(125, 25);
+            this.buttondisconnsftp.TabIndex = 9;
+            this.buttondisconnsftp.Text = "断开连接";
+            this.buttondisconnsftp.UseVisualStyleBackColor = true;
+            this.buttondisconnsftp.Click += new System.EventHandler(this.buttondisconnsftp_Click);
             // 
             // buttonlogsftp
             // 
@@ -236,6 +249,7 @@ namespace FMU_Test
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBoxsavelog);
             this.groupBox3.Controls.Add(this.buttondisconnfmu);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.comboBoxtask);
@@ -256,6 +270,38 @@ namespace FMU_Test
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "测试";
+            // 
+            // checkBoxsavelog
+            // 
+            this.checkBoxsavelog.AutoSize = true;
+            this.checkBoxsavelog.Checked = true;
+            this.checkBoxsavelog.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxsavelog.Location = new System.Drawing.Point(704, 117);
+            this.checkBoxsavelog.Name = "checkBoxsavelog";
+            this.checkBoxsavelog.Size = new System.Drawing.Size(89, 19);
+            this.checkBoxsavelog.TabIndex = 19;
+            this.checkBoxsavelog.Text = "保存日志";
+            this.checkBoxsavelog.UseVisualStyleBackColor = true;
+            this.checkBoxsavelog.CheckedChanged += new System.EventHandler(this.checkBoxsavelog_CheckedChanged);
+            // 
+            // buttondisconnfmu
+            // 
+            this.buttondisconnfmu.Location = new System.Drawing.Point(521, 24);
+            this.buttondisconnfmu.Name = "buttondisconnfmu";
+            this.buttondisconnfmu.Size = new System.Drawing.Size(125, 25);
+            this.buttondisconnfmu.TabIndex = 18;
+            this.buttondisconnfmu.Text = "退出登录";
+            this.buttondisconnfmu.UseVisualStyleBackColor = true;
+            this.buttondisconnfmu.Click += new System.EventHandler(this.buttondisconnfmu_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(172, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 15);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "API命令：";
             // 
             // comboBoxtask
             // 
@@ -386,34 +432,9 @@ namespace FMU_Test
             this.timerNOP.Interval = 100000;
             this.timerNOP.Tick += new System.EventHandler(this.timerNOP_Tick);
             // 
-            // label4
+            // timersavelog
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(172, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 15);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "API命令：";
-            // 
-            // buttondisconnsftp
-            // 
-            this.buttondisconnsftp.Location = new System.Drawing.Point(734, 63);
-            this.buttondisconnsftp.Name = "buttondisconnsftp";
-            this.buttondisconnsftp.Size = new System.Drawing.Size(125, 25);
-            this.buttondisconnsftp.TabIndex = 9;
-            this.buttondisconnsftp.Text = "断开连接";
-            this.buttondisconnsftp.UseVisualStyleBackColor = true;
-            this.buttondisconnsftp.Click += new System.EventHandler(this.buttondisconnsftp_Click);
-            // 
-            // buttondisconnfmu
-            // 
-            this.buttondisconnfmu.Location = new System.Drawing.Point(521, 24);
-            this.buttondisconnfmu.Name = "buttondisconnfmu";
-            this.buttondisconnfmu.Size = new System.Drawing.Size(125, 25);
-            this.buttondisconnfmu.TabIndex = 18;
-            this.buttondisconnfmu.Text = "退出登录";
-            this.buttondisconnfmu.UseVisualStyleBackColor = true;
-            this.buttondisconnfmu.Click += new System.EventHandler(this.buttondisconnfmu_Click);
+            this.timersavelog.Tick += new System.EventHandler(this.timersavelog_Tick);
             // 
             // MainForm
             // 
@@ -426,6 +447,7 @@ namespace FMU_Test
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -475,6 +497,8 @@ namespace FMU_Test
         private System.Windows.Forms.Button buttondisconnsftp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttondisconnfmu;
+        private System.Windows.Forms.CheckBox checkBoxsavelog;
+        private System.Windows.Forms.Timer timersavelog;
     }
 }
 

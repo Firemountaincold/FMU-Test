@@ -100,7 +100,7 @@ namespace FMU_Test
             }
         }
 
-        public void Put(string localPath, string remotePath)
+        public long Put(string localPath, string remotePath)
         {
             // SFTP上传文件
             try
@@ -108,6 +108,7 @@ namespace FMU_Test
                 using (var file = File.OpenRead(localPath))
                 {
                     sftp.UploadFile(file, remotePath);
+                    return file.Length;
                 }
             }
             catch (Exception ex)
