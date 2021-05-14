@@ -81,6 +81,7 @@ namespace FMU_Test
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(234, 25);
             this.textBoxname.TabIndex = 0;
+            this.textBoxname.MouseHover += new System.EventHandler(this.textBoxname_MouseHover);
             // 
             // textBoxuri
             // 
@@ -88,6 +89,7 @@ namespace FMU_Test
             this.textBoxuri.Name = "textBoxuri";
             this.textBoxuri.Size = new System.Drawing.Size(234, 25);
             this.textBoxuri.TabIndex = 1;
+            this.textBoxuri.MouseHover += new System.EventHandler(this.textBoxuri_MouseHover);
             // 
             // GetCal
             // 

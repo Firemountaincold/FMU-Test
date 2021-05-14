@@ -7,6 +7,42 @@ using Renci.SshNet;
 
 namespace FMU_Test
 {
+    public class TipTools
+    {
+        public void ToolTips(TextBox box, string tips)
+        {
+            //鼠标悬停说明文字
+            ToolTip toolTip = new ToolTip();
+            toolTip.AutoPopDelay = 5000;
+            toolTip.InitialDelay = 100;
+            toolTip.ReshowDelay = 500;
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(box, tips);
+        }
+
+        public void ToolTips(ComboBox box, string tips)
+        {
+            //鼠标悬停说明文字
+            ToolTip toolTip = new ToolTip();
+            toolTip.AutoPopDelay = 5000;
+            toolTip.InitialDelay = 100;
+            toolTip.ReshowDelay = 500;
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(box, tips);
+        }
+
+        public void ToolTips(Button box, string tips)
+        {
+            //鼠标悬停说明文字
+            ToolTip toolTip = new ToolTip();
+            toolTip.AutoPopDelay = 5000;
+            toolTip.InitialDelay = 100;
+            toolTip.ReshowDelay = 500;
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(box, tips);
+        }
+    }
+
     public class InfoTools
     {
         public RichTextBox tb = new RichTextBox();

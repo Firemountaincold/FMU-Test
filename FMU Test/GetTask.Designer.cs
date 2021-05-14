@@ -41,10 +41,11 @@ namespace FMU_Test
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxname = new System.Windows.Forms.TextBox();
-            this.textBoxtype = new System.Windows.Forms.TextBox();
-            this.textBoxtrigger = new System.Windows.Forms.TextBox();
             this.textBoxperiod = new System.Windows.Forms.TextBox();
             this.buttoncancel = new System.Windows.Forms.Button();
+            this.comboBoxtype = new System.Windows.Forms.ComboBox();
+            this.comboBoxtrigger = new System.Windows.Forms.ComboBox();
+            this.buttonrelation = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -66,6 +67,7 @@ namespace FMU_Test
             this.buttonAddevent.Text = "添加触发条件";
             this.buttonAddevent.UseVisualStyleBackColor = true;
             this.buttonAddevent.Click += new System.EventHandler(this.buttonAddevent_Click);
+            this.buttonAddevent.MouseHover += new System.EventHandler(this.buttonAddevent_MouseHover);
             // 
             // buttonAddcal
             // 
@@ -76,6 +78,7 @@ namespace FMU_Test
             this.buttonAddcal.Text = "添加计算任务";
             this.buttonAddcal.UseVisualStyleBackColor = true;
             this.buttonAddcal.Click += new System.EventHandler(this.buttonAddcal_Click);
+            this.buttonAddcal.MouseHover += new System.EventHandler(this.buttonAddcal_MouseHover);
             // 
             // label1
             // 
@@ -149,9 +152,9 @@ namespace FMU_Test
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(32, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 15);
+            this.label6.Size = new System.Drawing.Size(97, 15);
             this.label6.TabIndex = 10;
-            this.label6.Text = "任务名：";
+            this.label6.Text = "调度任务名：";
             // 
             // textBoxname
             // 
@@ -159,20 +162,7 @@ namespace FMU_Test
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(338, 25);
             this.textBoxname.TabIndex = 0;
-            // 
-            // textBoxtype
-            // 
-            this.textBoxtype.Location = new System.Drawing.Point(153, 56);
-            this.textBoxtype.Name = "textBoxtype";
-            this.textBoxtype.Size = new System.Drawing.Size(338, 25);
-            this.textBoxtype.TabIndex = 1;
-            // 
-            // textBoxtrigger
-            // 
-            this.textBoxtrigger.Location = new System.Drawing.Point(153, 92);
-            this.textBoxtrigger.Name = "textBoxtrigger";
-            this.textBoxtrigger.Size = new System.Drawing.Size(338, 25);
-            this.textBoxtrigger.TabIndex = 2;
+            this.textBoxname.MouseHover += new System.EventHandler(this.textBoxname_MouseHover);
             // 
             // textBoxperiod
             // 
@@ -180,6 +170,7 @@ namespace FMU_Test
             this.textBoxperiod.Name = "textBoxperiod";
             this.textBoxperiod.Size = new System.Drawing.Size(338, 25);
             this.textBoxperiod.TabIndex = 3;
+            this.textBoxperiod.MouseHover += new System.EventHandler(this.textBoxperiod_MouseHover);
             // 
             // buttoncancel
             // 
@@ -191,6 +182,47 @@ namespace FMU_Test
             this.buttoncancel.UseVisualStyleBackColor = true;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
+            // comboBoxtype
+            // 
+            this.comboBoxtype.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBoxtype.FormattingEnabled = true;
+            this.comboBoxtype.Items.AddRange(new object[] {
+            "once",
+            "repeat"});
+            this.comboBoxtype.Location = new System.Drawing.Point(153, 55);
+            this.comboBoxtype.Name = "comboBoxtype";
+            this.comboBoxtype.Size = new System.Drawing.Size(338, 25);
+            this.comboBoxtype.TabIndex = 11;
+            this.comboBoxtype.MouseHover += new System.EventHandler(this.comboBoxtype_MouseHover);
+            // 
+            // comboBoxtrigger
+            // 
+            this.comboBoxtrigger.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBoxtrigger.FormattingEnabled = true;
+            this.comboBoxtrigger.Items.AddRange(new object[] {
+            "Cycle",
+            "Period",
+            "Event",
+            "Periodevent"});
+            this.comboBoxtrigger.Location = new System.Drawing.Point(153, 91);
+            this.comboBoxtrigger.Name = "comboBoxtrigger";
+            this.comboBoxtrigger.Size = new System.Drawing.Size(338, 25);
+            this.comboBoxtrigger.TabIndex = 12;
+            this.comboBoxtrigger.SelectedIndexChanged += new System.EventHandler(this.comboBoxtrigger_SelectedIndexChanged);
+            this.comboBoxtrigger.MouseHover += new System.EventHandler(this.comboBoxtrigger_MouseHover);
+            // 
+            // buttonrelation
+            // 
+            this.buttonrelation.Enabled = false;
+            this.buttonrelation.Location = new System.Drawing.Point(383, 188);
+            this.buttonrelation.Name = "buttonrelation";
+            this.buttonrelation.Size = new System.Drawing.Size(108, 25);
+            this.buttonrelation.TabIndex = 13;
+            this.buttonrelation.Text = "逻辑关系";
+            this.buttonrelation.UseVisualStyleBackColor = true;
+            this.buttonrelation.Click += new System.EventHandler(this.buttonrelation_Click);
+            this.buttonrelation.MouseHover += new System.EventHandler(this.buttonrelation_MouseHover);
+            // 
             // GetTask
             // 
             this.AcceptButton = this.buttonOK;
@@ -198,10 +230,11 @@ namespace FMU_Test
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(514, 334);
+            this.Controls.Add(this.buttonrelation);
+            this.Controls.Add(this.comboBoxtrigger);
+            this.Controls.Add(this.comboBoxtype);
             this.Controls.Add(this.buttoncancel);
             this.Controls.Add(this.textBoxperiod);
-            this.Controls.Add(this.textBoxtrigger);
-            this.Controls.Add(this.textBoxtype);
             this.Controls.Add(this.textBoxname);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -239,9 +272,10 @@ namespace FMU_Test
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxname;
-        private System.Windows.Forms.TextBox textBoxtype;
-        private System.Windows.Forms.TextBox textBoxtrigger;
         private System.Windows.Forms.TextBox textBoxperiod;
         private System.Windows.Forms.Button buttoncancel;
+        private System.Windows.Forms.ComboBox comboBoxtype;
+        private System.Windows.Forms.ComboBox comboBoxtrigger;
+        private System.Windows.Forms.Button buttonrelation;
     }
 }

@@ -19,3 +19,4 @@ C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetEvent.resou
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\bin\Debug\Newtonsoft.Json.dll
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\bin\Debug\Newtonsoft.Json.xml
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.LogIn.resources
+C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.Events.resources

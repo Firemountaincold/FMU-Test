@@ -37,10 +37,10 @@ namespace FMU_Test
             this.buttonadd = new System.Windows.Forms.Button();
             this.buttoncancel = new System.Windows.Forms.Button();
             this.textBoxname = new System.Windows.Forms.TextBox();
-            this.textBoxtype = new System.Windows.Forms.TextBox();
             this.textBoxtag = new System.Windows.Forms.TextBox();
-            this.textBoxjudge = new System.Windows.Forms.TextBox();
             this.textBoxvalue = new System.Windows.Forms.TextBox();
+            this.comboBoxtype = new System.Windows.Forms.ComboBox();
+            this.comboBoxjudge = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -114,13 +114,7 @@ namespace FMU_Test
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(234, 25);
             this.textBoxname.TabIndex = 0;
-            // 
-            // textBoxtype
-            // 
-            this.textBoxtype.Location = new System.Drawing.Point(140, 48);
-            this.textBoxtype.Name = "textBoxtype";
-            this.textBoxtype.Size = new System.Drawing.Size(234, 25);
-            this.textBoxtype.TabIndex = 1;
+            this.textBoxname.MouseHover += new System.EventHandler(this.textBoxname_MouseHover);
             // 
             // textBoxtag
             // 
@@ -128,13 +122,7 @@ namespace FMU_Test
             this.textBoxtag.Name = "textBoxtag";
             this.textBoxtag.Size = new System.Drawing.Size(234, 25);
             this.textBoxtag.TabIndex = 2;
-            // 
-            // textBoxjudge
-            // 
-            this.textBoxjudge.Location = new System.Drawing.Point(140, 108);
-            this.textBoxjudge.Name = "textBoxjudge";
-            this.textBoxjudge.Size = new System.Drawing.Size(234, 25);
-            this.textBoxjudge.TabIndex = 3;
+            this.textBoxtag.MouseHover += new System.EventHandler(this.textBoxtag_MouseHover);
             // 
             // textBoxvalue
             // 
@@ -142,6 +130,40 @@ namespace FMU_Test
             this.textBoxvalue.Name = "textBoxvalue";
             this.textBoxvalue.Size = new System.Drawing.Size(234, 25);
             this.textBoxvalue.TabIndex = 4;
+            this.textBoxvalue.MouseHover += new System.EventHandler(this.textBoxvalue_MouseHover);
+            // 
+            // comboBoxtype
+            // 
+            this.comboBoxtype.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxtype.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBoxtype.FormattingEnabled = true;
+            this.comboBoxtype.Items.AddRange(new object[] {
+            "Tag",
+            "Time"});
+            this.comboBoxtype.Location = new System.Drawing.Point(140, 48);
+            this.comboBoxtype.Name = "comboBoxtype";
+            this.comboBoxtype.Size = new System.Drawing.Size(234, 25);
+            this.comboBoxtype.TabIndex = 7;
+            this.comboBoxtype.SelectedIndexChanged += new System.EventHandler(this.comboBoxtype_SelectedIndexChanged);
+            this.comboBoxtype.MouseHover += new System.EventHandler(this.comboBoxtype_MouseHover);
+            // 
+            // comboBoxjudge
+            // 
+            this.comboBoxjudge.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxjudge.Font = new System.Drawing.Font("宋体", 10F);
+            this.comboBoxjudge.FormattingEnabled = true;
+            this.comboBoxjudge.Items.AddRange(new object[] {
+            "=",
+            "!=",
+            ">",
+            "<",
+            ">=",
+            "<="});
+            this.comboBoxjudge.Location = new System.Drawing.Point(140, 108);
+            this.comboBoxjudge.Name = "comboBoxjudge";
+            this.comboBoxjudge.Size = new System.Drawing.Size(234, 25);
+            this.comboBoxjudge.TabIndex = 8;
+            this.comboBoxjudge.MouseHover += new System.EventHandler(this.comboBoxjudge_MouseHover);
             // 
             // GetEvent
             // 
@@ -150,10 +172,10 @@ namespace FMU_Test
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(386, 239);
+            this.Controls.Add(this.comboBoxjudge);
+            this.Controls.Add(this.comboBoxtype);
             this.Controls.Add(this.textBoxvalue);
-            this.Controls.Add(this.textBoxjudge);
             this.Controls.Add(this.textBoxtag);
-            this.Controls.Add(this.textBoxtype);
             this.Controls.Add(this.textBoxname);
             this.Controls.Add(this.buttoncancel);
             this.Controls.Add(this.buttonadd);
@@ -183,9 +205,9 @@ namespace FMU_Test
         private System.Windows.Forms.Button buttonadd;
         private System.Windows.Forms.Button buttoncancel;
         private System.Windows.Forms.TextBox textBoxname;
-        private System.Windows.Forms.TextBox textBoxtype;
         private System.Windows.Forms.TextBox textBoxtag;
-        private System.Windows.Forms.TextBox textBoxjudge;
         private System.Windows.Forms.TextBox textBoxvalue;
+        private System.Windows.Forms.ComboBox comboBoxtype;
+        private System.Windows.Forms.ComboBox comboBoxjudge;
     }
 }

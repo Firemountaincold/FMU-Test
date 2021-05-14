@@ -43,7 +43,7 @@ namespace FMU_Test
         }
 
         public static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
-        {   // 总是接受  
+        {   // 总是接受，忽略https证书   
             return true;
         }
 

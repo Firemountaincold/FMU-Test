@@ -94,22 +94,24 @@ namespace FMU_Test
             // 
             // buttondisconnsftp
             // 
+            this.buttondisconnsftp.BackColor = System.Drawing.SystemColors.Menu;
             this.buttondisconnsftp.Location = new System.Drawing.Point(734, 63);
             this.buttondisconnsftp.Name = "buttondisconnsftp";
             this.buttondisconnsftp.Size = new System.Drawing.Size(125, 25);
             this.buttondisconnsftp.TabIndex = 9;
             this.buttondisconnsftp.Text = "断开连接";
-            this.buttondisconnsftp.UseVisualStyleBackColor = true;
+            this.buttondisconnsftp.UseVisualStyleBackColor = false;
             this.buttondisconnsftp.Click += new System.EventHandler(this.buttondisconnsftp_Click);
             // 
             // buttonlogsftp
             // 
+            this.buttonlogsftp.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonlogsftp.Location = new System.Drawing.Point(588, 63);
             this.buttonlogsftp.Name = "buttonlogsftp";
             this.buttonlogsftp.Size = new System.Drawing.Size(125, 25);
             this.buttonlogsftp.TabIndex = 8;
             this.buttonlogsftp.Text = "登录SFTP";
-            this.buttonlogsftp.UseVisualStyleBackColor = true;
+            this.buttonlogsftp.UseVisualStyleBackColor = false;
             this.buttonlogsftp.Click += new System.EventHandler(this.buttonlogsftp_Click);
             // 
             // checkBoxtask
@@ -173,12 +175,13 @@ namespace FMU_Test
             // 
             // buttonUpload
             // 
+            this.buttonUpload.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonUpload.Location = new System.Drawing.Point(881, 63);
             this.buttonUpload.Name = "buttonUpload";
             this.buttonUpload.Size = new System.Drawing.Size(125, 25);
             this.buttonUpload.TabIndex = 3;
             this.buttonUpload.Text = "部署";
-            this.buttonUpload.UseVisualStyleBackColor = true;
+            this.buttonUpload.UseVisualStyleBackColor = false;
             this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
             // 
             // textBoxRemotePath
@@ -190,22 +193,24 @@ namespace FMU_Test
             // 
             // buttonCall
             // 
+            this.buttonCall.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonCall.Location = new System.Drawing.Point(394, 24);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(150, 25);
             this.buttonCall.TabIndex = 0;
             this.buttonCall.Text = "选择py文件";
-            this.buttonCall.UseVisualStyleBackColor = true;
+            this.buttonCall.UseVisualStyleBackColor = false;
             this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
             // 
             // buttonFMU
             // 
+            this.buttonFMU.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonFMU.Location = new System.Drawing.Point(27, 24);
             this.buttonFMU.Name = "buttonFMU";
             this.buttonFMU.Size = new System.Drawing.Size(150, 25);
             this.buttonFMU.TabIndex = 0;
             this.buttonFMU.Text = "选择dll文件";
-            this.buttonFMU.UseVisualStyleBackColor = true;
+            this.buttonFMU.UseVisualStyleBackColor = false;
             this.buttonFMU.Click += new System.EventHandler(this.buttonFMU_Click);
             // 
             // groupBox2
@@ -221,28 +226,32 @@ namespace FMU_Test
             // 
             // buttonOpenxml
             // 
+            this.buttonOpenxml.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonOpenxml.Location = new System.Drawing.Point(27, 88);
             this.buttonOpenxml.Name = "buttonOpenxml";
             this.buttonOpenxml.Size = new System.Drawing.Size(150, 25);
             this.buttonOpenxml.TabIndex = 1;
             this.buttonOpenxml.Text = "打开Task.xml";
-            this.buttonOpenxml.UseVisualStyleBackColor = true;
+            this.buttonOpenxml.UseVisualStyleBackColor = false;
             this.buttonOpenxml.Click += new System.EventHandler(this.buttonOpenxml_Click);
             // 
             // buttonGetTask
             // 
+            this.buttonGetTask.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonGetTask.Location = new System.Drawing.Point(27, 46);
             this.buttonGetTask.Name = "buttonGetTask";
             this.buttonGetTask.Size = new System.Drawing.Size(150, 25);
             this.buttonGetTask.TabIndex = 0;
             this.buttonGetTask.Text = "生成Task.xml";
-            this.buttonGetTask.UseVisualStyleBackColor = true;
+            this.buttonGetTask.UseVisualStyleBackColor = false;
             this.buttonGetTask.Click += new System.EventHandler(this.buttonGetTask_Click);
             // 
             // richTextBoxinfo
             // 
+            this.richTextBoxinfo.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBoxinfo.Location = new System.Drawing.Point(13, 291);
             this.richTextBoxinfo.Name = "richTextBoxinfo";
+            this.richTextBoxinfo.ReadOnly = true;
             this.richTextBoxinfo.Size = new System.Drawing.Size(1026, 255);
             this.richTextBoxinfo.TabIndex = 2;
             this.richTextBoxinfo.Text = "";
@@ -286,12 +295,13 @@ namespace FMU_Test
             // 
             // buttondisconnfmu
             // 
+            this.buttondisconnfmu.BackColor = System.Drawing.SystemColors.Menu;
             this.buttondisconnfmu.Location = new System.Drawing.Point(521, 24);
             this.buttondisconnfmu.Name = "buttondisconnfmu";
             this.buttondisconnfmu.Size = new System.Drawing.Size(125, 25);
             this.buttondisconnfmu.TabIndex = 18;
             this.buttondisconnfmu.Text = "退出登录";
-            this.buttondisconnfmu.UseVisualStyleBackColor = true;
+            this.buttondisconnfmu.UseVisualStyleBackColor = false;
             this.buttondisconnfmu.Click += new System.EventHandler(this.buttondisconnfmu_Click);
             // 
             // label4
@@ -354,12 +364,13 @@ namespace FMU_Test
             // 
             // buttondo
             // 
+            this.buttondo.BackColor = System.Drawing.SystemColors.Menu;
             this.buttondo.Location = new System.Drawing.Point(668, 68);
             this.buttondo.Name = "buttondo";
             this.buttondo.Size = new System.Drawing.Size(125, 25);
             this.buttondo.TabIndex = 13;
             this.buttondo.Text = "执行命令";
-            this.buttondo.UseVisualStyleBackColor = true;
+            this.buttondo.UseVisualStyleBackColor = false;
             this.buttondo.Click += new System.EventHandler(this.buttondo_Click);
             // 
             // label6
@@ -409,22 +420,24 @@ namespace FMU_Test
             // 
             // buttonlogin
             // 
+            this.buttonlogin.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonlogin.Location = new System.Drawing.Point(36, 24);
             this.buttonlogin.Name = "buttonlogin";
             this.buttonlogin.Size = new System.Drawing.Size(125, 25);
             this.buttonlogin.TabIndex = 7;
             this.buttonlogin.Text = "登录";
-            this.buttonlogin.UseVisualStyleBackColor = true;
+            this.buttonlogin.UseVisualStyleBackColor = false;
             this.buttonlogin.Click += new System.EventHandler(this.buttonlogin_ClickAsync);
             // 
             // buttonexit
             // 
+            this.buttonexit.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonexit.Location = new System.Drawing.Point(668, 24);
             this.buttonexit.Name = "buttonexit";
             this.buttonexit.Size = new System.Drawing.Size(125, 25);
             this.buttonexit.TabIndex = 6;
             this.buttonexit.Text = "退出软件";
-            this.buttonexit.UseVisualStyleBackColor = true;
+            this.buttonexit.UseVisualStyleBackColor = false;
             this.buttonexit.Click += new System.EventHandler(this.buttonexit_Click);
             // 
             // timerNOP
