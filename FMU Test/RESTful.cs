@@ -115,12 +115,17 @@ namespace FMU_Test
             }
         }
 
-        public async void GetNOP(string userid, string token, string password)
+        public async Task<string> GetNOP(string userid, string token, string password)
         {
             //空命令，保持连接
             HttpResponseMessage response = await client.GetAsync(GetAPI(userid, token, Order.NOP, password));
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject json = (JObject)JsonConvert.DeserializeObject(responseBody);
+            if (json["msg"].ToString() != "success")
+            {
+                SN--;
+            }
+            return json["msg"].ToString();
         }
 
         public async Task<JObject> GetInfo(string userid, string token, Order order, string password)
@@ -136,10 +141,6 @@ namespace FMU_Test
         {
             //发送信息
             JObject json = new JObject();
-            if (order == Order.PyRunStat)
-            {
-                json = PostAPI(order1, order2, order);
-            }
             HttpContent content = new StringContent(json.ToString());
             HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password, seed), content);
             string responseBody = await response.Content.ReadAsStringAsync();
@@ -182,7 +183,7 @@ namespace FMU_Test
 
         public JObject PostAPI(string order1, string order2, Order order)
         {
-            //获取Post命令的json
+            //获取Post命令的json，目前用不上了
             JObject json = new JObject();
             switch (order)
             {
@@ -237,6 +238,10 @@ namespace FMU_Test
                 case Order.PyRunStat:
                     string api5 = "PyRunStat?UserId=" + userid + "&Token=" + token + "&SN=" + GetMD5(SN.ToString() + password) +
                         "&Stat=" + order1;
+                    if (order2 != "")
+                    {
+                        api5 += "&TaskNames=" + order2;
+                    }
                     SN++;
                     return api5;
             }

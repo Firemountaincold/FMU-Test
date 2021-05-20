@@ -9,37 +9,43 @@ namespace FMU_Test
 {
     public class TipTools
     {
-        public void ToolTips(TextBox box, string tips)
+        public ToolTip toolTip = new ToolTip();
+
+        public TipTools()
         {
-            //鼠标悬停说明文字
-            ToolTip toolTip = new ToolTip();
             toolTip.AutoPopDelay = 5000;
             toolTip.InitialDelay = 100;
             toolTip.ReshowDelay = 500;
             toolTip.ShowAlways = true;
+            toolTip.IsBalloon = true;
+        }
+        public void ToolTips(TextBox box, string tips)
+        {
+            //鼠标悬停说明文字
+            toolTip.SetToolTip(box, tips);
+        }
+
+        public void ToolTips(CheckBox box, string tips)
+        {
+            //鼠标悬停说明文字
             toolTip.SetToolTip(box, tips);
         }
 
         public void ToolTips(ComboBox box, string tips)
         {
             //鼠标悬停说明文字
-            ToolTip toolTip = new ToolTip();
-            toolTip.AutoPopDelay = 5000;
-            toolTip.InitialDelay = 100;
-            toolTip.ReshowDelay = 500;
-            toolTip.ShowAlways = true;
             toolTip.SetToolTip(box, tips);
         }
 
         public void ToolTips(Button box, string tips)
         {
             //鼠标悬停说明文字
-            ToolTip toolTip = new ToolTip();
-            toolTip.AutoPopDelay = 5000;
-            toolTip.InitialDelay = 100;
-            toolTip.ReshowDelay = 500;
-            toolTip.ShowAlways = true;
             toolTip.SetToolTip(box, tips);
+        }
+
+        public void Clear()
+        {
+            toolTip.RemoveAll();
         }
     }
 
@@ -78,20 +84,20 @@ namespace FMU_Test
         public void AddColorInfo(string info, Color color)
         {
             // 用于输出带颜色的信息
-            tb.BeginInvoke(new Action(() => { tb.SelectionStart = tb.TextLength; }));
-            tb.BeginInvoke(new Action(() => { tb.SelectionLength = 0; }));
-            tb.BeginInvoke(new Action(() => { tb.SelectionColor = color; }));
-            tb.BeginInvoke(new Action(() => { tb.AppendText(info); }));
-            tb.BeginInvoke(new Action(() => { tb.SelectionColor = tb.ForeColor; }));
-            tb.BeginInvoke(new Action(() => { tb.ScrollToCaret(); }));
+            tb.BeginInvoke(new Action(() => { 
+                tb.SelectionStart = tb.TextLength; 
+                tb.SelectionLength = 0;
+                tb.SelectionColor = color;
+                tb.AppendText(info);
+                tb.SelectionColor = tb.ForeColor;
+                tb.ScrollToCaret();
+            }));
         }
     }
 
-    /// <summary>
-    /// SFTP操作类
-    /// </summary>
     public class SFTPHelper
     {
+        // SFTP操作类
         private SftpClient sftp;
         // SFTP连接状态
         public bool Connected { get { return sftp.IsConnected; } }

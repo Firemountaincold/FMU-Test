@@ -39,16 +39,18 @@ namespace FMU_Test
             // 
             // textBoxevents
             // 
-            this.textBoxevents.Location = new System.Drawing.Point(12, 30);
+            this.textBoxevents.Location = new System.Drawing.Point(9, 24);
+            this.textBoxevents.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxevents.Name = "textBoxevents";
-            this.textBoxevents.Size = new System.Drawing.Size(381, 25);
+            this.textBoxevents.Size = new System.Drawing.Size(287, 21);
             this.textBoxevents.TabIndex = 0;
             // 
             // buttonsave
             // 
-            this.buttonsave.Location = new System.Drawing.Point(56, 250);
+            this.buttonsave.Location = new System.Drawing.Point(42, 200);
+            this.buttonsave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonsave.Name = "buttonsave";
-            this.buttonsave.Size = new System.Drawing.Size(125, 25);
+            this.buttonsave.Size = new System.Drawing.Size(94, 20);
             this.buttonsave.TabIndex = 1;
             this.buttonsave.Text = "保存关系";
             this.buttonsave.UseVisualStyleBackColor = true;
@@ -56,9 +58,10 @@ namespace FMU_Test
             // 
             // buttoncancel
             // 
-            this.buttoncancel.Location = new System.Drawing.Point(224, 250);
+            this.buttoncancel.Location = new System.Drawing.Point(168, 200);
+            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
-            this.buttoncancel.Size = new System.Drawing.Size(125, 25);
+            this.buttoncancel.Size = new System.Drawing.Size(94, 20);
             this.buttoncancel.TabIndex = 2;
             this.buttoncancel.Text = "取消";
             this.buttoncancel.UseVisualStyleBackColor = true;
@@ -66,39 +69,45 @@ namespace FMU_Test
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(12, 79);
+            this.textBox2.Location = new System.Drawing.Point(9, 61);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(381, 39);
+            this.textBox2.Size = new System.Drawing.Size(286, 41);
             this.textBox2.TabIndex = 3;
             this.textBox2.Text = "多个触发条件的逻辑组合关系，它的值是一个由触发条件名字和 AND 、OR 、括号、空格组成的字串表达式。";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 132);
+            this.label1.Location = new System.Drawing.Point(7, 106);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(340, 15);
+            this.label1.Size = new System.Drawing.Size(257, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "示例：(MyEvent1 AND MyEvent2) OR MyEvent3 ";
             // 
             // textBoxeventname
             // 
-            this.textBoxeventname.Location = new System.Drawing.Point(13, 164);
+            this.textBoxeventname.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxeventname.Location = new System.Drawing.Point(10, 131);
+            this.textBoxeventname.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxeventname.Multiline = true;
             this.textBoxeventname.Name = "textBoxeventname";
             this.textBoxeventname.ReadOnly = true;
-            this.textBoxeventname.Size = new System.Drawing.Size(380, 68);
+            this.textBoxeventname.Size = new System.Drawing.Size(286, 55);
             this.textBoxeventname.TabIndex = 5;
             this.textBoxeventname.Text = "已保存的触发条件名字：";
             // 
             // Events
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 291);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(304, 233);
             this.Controls.Add(this.textBoxeventname);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -106,11 +115,12 @@ namespace FMU_Test
             this.Controls.Add(this.buttonsave);
             this.Controls.Add(this.textBoxevents);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Events";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Events";
+            this.Text = "触发逻辑";
             this.Load += new System.EventHandler(this.Events_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

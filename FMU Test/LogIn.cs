@@ -10,9 +10,12 @@ namespace FMU_Test
         public string port;
         public string userid;
         public string password;
+        public string type;
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public LogIn(string type)
         {
             InitializeComponent();
+            this.type = type;
             if (type == "fmu")
             {
                 textBoxip.Text = ConfigurationManager.AppSettings["fmuip"]; 
@@ -37,6 +40,27 @@ namespace FMU_Test
                 port = textBoxport.Text;
                 userid = textBoxuserid.Text;
                 password = textBoxpassword.Text;
+                if (!Compare())
+                {
+                    if (MessageBox.Show("检测到登录信息改变，是否保存现在的登录信息？", "询问", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        if (type == "fmu")
+                        {
+                            config.AppSettings.Settings["fmuip"].Value = ip;
+                            config.AppSettings.Settings["fmuport"].Value = port;
+                            config.AppSettings.Settings["fmuuser"].Value = userid;
+                            config.AppSettings.Settings["fmupw"].Value = password;
+                        }
+                        else if (type == "sftp")
+                        {
+                            config.AppSettings.Settings["sftpip"].Value = ip;
+                            config.AppSettings.Settings["sftpport"].Value = port;
+                            config.AppSettings.Settings["sftpuser"].Value = userid;
+                            config.AppSettings.Settings["sftppw"].Value = password;
+                        }
+                        config.Save(ConfigurationSaveMode.Modified);
+                    }
+                }
                 DialogResult = DialogResult.OK;
             }
             else
@@ -48,6 +72,35 @@ namespace FMU_Test
         private void buttoncancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        public bool Compare()
+        {
+            if (type == "fmu")
+            {
+                if (textBoxip.Text == ConfigurationManager.AppSettings["fmuip"] && textBoxport.Text == ConfigurationManager.AppSettings["fmuport"] && 
+                    textBoxuserid.Text == ConfigurationManager.AppSettings["fmuuser"] && textBoxpassword.Text == ConfigurationManager.AppSettings["fmupw"])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (type == "sftp") 
+            {
+                if (textBoxip.Text == ConfigurationManager.AppSettings["sftpip"] && textBoxport.Text == ConfigurationManager.AppSettings["sftpport"] &&
+                    textBoxuserid.Text == ConfigurationManager.AppSettings["sftpuser"] && textBoxpassword.Text == ConfigurationManager.AppSettings["sftppw"])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

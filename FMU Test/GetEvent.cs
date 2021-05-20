@@ -17,6 +17,10 @@ namespace FMU_Test
             if (textBoxname.Text != "" && comboBoxtype.Text != "" && comboBoxjudge.Text != "" &&
                 textBoxvalue.Text != "")
             {
+                if (!textBoxtag.Enabled)
+                {
+                    textBoxtag.Text = "";
+                }
                 eve = new Event(textBoxname.Text, comboBoxtype.Text, textBoxtag.Text, comboBoxjudge.Text, textBoxvalue.Text);
                 DialogResult = DialogResult.OK;
             }

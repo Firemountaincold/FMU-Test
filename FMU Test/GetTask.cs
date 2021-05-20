@@ -12,7 +12,7 @@ namespace FMU_Test
         public TipTools tip = new TipTools();
         public Event[] ee = new Event[1];
         public Cal[] cc = new Cal[1];
-        public string eventss;
+        public string eventss = "";
         public int evecount = 0;
         public int calcount = 0;
         public bool isevent = true;
@@ -32,15 +32,22 @@ namespace FMU_Test
             {
                 if (isrelation)
                 {
-                    if (evecount != 0 && calcount != 0)
+                    if (evecount != 0 || isevent == false)
                     {
-                        Task task = new Task(textBoxname.Text, comboBoxtype.Text, comboBoxtrigger.Text, textBoxperiod.Text, eventss, ee, cc);
-                        CreateTask(xmlDocument, root, task);
-                        DialogResult = DialogResult.OK;
+                        if (calcount != 0)
+                        {
+                            Task task = new Task(textBoxname.Text, comboBoxtype.Text, comboBoxtrigger.Text, textBoxperiod.Text, eventss, ee, cc);
+                            CreateTask(xmlDocument, root, task);
+                            DialogResult = DialogResult.OK;
+                        }
+                        else
+                        {
+                            MessageBox.Show("请添加计算任务。", "警告");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("请添加触发条件和计算任务。", "警告");
+                        MessageBox.Show("请添加触发条件。", "警告");
                     }
                 }
                 else
@@ -64,19 +71,31 @@ namespace FMU_Test
             XmlElement rule = xd.CreateElement("Rule");
             rule.SetAttribute("TaskType", t.tasktype);
             rule.SetAttribute("TaskTrigger", t.tasktrigger);
-            rule.SetAttribute("TaskPeriod", t.taskperiod);
-            rule.SetAttribute("Events", t.events.Replace(" ", "======"));
+            if (t.taskperiod != "")
+            {
+                rule.SetAttribute("TaskPeriod", t.taskperiod);
+            }
+            if (t.events != "")
+            {
+                rule.SetAttribute("Events", t.events.Replace(" ", "======"));
+            }
             task.AppendChild(rule);
             //调度触发条件
-            for (int i = 0; i < t.e.Length; i++)
+            if (isevent)
             {
-                XmlElement eve = xd.CreateElement("Event");
-                eve.SetAttribute("Name", t.e[i].eventname);
-                eve.SetAttribute("Type", t.e[i].eventtype);
-                eve.SetAttribute("Tag", t.e[i].eventtag);
-                eve.SetAttribute("Judge", t.e[i].eventjudge);
-                eve.SetAttribute("Value", t.e[i].eventvalue);
-                rule.AppendChild(eve);
+                for (int i = 0; i < t.e.Length; i++)
+                {
+                    XmlElement eve = xd.CreateElement("Event");
+                    eve.SetAttribute("Name", t.e[i].eventname);
+                    eve.SetAttribute("Type", t.e[i].eventtype);
+                    if (t.e[i].eventtag != "")
+                    {
+                        eve.SetAttribute("Tag", t.e[i].eventtag);
+                    }
+                    eve.SetAttribute("Judge", t.e[i].eventjudge);
+                    eve.SetAttribute("Value", t.e[i].eventvalue);
+                    rule.AppendChild(eve);
+                }
             }
             XmlElement cals = xd.CreateElement("Cals");
             task.AppendChild(cals);
@@ -133,8 +152,6 @@ namespace FMU_Test
             DialogResult = DialogResult.Cancel;
         }
 
-
-
         private void textBoxname_MouseHover(object sender, EventArgs e)
         {
             tip.ToolTips(textBoxname, "任务定义信息，每个任务有一个唯一的名字。");
@@ -155,6 +172,7 @@ namespace FMU_Test
             //根据选择判断应该使用的控件
             if (comboBoxtrigger.SelectedItem.ToString() == "Cycle")
             {
+                textBoxperiod.Text = "";
                 textBoxperiod.Enabled = false;
                 buttonAddevent.Enabled = false;
                 isevent = false;
@@ -167,6 +185,7 @@ namespace FMU_Test
             }
             else if (comboBoxtrigger.SelectedItem.ToString() == "Event")
             {
+                textBoxperiod.Text = "";
                 textBoxperiod.Enabled = false;
                 buttonAddevent.Enabled = true;
                 isevent = true;
@@ -187,12 +206,12 @@ namespace FMU_Test
 
         private void textBoxperiod_MouseHover(object sender, EventArgs e)
         {
-            tip.ToolTips(textBoxperiod, "调度周期，值为一个数字，单位：秒。)");
+            tip.ToolTips(textBoxperiod, "调度周期，值为一个数字，单位：秒。");
         }
 
         private void buttonAddevent_MouseHover(object sender, EventArgs e)
         {
-            tip.ToolTips(buttonAddevent, "点击添加调度触发条件。");
+            tip.ToolTips(buttonAddevent, "点击添加调度触发条件。如果触发条件超过1个，需要编辑它们的逻辑关系。");
         }
 
         private void buttonAddcal_MouseHover(object sender, EventArgs e)
