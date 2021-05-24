@@ -64,7 +64,7 @@ namespace FMU_Test
             // textBoxport
             // 
             this.textBoxport.Location = new System.Drawing.Point(92, 60);
-            this.textBoxport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxport.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxport.Name = "textBoxport";
             this.textBoxport.Size = new System.Drawing.Size(162, 21);
             this.textBoxport.TabIndex = 12;
@@ -72,7 +72,7 @@ namespace FMU_Test
             // textBoxip
             // 
             this.textBoxip.Location = new System.Drawing.Point(92, 29);
-            this.textBoxip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxip.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxip.Name = "textBoxip";
             this.textBoxip.Size = new System.Drawing.Size(162, 21);
             this.textBoxip.TabIndex = 11;
@@ -100,7 +100,7 @@ namespace FMU_Test
             // textBoxuserid
             // 
             this.textBoxuserid.Location = new System.Drawing.Point(92, 94);
-            this.textBoxuserid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxuserid.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxuserid.Name = "textBoxuserid";
             this.textBoxuserid.Size = new System.Drawing.Size(162, 21);
             this.textBoxuserid.TabIndex = 15;
@@ -108,31 +108,35 @@ namespace FMU_Test
             // textBoxpassword
             // 
             this.textBoxpassword.Location = new System.Drawing.Point(92, 129);
-            this.textBoxpassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxpassword.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxpassword.Name = "textBoxpassword";
             this.textBoxpassword.Size = new System.Drawing.Size(162, 21);
             this.textBoxpassword.TabIndex = 16;
             // 
             // buttonok
             // 
+            this.buttonok.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonok.Location = new System.Drawing.Point(32, 178);
-            this.buttonok.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonok.Margin = new System.Windows.Forms.Padding(2);
             this.buttonok.Name = "buttonok";
             this.buttonok.Size = new System.Drawing.Size(94, 20);
             this.buttonok.TabIndex = 17;
             this.buttonok.Text = "登录";
-            this.buttonok.UseVisualStyleBackColor = true;
+            this.buttonok.UseVisualStyleBackColor = false;
             this.buttonok.Click += new System.EventHandler(this.buttonok_Click);
             // 
             // buttoncancel
             // 
+            this.buttoncancel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttoncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttoncancel.Location = new System.Drawing.Point(160, 178);
-            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
             this.buttoncancel.Size = new System.Drawing.Size(94, 20);
             this.buttoncancel.TabIndex = 18;
             this.buttoncancel.Text = "取消";
-            this.buttoncancel.UseVisualStyleBackColor = true;
+            this.buttoncancel.UseVisualStyleBackColor = false;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
             // LogIn
@@ -153,7 +157,7 @@ namespace FMU_Test
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LogIn";

@@ -50,36 +50,42 @@ namespace FMU_Test
             // 
             // buttonOK
             // 
+            this.buttonOK.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonOK.Location = new System.Drawing.Point(44, 228);
-            this.buttonOK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonOK.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(112, 20);
             this.buttonOK.TabIndex = 6;
-            this.buttonOK.Text = "生成xml";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Text = "添加任务";
+            this.buttonOK.UseVisualStyleBackColor = false;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // buttonAddevent
             // 
+            this.buttonAddevent.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonAddevent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonAddevent.Location = new System.Drawing.Point(44, 150);
-            this.buttonAddevent.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddevent.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddevent.Name = "buttonAddevent";
             this.buttonAddevent.Size = new System.Drawing.Size(112, 20);
             this.buttonAddevent.TabIndex = 4;
             this.buttonAddevent.Text = "添加触发条件";
-            this.buttonAddevent.UseVisualStyleBackColor = true;
+            this.buttonAddevent.UseVisualStyleBackColor = false;
             this.buttonAddevent.Click += new System.EventHandler(this.buttonAddevent_Click);
             this.buttonAddevent.MouseHover += new System.EventHandler(this.buttonAddevent_MouseHover);
             // 
             // buttonAddcal
             // 
+            this.buttonAddcal.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonAddcal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonAddcal.Location = new System.Drawing.Point(44, 185);
-            this.buttonAddcal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAddcal.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAddcal.Name = "buttonAddcal";
             this.buttonAddcal.Size = new System.Drawing.Size(112, 20);
             this.buttonAddcal.TabIndex = 5;
             this.buttonAddcal.Text = "添加计算任务";
-            this.buttonAddcal.UseVisualStyleBackColor = true;
+            this.buttonAddcal.UseVisualStyleBackColor = false;
             this.buttonAddcal.Click += new System.EventHandler(this.buttonAddcal_Click);
             this.buttonAddcal.MouseHover += new System.EventHandler(this.buttonAddcal_MouseHover);
             // 
@@ -108,7 +114,7 @@ namespace FMU_Test
             this.textBoxevecount.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxevecount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxevecount.Location = new System.Drawing.Point(267, 154);
-            this.textBoxevecount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxevecount.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxevecount.Name = "textBoxevecount";
             this.textBoxevecount.ReadOnly = true;
             this.textBoxevecount.Size = new System.Drawing.Size(75, 14);
@@ -120,7 +126,7 @@ namespace FMU_Test
             this.textBoxcalcount.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxcalcount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxcalcount.Location = new System.Drawing.Point(267, 188);
-            this.textBoxcalcount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxcalcount.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxcalcount.Name = "textBoxcalcount";
             this.textBoxcalcount.ReadOnly = true;
             this.textBoxcalcount.Size = new System.Drawing.Size(75, 14);
@@ -170,7 +176,7 @@ namespace FMU_Test
             // textBoxname
             // 
             this.textBoxname.Location = new System.Drawing.Point(115, 16);
-            this.textBoxname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxname.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(254, 21);
             this.textBoxname.TabIndex = 0;
@@ -179,7 +185,7 @@ namespace FMU_Test
             // textBoxperiod
             // 
             this.textBoxperiod.Location = new System.Drawing.Point(115, 102);
-            this.textBoxperiod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxperiod.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxperiod.Name = "textBoxperiod";
             this.textBoxperiod.Size = new System.Drawing.Size(254, 21);
             this.textBoxperiod.TabIndex = 3;
@@ -187,13 +193,15 @@ namespace FMU_Test
             // 
             // buttoncancel
             // 
+            this.buttoncancel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttoncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttoncancel.Location = new System.Drawing.Point(214, 228);
-            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
-            this.buttoncancel.Size = new System.Drawing.Size(94, 20);
+            this.buttoncancel.Size = new System.Drawing.Size(112, 20);
             this.buttoncancel.TabIndex = 7;
             this.buttoncancel.Text = "取消";
-            this.buttoncancel.UseVisualStyleBackColor = true;
+            this.buttoncancel.UseVisualStyleBackColor = false;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
             // comboBoxtype
@@ -207,7 +215,7 @@ namespace FMU_Test
             "once",
             "repeat"});
             this.comboBoxtype.Location = new System.Drawing.Point(115, 44);
-            this.comboBoxtype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxtype.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxtype.Name = "comboBoxtype";
             this.comboBoxtype.Size = new System.Drawing.Size(254, 21);
             this.comboBoxtype.TabIndex = 11;
@@ -226,7 +234,7 @@ namespace FMU_Test
             "Event",
             "Periodevent"});
             this.comboBoxtrigger.Location = new System.Drawing.Point(115, 73);
-            this.comboBoxtrigger.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxtrigger.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxtrigger.Name = "comboBoxtrigger";
             this.comboBoxtrigger.Size = new System.Drawing.Size(254, 21);
             this.comboBoxtrigger.TabIndex = 12;
@@ -235,14 +243,16 @@ namespace FMU_Test
             // 
             // buttonrelation
             // 
+            this.buttonrelation.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonrelation.Enabled = false;
+            this.buttonrelation.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonrelation.Location = new System.Drawing.Point(287, 150);
-            this.buttonrelation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonrelation.Margin = new System.Windows.Forms.Padding(2);
             this.buttonrelation.Name = "buttonrelation";
             this.buttonrelation.Size = new System.Drawing.Size(81, 20);
             this.buttonrelation.TabIndex = 13;
             this.buttonrelation.Text = "逻辑关系";
-            this.buttonrelation.UseVisualStyleBackColor = true;
+            this.buttonrelation.UseVisualStyleBackColor = false;
             this.buttonrelation.Click += new System.EventHandler(this.buttonrelation_Click);
             this.buttonrelation.MouseHover += new System.EventHandler(this.buttonrelation_MouseHover);
             // 
@@ -271,12 +281,12 @@ namespace FMU_Test
             this.Controls.Add(this.buttonAddevent);
             this.Controls.Add(this.buttonOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GetTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "生成Task.xml";
+            this.Text = "添加任务";
             this.ResumeLayout(false);
             this.PerformLayout();
 

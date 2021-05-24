@@ -137,15 +137,25 @@ namespace FMU_Test
             return json;
         }
 
-        public async Task<JObject> PostInfo(string userid, string token, string order1, string order2, Order order, string password, string seed="")
+        public async Task<JObject> PostInfo(string userid, string token, string order1, string order2, Order order, string password, string seed = "")
         {
             //发送信息
-            JObject json = new JObject();
-            HttpContent content = new StringContent(json.ToString());
+            string str = "";
+            HttpContent content = new StringContent(str);
+            if (order == Order.PyRunStat && order2 != "")
+            {
+                JObject js = new JObject();
+                string[] a = order2.Split(',');
+                JArray ja = new JArray(a);
+                js.Add("TaskNames", ja);
+                string jss = JsonConvert.SerializeObject(js);
+                content = new StringContent(jss);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            }
             HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password, seed), content);
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject returnjson = (JObject)JsonConvert.DeserializeObject(responseBody);
-            if (returnjson["msg"].ToString() != "success" && returnjson["msg"].ToString() != "msg not match!") 
+            if (returnjson["msg"].ToString() != "success" && returnjson["msg"].ToString() != "msg not match!" && returnjson["msg"].ToString().StartsWith("cant stop task"))
             {
                 SN--;
             }
@@ -204,13 +214,14 @@ namespace FMU_Test
                     json["UninstallName"] = order1;
                     return json;
                 case Order.PyRunStat:
+                    json["Stat"] = order1;
                     json["TaskNames"] = order2;
                     return json;
             }
             return json;
         }
 
-        public string PostAPI(string userid, string token, string order1, string order2, Order order, string password, string seed="")
+        public string PostAPI(string userid, string token, string order1, string order2, Order order, string password, string seed = "")
         {
             //获取Post命令的字符串
             switch (order)
@@ -238,10 +249,6 @@ namespace FMU_Test
                 case Order.PyRunStat:
                     string api5 = "PyRunStat?UserId=" + userid + "&Token=" + token + "&SN=" + GetMD5(SN.ToString() + password) +
                         "&Stat=" + order1;
-                    if (order2 != "")
-                    {
-                        api5 += "&TaskNames=" + order2;
-                    }
                     SN++;
                     return api5;
             }

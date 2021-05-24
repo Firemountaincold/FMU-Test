@@ -15,6 +15,7 @@ namespace FMU_Test
         public LogIn(string type)
         {
             InitializeComponent();
+            //同时用于两个登录窗口，所以需要两种初始化
             this.type = type;
             if (type == "fmu")
             {
@@ -34,6 +35,7 @@ namespace FMU_Test
 
         private void buttonok_Click(object sender, EventArgs e)
         {
+            //登录，并询问是否保存改变的信息
             if (textBoxip.Text != "" && textBoxpassword.Text != "" && textBoxport.Text != "" && textBoxuserid.Text != "")
             {
                 ip = textBoxip.Text;
@@ -71,11 +73,13 @@ namespace FMU_Test
 
         private void buttoncancel_Click(object sender, EventArgs e)
         {
+            //取消
             DialogResult = DialogResult.Cancel;
         }
 
         public bool Compare()
         {
+            //对比登录信息是否改变
             if (type == "fmu")
             {
                 if (textBoxip.Text == ConfigurationManager.AppSettings["fmuip"] && textBoxport.Text == ConfigurationManager.AppSettings["fmuport"] && 

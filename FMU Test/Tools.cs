@@ -13,6 +13,7 @@ namespace FMU_Test
 
         public TipTools()
         {
+            //初始化
             toolTip.AutoPopDelay = 5000;
             toolTip.InitialDelay = 100;
             toolTip.ReshowDelay = 500;
@@ -45,6 +46,7 @@ namespace FMU_Test
 
         public void Clear()
         {
+            //移除实例添加的所有说明
             toolTip.RemoveAll();
         }
     }

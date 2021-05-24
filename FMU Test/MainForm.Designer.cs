@@ -115,7 +115,8 @@ namespace FMU_Test
             // 
             // buttondisconnsftp
             // 
-            this.buttondisconnsftp.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttondisconnsftp.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttondisconnsftp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttondisconnsftp.Location = new System.Drawing.Point(550, 77);
             this.buttondisconnsftp.Margin = new System.Windows.Forms.Padding(2);
             this.buttondisconnsftp.Name = "buttondisconnsftp";
@@ -127,7 +128,8 @@ namespace FMU_Test
             // 
             // buttonlogsftp
             // 
-            this.buttonlogsftp.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonlogsftp.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonlogsftp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonlogsftp.Location = new System.Drawing.Point(441, 77);
             this.buttonlogsftp.Margin = new System.Windows.Forms.Padding(2);
             this.buttonlogsftp.Name = "buttonlogsftp";
@@ -227,7 +229,8 @@ namespace FMU_Test
             // 
             // buttonUpload
             // 
-            this.buttonUpload.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonUpload.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonUpload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonUpload.Location = new System.Drawing.Point(661, 77);
             this.buttonUpload.Margin = new System.Windows.Forms.Padding(2);
             this.buttonUpload.Name = "buttonUpload";
@@ -247,7 +250,8 @@ namespace FMU_Test
             // 
             // buttonCall
             // 
-            this.buttonCall.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonCall.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonCall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonCall.Location = new System.Drawing.Point(20, 46);
             this.buttonCall.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCall.Name = "buttonCall";
@@ -259,7 +263,8 @@ namespace FMU_Test
             // 
             // buttonFMU
             // 
-            this.buttonFMU.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonFMU.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonFMU.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonFMU.Location = new System.Drawing.Point(20, 19);
             this.buttonFMU.Margin = new System.Windows.Forms.Padding(2);
             this.buttonFMU.Name = "buttonFMU";
@@ -284,7 +289,8 @@ namespace FMU_Test
             // 
             // buttonOpenxml
             // 
-            this.buttonOpenxml.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonOpenxml.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonOpenxml.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonOpenxml.Location = new System.Drawing.Point(20, 77);
             this.buttonOpenxml.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOpenxml.Name = "buttonOpenxml";
@@ -296,7 +302,8 @@ namespace FMU_Test
             // 
             // buttonGetTask
             // 
-            this.buttonGetTask.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonGetTask.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonGetTask.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonGetTask.Location = new System.Drawing.Point(20, 35);
             this.buttonGetTask.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGetTask.Name = "buttonGetTask";
@@ -308,7 +315,7 @@ namespace FMU_Test
             // 
             // richTextBoxinfo
             // 
-            this.richTextBoxinfo.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBoxinfo.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.richTextBoxinfo.Location = new System.Drawing.Point(11, 254);
             this.richTextBoxinfo.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxinfo.Name = "richTextBoxinfo";
@@ -371,7 +378,8 @@ namespace FMU_Test
             // 
             // buttondisconnfmu
             // 
-            this.buttondisconnfmu.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttondisconnfmu.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttondisconnfmu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttondisconnfmu.Location = new System.Drawing.Point(391, 19);
             this.buttondisconnfmu.Margin = new System.Windows.Forms.Padding(2);
             this.buttondisconnfmu.Name = "buttondisconnfmu";
@@ -449,7 +457,8 @@ namespace FMU_Test
             // 
             // buttondo
             // 
-            this.buttondo.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttondo.BackColor = System.Drawing.Color.OldLace;
+            this.buttondo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttondo.Location = new System.Drawing.Point(501, 54);
             this.buttondo.Margin = new System.Windows.Forms.Padding(2);
             this.buttondo.Name = "buttondo";
@@ -513,7 +522,8 @@ namespace FMU_Test
             // 
             // buttonlogin
             // 
-            this.buttonlogin.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonlogin.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonlogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonlogin.Location = new System.Drawing.Point(27, 19);
             this.buttonlogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonlogin.Name = "buttonlogin";
@@ -525,7 +535,8 @@ namespace FMU_Test
             // 
             // buttonexit
             // 
-            this.buttonexit.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonexit.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonexit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonexit.Location = new System.Drawing.Point(501, 19);
             this.buttonexit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonexit.Name = "buttonexit";

@@ -95,30 +95,34 @@ namespace FMU_Test
             // 
             // buttonadd
             // 
+            this.buttonadd.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonadd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonadd.Location = new System.Drawing.Point(30, 153);
-            this.buttonadd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonadd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonadd.Name = "buttonadd";
             this.buttonadd.Size = new System.Drawing.Size(94, 20);
             this.buttonadd.TabIndex = 5;
             this.buttonadd.Text = "添加";
-            this.buttonadd.UseVisualStyleBackColor = true;
+            this.buttonadd.UseVisualStyleBackColor = false;
             this.buttonadd.Click += new System.EventHandler(this.buttonadd_Click);
             // 
             // buttoncancel
             // 
+            this.buttoncancel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttoncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttoncancel.Location = new System.Drawing.Point(172, 153);
-            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
             this.buttoncancel.Size = new System.Drawing.Size(94, 20);
             this.buttoncancel.TabIndex = 6;
             this.buttoncancel.Text = "取消";
-            this.buttoncancel.UseVisualStyleBackColor = true;
+            this.buttoncancel.UseVisualStyleBackColor = false;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
             // textBoxname
             // 
             this.textBoxname.Location = new System.Drawing.Point(105, 14);
-            this.textBoxname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxname.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(176, 21);
             this.textBoxname.TabIndex = 0;
@@ -127,7 +131,7 @@ namespace FMU_Test
             // textBoxtag
             // 
             this.textBoxtag.Location = new System.Drawing.Point(105, 62);
-            this.textBoxtag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxtag.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxtag.Name = "textBoxtag";
             this.textBoxtag.Size = new System.Drawing.Size(176, 21);
             this.textBoxtag.TabIndex = 2;
@@ -136,7 +140,7 @@ namespace FMU_Test
             // textBoxvalue
             // 
             this.textBoxvalue.Location = new System.Drawing.Point(105, 110);
-            this.textBoxvalue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxvalue.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxvalue.Name = "textBoxvalue";
             this.textBoxvalue.Size = new System.Drawing.Size(176, 21);
             this.textBoxvalue.TabIndex = 4;
@@ -153,7 +157,7 @@ namespace FMU_Test
             "Tag",
             "Time"});
             this.comboBoxtype.Location = new System.Drawing.Point(105, 38);
-            this.comboBoxtype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxtype.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxtype.Name = "comboBoxtype";
             this.comboBoxtype.Size = new System.Drawing.Size(176, 21);
             this.comboBoxtype.TabIndex = 7;
@@ -175,7 +179,7 @@ namespace FMU_Test
             ">=",
             "<="});
             this.comboBoxjudge.Location = new System.Drawing.Point(105, 86);
-            this.comboBoxjudge.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxjudge.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxjudge.Name = "comboBoxjudge";
             this.comboBoxjudge.Size = new System.Drawing.Size(176, 21);
             this.comboBoxjudge.TabIndex = 8;
@@ -201,7 +205,7 @@ namespace FMU_Test
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GetEvent";

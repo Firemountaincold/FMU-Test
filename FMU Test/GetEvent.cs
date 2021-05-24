@@ -14,6 +14,7 @@ namespace FMU_Test
 
         private void buttonadd_Click(object sender, EventArgs e)
         {
+            //添加触发条件
             if (textBoxname.Text != "" && comboBoxtype.Text != "" && comboBoxjudge.Text != "" &&
                 textBoxvalue.Text != "")
             {
@@ -44,6 +45,7 @@ namespace FMU_Test
 
         private void buttoncancel_Click(object sender, EventArgs e)
         {
+            //取消
             DialogResult = DialogResult.Cancel;
         }
 

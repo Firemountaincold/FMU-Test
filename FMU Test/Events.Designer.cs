@@ -47,24 +47,28 @@ namespace FMU_Test
             // 
             // buttonsave
             // 
+            this.buttonsave.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonsave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonsave.Location = new System.Drawing.Point(42, 200);
             this.buttonsave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonsave.Name = "buttonsave";
             this.buttonsave.Size = new System.Drawing.Size(94, 20);
             this.buttonsave.TabIndex = 1;
             this.buttonsave.Text = "保存关系";
-            this.buttonsave.UseVisualStyleBackColor = true;
+            this.buttonsave.UseVisualStyleBackColor = false;
             this.buttonsave.Click += new System.EventHandler(this.buttonsave_Click);
             // 
             // buttoncancel
             // 
+            this.buttoncancel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttoncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttoncancel.Location = new System.Drawing.Point(168, 200);
             this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
             this.buttoncancel.Size = new System.Drawing.Size(94, 20);
             this.buttoncancel.TabIndex = 2;
             this.buttoncancel.Text = "取消";
-            this.buttoncancel.UseVisualStyleBackColor = true;
+            this.buttoncancel.UseVisualStyleBackColor = false;
             this.buttoncancel.Click += new System.EventHandler(this.buttoncancel_Click);
             // 
             // textBox2
@@ -92,7 +96,7 @@ namespace FMU_Test
             // 
             // textBoxeventname
             // 
-            this.textBoxeventname.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxeventname.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBoxeventname.Location = new System.Drawing.Point(10, 131);
             this.textBoxeventname.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxeventname.Multiline = true;

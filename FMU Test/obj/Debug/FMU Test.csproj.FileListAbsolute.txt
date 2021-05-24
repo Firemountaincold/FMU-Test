@@ -42,3 +42,4 @@ C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.csproj.CoreCompil
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.csproj.CopyComplete
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.exe
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.pdb
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetTasks.resources

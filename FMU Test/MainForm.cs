@@ -172,10 +172,18 @@ namespace FMU_Test
         private void buttonGetTask_Click(object sender, EventArgs e)
         {
             //生成Task.xml
-            GetTask getTask = new GetTask();
-            if (getTask.ShowDialog() == DialogResult.OK)
+            GetTasks getTasks = new GetTasks();
+            if (getTasks.ShowDialog() == DialogResult.OK)
             {
                 info.AddInfo("创建成功！已保存到" + Application.StartupPath + "\\XML文件\\Task.xml", 1);
+                string[] taskname = getTasks.name;
+                string name = "已添加的任务：";
+                for (int i = 0; i < taskname.Length - 1; i++) 
+                {
+                    name += taskname[i] + "、";
+                }
+                name += taskname[taskname.Length - 1];
+                info.AddInfo(name, 1);
             }
         }
 
@@ -423,7 +431,7 @@ namespace FMU_Test
                                 if (json["msg"].ToString() == "success")
                                 {
                                     info.AddInfo("启动PyRunStat POST操作。当前流水号为：" + restful.SN + rn +
-                                        "返回消息：运行调度成功！"+json["data"].ToString(), 1);
+                                        "返回消息：运行调度成功！", 1);
                                 }
                                 else
                                 {
@@ -625,6 +633,7 @@ namespace FMU_Test
                 logflag = false;
                 textBoxlogstatus.Text = "未登录";
                 textBoxlogstatus.ForeColor = Color.Black;
+                timerNOP.Stop();
             }
             else
             {
@@ -731,12 +740,13 @@ namespace FMU_Test
                     txttip.ToolTips(textBoxpost2, "新密码，长度应与旧密码相同。");
                     break;
                 case "设置控制器的控制程序的运行调度":
-                    txttip.ToolTips(textBoxpost2, "格式为JSON字符串数组。如果为空，则命令针对控制器内的全部任务。");
+                    txttip.ToolTips(textBoxpost2, "多个任务名之间用英文逗号隔开。如果为空，则命令针对控制器内的全部任务。");
                     break;
                 case "设置PyTask的路径":
                     txttip.ToolTips(textBoxpost2, "任务配置文件的路径和文件名信息。");
                     break;
             }
         }
+
     }
 }
