@@ -76,7 +76,11 @@ namespace FMU_Test
             {
                 rule.SetAttribute("TaskPeriod", t.taskperiod);
             }
-            if (t.events != "")
+            else
+            {
+                rule.SetAttribute("TaskPeriod", "5");//没有这项会报错
+            }
+            if(t.events != "")
             {
                 rule.SetAttribute("Events", t.events.Replace(" ", "======"));//空格要变转义符号，但在xml里变&会自动再次转义，所以先用奇怪符号替换，保存后再转义
             }

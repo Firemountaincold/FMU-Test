@@ -19,6 +19,7 @@ namespace FMU_Test
             this.type = type;
             if (type == "fmu")
             {
+                Text = "登录RESTful API";
                 textBoxip.Text = ConfigurationManager.AppSettings["fmuip"]; 
                 textBoxport.Text = ConfigurationManager.AppSettings["fmuport"];
                 textBoxuserid.Text = ConfigurationManager.AppSettings["fmuuser"];
@@ -26,6 +27,7 @@ namespace FMU_Test
             }
             else if (type == "sftp")
             {
+                Text = "登录SFTP";
                 textBoxip.Text = ConfigurationManager.AppSettings["sftpip"];
                 textBoxport.Text = ConfigurationManager.AppSettings["sftpport"];
                 textBoxuserid.Text = ConfigurationManager.AppSettings["sftpuser"];

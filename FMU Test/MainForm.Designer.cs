@@ -32,6 +32,7 @@ namespace FMU_Test
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonsftpdel = new System.Windows.Forms.Button();
             this.checkBoxpyTask = new System.Windows.Forms.CheckBox();
             this.buttondisconnsftp = new System.Windows.Forms.Button();
             this.buttonlogsftp = new System.Windows.Forms.Button();
@@ -50,6 +51,8 @@ namespace FMU_Test
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonOpenxml = new System.Windows.Forms.Button();
             this.buttonGetTask = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxxml = new System.Windows.Forms.TextBox();
             this.richTextBoxinfo = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBoxgetinfo = new System.Windows.Forms.CheckBox();
@@ -77,6 +80,7 @@ namespace FMU_Test
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonsftpdel);
             this.groupBox1.Controls.Add(this.checkBoxpyTask);
             this.groupBox1.Controls.Add(this.buttondisconnsftp);
             this.groupBox1.Controls.Add(this.buttonlogsftp);
@@ -92,6 +96,7 @@ namespace FMU_Test
             this.groupBox1.Controls.Add(this.textBoxRemotePath);
             this.groupBox1.Controls.Add(this.buttonCall);
             this.groupBox1.Controls.Add(this.buttonFMU);
+            this.groupBox1.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
@@ -101,13 +106,25 @@ namespace FMU_Test
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SFTP文件部署";
             // 
+            // buttonsftpdel
+            // 
+            this.buttonsftpdel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonsftpdel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonsftpdel.Location = new System.Drawing.Point(660, 46);
+            this.buttonsftpdel.Name = "buttonsftpdel";
+            this.buttonsftpdel.Size = new System.Drawing.Size(94, 20);
+            this.buttonsftpdel.TabIndex = 8;
+            this.buttonsftpdel.Text = "取消部署";
+            this.buttonsftpdel.UseVisualStyleBackColor = false;
+            this.buttonsftpdel.Click += new System.EventHandler(this.buttonsftpdel_Click);
+            // 
             // checkBoxpyTask
             // 
             this.checkBoxpyTask.AutoSize = true;
             this.checkBoxpyTask.Location = new System.Drawing.Point(441, 22);
             this.checkBoxpyTask.Name = "checkBoxpyTask";
             this.checkBoxpyTask.Size = new System.Drawing.Size(162, 16);
-            this.checkBoxpyTask.TabIndex = 10;
+            this.checkBoxpyTask.TabIndex = 2;
             this.checkBoxpyTask.Text = "自动调用API设置任务目录";
             this.checkBoxpyTask.UseVisualStyleBackColor = true;
             this.checkBoxpyTask.CheckedChanged += new System.EventHandler(this.checkBoxpyTask_CheckedChanged);
@@ -121,7 +138,7 @@ namespace FMU_Test
             this.buttondisconnsftp.Margin = new System.Windows.Forms.Padding(2);
             this.buttondisconnsftp.Name = "buttondisconnsftp";
             this.buttondisconnsftp.Size = new System.Drawing.Size(94, 20);
-            this.buttondisconnsftp.TabIndex = 9;
+            this.buttondisconnsftp.TabIndex = 6;
             this.buttondisconnsftp.Text = "断开连接";
             this.buttondisconnsftp.UseVisualStyleBackColor = false;
             this.buttondisconnsftp.Click += new System.EventHandler(this.buttondisconnsftp_Click);
@@ -134,7 +151,7 @@ namespace FMU_Test
             this.buttonlogsftp.Margin = new System.Windows.Forms.Padding(2);
             this.buttonlogsftp.Name = "buttonlogsftp";
             this.buttonlogsftp.Size = new System.Drawing.Size(94, 20);
-            this.buttonlogsftp.TabIndex = 8;
+            this.buttonlogsftp.TabIndex = 5;
             this.buttonlogsftp.Text = "登录SFTP";
             this.buttonlogsftp.UseVisualStyleBackColor = false;
             this.buttonlogsftp.Click += new System.EventHandler(this.buttonlogsftp_Click);
@@ -146,7 +163,7 @@ namespace FMU_Test
             this.checkBoxtask.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxtask.Name = "checkBoxtask";
             this.checkBoxtask.Size = new System.Drawing.Size(120, 16);
-            this.checkBoxtask.TabIndex = 7;
+            this.checkBoxtask.TabIndex = 3;
             this.checkBoxtask.Text = "同时部署Task.xml";
             this.checkBoxtask.UseVisualStyleBackColor = true;
             this.checkBoxtask.CheckedChanged += new System.EventHandler(this.checkBoxtask_CheckedChanged);
@@ -160,7 +177,7 @@ namespace FMU_Test
             this.textBoxCallstatus.Name = "textBoxCallstatus";
             this.textBoxCallstatus.ReadOnly = true;
             this.textBoxCallstatus.Size = new System.Drawing.Size(52, 14);
-            this.textBoxCallstatus.TabIndex = 6;
+            this.textBoxCallstatus.TabIndex = 14;
             this.textBoxCallstatus.Text = "未选择";
             // 
             // textBoxsftplog
@@ -184,7 +201,7 @@ namespace FMU_Test
             this.textBoxFMUstatus.Name = "textBoxFMUstatus";
             this.textBoxFMUstatus.ReadOnly = true;
             this.textBoxFMUstatus.Size = new System.Drawing.Size(51, 14);
-            this.textBoxFMUstatus.TabIndex = 6;
+            this.textBoxFMUstatus.TabIndex = 11;
             this.textBoxFMUstatus.Text = "未选择";
             // 
             // label3
@@ -194,7 +211,7 @@ namespace FMU_Test
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 12;
             this.label3.Text = "py文件：";
             // 
             // label2
@@ -204,7 +221,7 @@ namespace FMU_Test
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 15;
             this.label2.Text = "dll文件：";
             // 
             // label5
@@ -214,7 +231,7 @@ namespace FMU_Test
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
-            this.label5.TabIndex = 5;
+            this.label5.TabIndex = 15;
             this.label5.Text = "SFTP状态：";
             // 
             // label1
@@ -224,18 +241,18 @@ namespace FMU_Test
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 9;
             this.label1.Text = "目标目录：";
             // 
             // buttonUpload
             // 
-            this.buttonUpload.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonUpload.BackColor = System.Drawing.Color.OldLace;
             this.buttonUpload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonUpload.Location = new System.Drawing.Point(661, 77);
             this.buttonUpload.Margin = new System.Windows.Forms.Padding(2);
             this.buttonUpload.Name = "buttonUpload";
             this.buttonUpload.Size = new System.Drawing.Size(94, 20);
-            this.buttonUpload.TabIndex = 3;
+            this.buttonUpload.TabIndex = 7;
             this.buttonUpload.Text = "部署";
             this.buttonUpload.UseVisualStyleBackColor = false;
             this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
@@ -246,7 +263,7 @@ namespace FMU_Test
             this.textBoxRemotePath.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxRemotePath.Name = "textBoxRemotePath";
             this.textBoxRemotePath.Size = new System.Drawing.Size(338, 21);
-            this.textBoxRemotePath.TabIndex = 1;
+            this.textBoxRemotePath.TabIndex = 4;
             // 
             // buttonCall
             // 
@@ -256,7 +273,7 @@ namespace FMU_Test
             this.buttonCall.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(112, 20);
-            this.buttonCall.TabIndex = 0;
+            this.buttonCall.TabIndex = 1;
             this.buttonCall.Text = "选择py文件";
             this.buttonCall.UseVisualStyleBackColor = false;
             this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
@@ -278,6 +295,9 @@ namespace FMU_Test
             // 
             this.groupBox2.Controls.Add(this.buttonOpenxml);
             this.groupBox2.Controls.Add(this.buttonGetTask);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.textBoxxml);
+            this.groupBox2.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(10, 123);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
@@ -291,7 +311,7 @@ namespace FMU_Test
             // 
             this.buttonOpenxml.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonOpenxml.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonOpenxml.Location = new System.Drawing.Point(20, 77);
+            this.buttonOpenxml.Location = new System.Drawing.Point(20, 87);
             this.buttonOpenxml.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOpenxml.Name = "buttonOpenxml";
             this.buttonOpenxml.Size = new System.Drawing.Size(112, 20);
@@ -304,7 +324,7 @@ namespace FMU_Test
             // 
             this.buttonGetTask.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonGetTask.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonGetTask.Location = new System.Drawing.Point(20, 35);
+            this.buttonGetTask.Location = new System.Drawing.Point(20, 24);
             this.buttonGetTask.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGetTask.Name = "buttonGetTask";
             this.buttonGetTask.Size = new System.Drawing.Size(112, 20);
@@ -313,9 +333,32 @@ namespace FMU_Test
             this.buttonGetTask.UseVisualStyleBackColor = false;
             this.buttonGetTask.Click += new System.EventHandler(this.buttonGetTask_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(25, 60);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 12);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "xml文件：";
+            // 
+            // textBoxxml
+            // 
+            this.textBoxxml.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxxml.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxxml.Location = new System.Drawing.Point(89, 60);
+            this.textBoxxml.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxxml.Name = "textBoxxml";
+            this.textBoxxml.ReadOnly = true;
+            this.textBoxxml.Size = new System.Drawing.Size(52, 14);
+            this.textBoxxml.TabIndex = 6;
+            this.textBoxxml.Text = "未生成";
+            // 
             // richTextBoxinfo
             // 
             this.richTextBoxinfo.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.richTextBoxinfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBoxinfo.Location = new System.Drawing.Point(11, 254);
             this.richTextBoxinfo.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxinfo.Name = "richTextBoxinfo";
@@ -342,6 +385,7 @@ namespace FMU_Test
             this.groupBox3.Controls.Add(this.labelpost1);
             this.groupBox3.Controls.Add(this.buttonlogin);
             this.groupBox3.Controls.Add(this.buttonexit);
+            this.groupBox3.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(169, 124);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
@@ -349,7 +393,7 @@ namespace FMU_Test
             this.groupBox3.Size = new System.Drawing.Size(610, 122);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "FSU测试";
+            this.groupBox3.Text = "FMU测试";
             // 
             // checkBoxgetinfo
             // 
@@ -357,7 +401,7 @@ namespace FMU_Test
             this.checkBoxgetinfo.Location = new System.Drawing.Point(246, 22);
             this.checkBoxgetinfo.Name = "checkBoxgetinfo";
             this.checkBoxgetinfo.Size = new System.Drawing.Size(132, 16);
-            this.checkBoxgetinfo.TabIndex = 20;
+            this.checkBoxgetinfo.TabIndex = 1;
             this.checkBoxgetinfo.Text = "登录后自动获取信息";
             this.checkBoxgetinfo.UseVisualStyleBackColor = true;
             this.checkBoxgetinfo.CheckedChanged += new System.EventHandler(this.checkBoxgetinfo_CheckedChanged);
@@ -371,7 +415,7 @@ namespace FMU_Test
             this.checkBoxsavelog.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxsavelog.Name = "checkBoxsavelog";
             this.checkBoxsavelog.Size = new System.Drawing.Size(72, 16);
-            this.checkBoxsavelog.TabIndex = 19;
+            this.checkBoxsavelog.TabIndex = 8;
             this.checkBoxsavelog.Text = "保存日志";
             this.checkBoxsavelog.UseVisualStyleBackColor = true;
             this.checkBoxsavelog.CheckedChanged += new System.EventHandler(this.checkBoxsavelog_CheckedChanged);
@@ -384,7 +428,7 @@ namespace FMU_Test
             this.buttondisconnfmu.Margin = new System.Windows.Forms.Padding(2);
             this.buttondisconnfmu.Name = "buttondisconnfmu";
             this.buttondisconnfmu.Size = new System.Drawing.Size(94, 20);
-            this.buttondisconnfmu.TabIndex = 18;
+            this.buttondisconnfmu.TabIndex = 2;
             this.buttondisconnfmu.Text = "退出登录";
             this.buttondisconnfmu.UseVisualStyleBackColor = false;
             this.buttondisconnfmu.Click += new System.EventHandler(this.buttondisconnfmu_Click);
@@ -414,7 +458,7 @@ namespace FMU_Test
             this.comboBoxtask.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxtask.Name = "comboBoxtask";
             this.comboBoxtask.Size = new System.Drawing.Size(296, 20);
-            this.comboBoxtask.TabIndex = 16;
+            this.comboBoxtask.TabIndex = 4;
             this.comboBoxtask.SelectedIndexChanged += new System.EventHandler(this.comboBoxtask_SelectedIndexChanged);
             // 
             // radioButtonpost
@@ -438,7 +482,7 @@ namespace FMU_Test
             this.textBoxlogstatus.Name = "textBoxlogstatus";
             this.textBoxlogstatus.ReadOnly = true;
             this.textBoxlogstatus.Size = new System.Drawing.Size(51, 14);
-            this.textBoxlogstatus.TabIndex = 6;
+            this.textBoxlogstatus.TabIndex = 14;
             this.textBoxlogstatus.Text = "未登录";
             // 
             // radioButtonget
@@ -463,7 +507,7 @@ namespace FMU_Test
             this.buttondo.Margin = new System.Windows.Forms.Padding(2);
             this.buttondo.Name = "buttondo";
             this.buttondo.Size = new System.Drawing.Size(94, 20);
-            this.buttondo.TabIndex = 13;
+            this.buttondo.TabIndex = 7;
             this.buttondo.Text = "执行命令";
             this.buttondo.UseVisualStyleBackColor = false;
             this.buttondo.Click += new System.EventHandler(this.buttondo_Click);
@@ -486,7 +530,7 @@ namespace FMU_Test
             this.textBoxpost2.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxpost2.Name = "textBoxpost2";
             this.textBoxpost2.Size = new System.Drawing.Size(174, 21);
-            this.textBoxpost2.TabIndex = 11;
+            this.textBoxpost2.TabIndex = 6;
             this.textBoxpost2.MouseHover += new System.EventHandler(this.textBoxpost2_MouseHover);
             // 
             // textBoxpost1
@@ -497,7 +541,7 @@ namespace FMU_Test
             this.textBoxpost1.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxpost1.Name = "textBoxpost1";
             this.textBoxpost1.Size = new System.Drawing.Size(164, 21);
-            this.textBoxpost1.TabIndex = 10;
+            this.textBoxpost1.TabIndex = 5;
             this.textBoxpost1.MouseHover += new System.EventHandler(this.textBoxpost1_MouseHover);
             // 
             // labelpost2
@@ -528,7 +572,7 @@ namespace FMU_Test
             this.buttonlogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonlogin.Name = "buttonlogin";
             this.buttonlogin.Size = new System.Drawing.Size(94, 20);
-            this.buttonlogin.TabIndex = 7;
+            this.buttonlogin.TabIndex = 0;
             this.buttonlogin.Text = "登录";
             this.buttonlogin.UseVisualStyleBackColor = false;
             this.buttonlogin.Click += new System.EventHandler(this.buttonlogin_ClickAsync);
@@ -541,7 +585,7 @@ namespace FMU_Test
             this.buttonexit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonexit.Name = "buttonexit";
             this.buttonexit.Size = new System.Drawing.Size(94, 20);
-            this.buttonexit.TabIndex = 6;
+            this.buttonexit.TabIndex = 3;
             this.buttonexit.Text = "退出软件";
             this.buttonexit.UseVisualStyleBackColor = false;
             this.buttonexit.Click += new System.EventHandler(this.buttonexit_Click);
@@ -573,9 +617,11 @@ namespace FMU_Test
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FMU测试工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -623,6 +669,9 @@ namespace FMU_Test
         private System.Windows.Forms.TextBox textBoxsftplog;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBoxgetinfo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxxml;
+        private System.Windows.Forms.Button buttonsftpdel;
     }
 }
 

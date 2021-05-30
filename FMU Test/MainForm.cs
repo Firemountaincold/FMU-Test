@@ -13,12 +13,13 @@ namespace FMU_Test
 {
     public partial class MainForm : Form
     {
+        //工具类
         public InfoTools info;
         public TipTools tip = new TipTools();
         public TipTools txttip = new TipTools();
         public RESTful restful = new RESTful();
-        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public SFTPHelper sftp;
+        //全局量
         public string FMUpath = "";
         public string Callpath = "";
         public string ip;
@@ -26,17 +27,21 @@ namespace FMU_Test
         public string userid;
         public string password;
         public string token;
-        public string seed; 
+        public string seed;
         public string rn = "\r\n       ";
+        public string[] putpath = new string[3];
+        //标志
         public bool logflag = false;
         public bool sftplogflag = false;
+        //配置文件修改
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
         public MainForm()
         {
             InitializeComponent();
             textBoxRemotePath.Text = ConfigurationManager.AppSettings["sftppath"];
             info = new InfoTools(richTextBoxinfo);
-            for (int i = 0; i < DateTime.Now.ToString().Length; i++) 
+            for (int i = 0; i < DateTime.Now.ToString().Length; i++)
             {
                 rn = rn + " ";
             }
@@ -44,6 +49,15 @@ namespace FMU_Test
             {
                 Directory.CreateDirectory(Application.StartupPath + "\\运行日志");
             }
+            for (int i = 0; i < putpath.Length; i++)
+            {
+                putpath[i] = "";
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            CheckXml();
         }
 
         public static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
@@ -109,16 +123,19 @@ namespace FMU_Test
                         {
                             long fmulength = sftp.Put(FMUpath, rp + Path.GetFileName(FMUpath));
                             info.AddInfo("已上传" + Path.GetFileName(FMUpath) + "。共" + fmulength + "字节。", 1);
+                            putpath[0] = rp + Path.GetFileName(FMUpath);
                         }
                         if (Callpath != "")
                         {
                             long callength = sftp.Put(Callpath, rp + Path.GetFileName(Callpath));
                             info.AddInfo("已上传" + Path.GetFileName(Callpath) + "。共" + callength + "字节。", 1);
+                            putpath[1] = rp + Path.GetFileName(Callpath);
                         }
                         if (checkBoxtask.Checked)
                         {
                             long tasklength = sftp.Put(Application.StartupPath + "\\XML文件\\Task.xml", rp + "Task.xml");
                             info.AddInfo("已上传Task.xml。共" + tasklength + "字节。", 1);
+                            putpath[2] = rp + "Task.xml";
                         }
                         if (checkBoxpyTask.Checked)
                         {
@@ -163,9 +180,42 @@ namespace FMU_Test
                     MessageBox.Show("请先登录SFTP服务器。", "警告");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 info.AddInfo("部署失败。原因：" + ex.Message, 2);
+            }
+        }
+
+        private void buttonsftpdel_Click(object sender, EventArgs e)
+        {
+            //删除上次部署的文件
+            try
+            {
+                if (sftplogflag)
+                {
+                    int t = 0;
+                    for (int i = 0; i < putpath.Length; i++)
+                    {
+                        if (putpath[i] != "")
+                        {
+                            sftp.Delete(putpath[0]);
+                            info.AddInfo("已删除" + Path.GetFileName(putpath[i]), 1);
+                            t++;
+                        }
+                    }
+                    if (t == 0)
+                    {
+                        info.AddInfo("没有能够取消的部署。", 2);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请先登录SFTP服务器。", "警告");
+                }
+            }
+            catch (Exception ex)
+            {
+                info.AddInfo(ex.Message, 2);
             }
         }
 
@@ -178,19 +228,20 @@ namespace FMU_Test
                 info.AddInfo("创建成功！已保存到" + Application.StartupPath + "\\XML文件\\Task.xml", 1);
                 string[] taskname = getTasks.name;
                 string name = "已添加的任务：";
-                for (int i = 0; i < taskname.Length - 1; i++) 
+                for (int i = 0; i < taskname.Length - 1; i++)
                 {
                     name += taskname[i] + "、";
                 }
                 name += taskname[taskname.Length - 1];
                 info.AddInfo(name, 1);
             }
+            CheckXml();
         }
 
         private void buttonOpenxml_Click(object sender, EventArgs e)
         {
             //打开Task.xml
-            if (File.Exists(Application.StartupPath + "\\XML文件\\Task.xml"))
+            if (CheckXml())
             {
                 Process.Start("notepad.exe", Application.StartupPath + "\\XML文件\\Task.xml");
             }
@@ -235,17 +286,39 @@ namespace FMU_Test
         private async void timerNOP_Tick(object sender, EventArgs e)
         {
             //保持连接
-            string nop = await restful.GetNOP(userid, token, password);
-            if (nop == "success")
+            try
             {
-                info.AddInfo("启动NOP GET操作。当前流水号为：" + restful.SN + rn +
-                                       "Token有效时间自动刷新成功。每隔" + restful.GetTokenTime().ToString() + "秒刷新一次。", 1);
+                string nop = await restful.GetNOP(userid, token, password);
+
+                if (nop == "success")
+                {
+                    info.AddInfo("启动NOP GET操作。当前流水号为：" + restful.SN + rn +
+                                           "Token有效时间自动刷新成功。每隔" + restful.GetTokenTime().ToString() + "秒刷新一次。", 1);
+                }
+                else
+                {
+                    info.AddInfo("启动NOP GET操作。当前流水号为：" + restful.SN + rn +
+                                           "Token有效时间自动刷新失败。原因：" + nop + rn + "连接已断开。", 2);
+                    FMUDisconnect();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                info.AddInfo("启动NOP GET操作。当前流水号为：" + restful.SN + rn +
-                                       "Token有效时间自动刷新失败。原因：" + nop, 1);
+                info.AddInfo("连接出现错误。原因：" + ex.Message, 2);
+                FMUDisconnect();
             }
+        }
+
+        public void FMUDisconnect()
+        {
+            restful.DisConnect();
+            logflag = false;
+            textBoxlogstatus.BeginInvoke(new Action(() =>
+            {
+                textBoxlogstatus.Text = "未登录";
+                textBoxlogstatus.ForeColor = Color.Black;
+            }));
+            timerNOP.Stop();
         }
 
         private async void buttonlogin_ClickAsync(object sender, EventArgs e)
@@ -255,7 +328,6 @@ namespace FMU_Test
             {
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证
                 LogIn logIn = new LogIn("fmu");
-                logIn.Text = "登录RESTful API";
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
                     ip = logIn.ip;
@@ -271,7 +343,7 @@ namespace FMU_Test
                     {
                         info.AddInfo("令牌获取失败！", 2);
                     }
-                    else 
+                    else
                     {
                         info.AddInfo("已获得令牌：" + token + "，登陆成功。", 1);
                         textBoxlogstatus.Text = "已登录";
@@ -310,6 +382,7 @@ namespace FMU_Test
                 comboBoxtask.Items.Add("获取平台版本信息");
                 comboBoxtask.Items.Add("获取PyTask的路径");
                 comboBoxtask.Items.Add("获取Python已安装的库");
+                comboBoxtask.SelectedItem = "获取控制器运行状态";
                 textBoxpost1.Enabled = false;
                 textBoxpost2.Enabled = false;
             }
@@ -325,8 +398,9 @@ namespace FMU_Test
                 comboBoxtask.Items.Add("修改密码");
                 comboBoxtask.Items.Add("设置控制器的控制程序的运行调度");
                 comboBoxtask.Items.Add("设置PyTask的路径");
-                comboBoxtask.Items.Add("安装Python库"); 
+                comboBoxtask.Items.Add("安装Python库");
                 comboBoxtask.Items.Add("卸载Python库");
+                comboBoxtask.SelectedItem = "设置控制器的控制程序的运行调度";
                 textBoxpost1.Enabled = true;
                 textBoxpost2.Enabled = true;
             }
@@ -349,7 +423,7 @@ namespace FMU_Test
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyRunStat, password);
                                 if (json["msg"].ToString() == "success")
                                 {
-                                    info.AddInfo("启动PyRunStat GET操作。当前流水号为：" + restful.SN  + rn +
+                                    info.AddInfo("启动PyRunStat GET操作。当前流水号为：" + restful.SN + rn +
                                         "控制器运行状态为：" + json["data"]["Stat"].ToString(), 1);
                                 }
                                 else
@@ -362,7 +436,7 @@ namespace FMU_Test
                                 json = await restful.GetInfo(userid, token, RESTful.Order.SysVersion, password);
                                 if (json["msg"].ToString() == "success")
                                 {
-                                    info.AddInfo("启动SysVersion GET操作。当前流水号为：" + restful.SN + rn + 
+                                    info.AddInfo("启动SysVersion GET操作。当前流水号为：" + restful.SN + rn +
                                     "平台系统：" + json["data"]["OS"].ToString() + rn + "系统版本：" + json["data"]["OsVer"] +
                                      rn + "Python版本：" + json["data"]["PythonVer"] + rn + "Gcc版本：" + json["data"]["GccVer"] + rn + "AI版本：" + json["data"]["AIVer"], 1);
                                 }
@@ -376,7 +450,7 @@ namespace FMU_Test
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyTaskFile, password);
                                 if (json["msg"].ToString() == "success")
                                 {
-                                    info.AddInfo("启动PyTaskFile GET操作。当前流水号为：" + restful.SN + rn + 
+                                    info.AddInfo("启动PyTaskFile GET操作。当前流水号为：" + restful.SN + rn +
                                     "根目录为：" + json["data"]["RootPath"].ToString() + rn + "文件目录为：" + json["data"]["FullFileName"].ToString(), 1);
                                 }
                                 else
@@ -389,7 +463,7 @@ namespace FMU_Test
                                 json = await restful.GetInfo(userid, token, RESTful.Order.PyLib, password);
                                 if (json["msg"].ToString() == "success")
                                 {
-                                    info.AddInfo("启动PyLib GET操作。当前流水号为：" + restful.SN + rn + 
+                                    info.AddInfo("启动PyLib GET操作。当前流水号为：" + restful.SN + rn +
                                     "已安装的库有：" + json["data"]["Libs"].ToString(), 1);
                                 }
                                 else
@@ -419,6 +493,8 @@ namespace FMU_Test
                                 {
                                     info.AddInfo("启动Password POST操作。当前流水号为：" + restful.SN + rn +
                                         "返回消息：密码修改成功！", 1);
+                                    FMUDisconnect();
+                                    info.AddInfo("已自动断开连接，请重新登录！", 2);
                                 }
                                 else
                                 {
@@ -486,9 +562,10 @@ namespace FMU_Test
                     MessageBox.Show("请先登录。", "警告");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 info.AddInfo(ex.Message, 2);
+                FMUDisconnect();
             }
         }
 
@@ -568,6 +645,8 @@ namespace FMU_Test
                         textBoxpost2.Enabled = false;
                         break;
                 }
+                textBoxpost1.Text = "";
+                textBoxpost2.Text = "";
             }
             else
             {
@@ -582,7 +661,6 @@ namespace FMU_Test
             try
             {
                 LogIn logIn = new LogIn("sftp");
-                logIn.Text = "登录SFTP";
                 if (logIn.ShowDialog() == DialogResult.OK)
                 {
                     sftp = new SFTPHelper(logIn.ip, logIn.port, logIn.userid, logIn.password);
@@ -609,7 +687,7 @@ namespace FMU_Test
         private void buttondisconnsftp_Click(object sender, EventArgs e)
         {
             //sftp断开连接
-            if (textBoxsftplog.Text == "已登录") 
+            if (textBoxsftplog.Text == "已登录")
             {
                 sftp.Disconnect();
                 info.AddInfo("已断开SFTP连接。", 1);
@@ -628,12 +706,8 @@ namespace FMU_Test
             //fmu退出登录
             if (textBoxlogstatus.Text == "已登录")
             {
-                restful.DisConnect();
+                FMUDisconnect();
                 info.AddInfo("已退出登录。", 1);
-                logflag = false;
-                textBoxlogstatus.Text = "未登录";
-                textBoxlogstatus.ForeColor = Color.Black;
-                timerNOP.Stop();
             }
             else
             {
@@ -684,7 +758,7 @@ namespace FMU_Test
         private void checkBoxtask_CheckedChanged(object sender, EventArgs e)
         {
             //保证task取消后取消另一个
-            if (!checkBoxtask.Checked) 
+            if (!checkBoxtask.Checked)
             {
                 if (checkBoxpyTask.Checked)
                 {
@@ -748,5 +822,21 @@ namespace FMU_Test
             }
         }
 
+        public bool CheckXml()
+        {
+            //检查Task.xml是否存在
+            if (File.Exists(Application.StartupPath + "\\XML文件\\Task.xml"))
+            {
+                textBoxxml.Text = "已生成";
+                textBoxxml.ForeColor = Color.Green;
+                return true;
+            }
+            else
+            {
+                textBoxxml.Text = "未生成";
+                textBoxxml.ForeColor = Color.Black;
+                return false;
+            }
+        }
     }
 }

@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Tasks xmlns:tasks="http://www.hollysys.com/IAS/control">
-  <Task Name="1324">
-    <Rule TaskType="once" TaskTrigger="Period" TaskPeriod="134" />
+  <Task Name="t1">
+    <Rule TaskType="repeat" TaskTrigger="Periodevent" TaskPeriod="5" Events="e1">
+      <Event Name="e1" Type="Tag" Tag="Tag" Judge="&lt;=" Value="20" />
+    </Rule>
     <Cals>
-      <Cal Name="1234" URI="1243" />
+      <Cal Name="c1" URI="cals/c1.py" />
     </Cals>
   </Task>
-  <Task Name="4ffrf">
+  <Task Name="t2">
     <Rule TaskType="repeat" TaskTrigger="Cycle" />
     <Cals>
-      <Cal Name="1243" URI="432" />
+      <Cal Name="c2" URI="cals/cal2.py" />
+    </Cals>
+  </Task>
+  <Task Name="t3">
+    <Rule TaskType="repeat" TaskTrigger="Event" Events="e1">
+      <Event Name="e1" Type="Tag" Tag="Tag1" Judge="&lt;" Value="20" />
+    </Rule>
+    <Cals>
+      <Cal Name="c3" URI="cals/cal3.py" />
+    </Cals>
+  </Task>
+  <Task Name="t4">
+    <Rule TaskType="repeat" TaskTrigger="Period" TaskPeriod="3" />
+    <Cals>
+      <Cal Name="c4" URI="cals/cal4.py" />
     </Cals>
   </Task>
 </Tasks>

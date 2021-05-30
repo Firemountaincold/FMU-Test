@@ -148,14 +148,14 @@ namespace FMU_Test
                 string[] a = order2.Split(',');
                 JArray ja = new JArray(a);
                 js.Add("TaskNames", ja);
-                string jss = JsonConvert.SerializeObject(js);
+                string jss = JsonConvert.SerializeObject(js);//用序列化才能得到正确的字符串
                 content = new StringContent(jss);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             }
             HttpResponseMessage response = await client.PostAsync(PostAPI(userid, token, order1, order2, order, password, seed), content);
             string responseBody = await response.Content.ReadAsStringAsync();
             JObject returnjson = (JObject)JsonConvert.DeserializeObject(responseBody);
-            if (returnjson["msg"].ToString() != "success" && returnjson["msg"].ToString() != "msg not match!" && returnjson["msg"].ToString().StartsWith("cant stop task"))
+            if (returnjson["msg"].ToString() != "success" && returnjson["msg"].ToString() != "msg not match!" && !returnjson["msg"].ToString().StartsWith("cant stop task"))
             {
                 SN--;
             }
