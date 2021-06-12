@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using System.Xml;
+using System.Collections.Generic;
 using Renci.SshNet;
 
 namespace FMU_Test
@@ -223,6 +225,43 @@ namespace FMU_Test
             {
                 throw new Exception(string.Format("SFTP文件移动失败，原因：{0}", ex.Message));
             }
+        }
+    }
+
+    public class XmlTransfer
+    {
+        public XmlTextReader xr;
+        public XmlTransfer(string xmlpath)
+        {
+            //初始化
+            xr = new XmlTextReader(xmlpath);
+        }
+
+        public Dictionary<string, string> Read10_VarAndType()
+        {
+            //读取_10格式的xml
+            Dictionary<string, string> vars = new Dictionary<string, string>();
+            string var = "";
+            string typename = "";
+            while (xr.Read())
+            {
+                XmlNodeType nt = xr.NodeType;
+                xr.WhitespaceHandling = WhitespaceHandling.None;
+                if (nt == XmlNodeType.Element)
+                {
+                    if (xr.Name == "Variable")
+                    {
+                        var = xr.GetAttribute("name");
+                    }
+                    if (xr.Name == "TypeName")
+                    {
+                        xr.Read();
+                        typename = xr.Value;
+                        vars.Add(var, typename);
+                    }
+                }
+            }
+            return vars;
         }
     }
 }

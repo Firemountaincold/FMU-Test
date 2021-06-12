@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace FMU_Test
@@ -17,7 +17,9 @@ namespace FMU_Test
         public int calcount = 0;
         public bool isevent = true;
         public bool isrelation = true;
+        public bool loaded = false;
         public string name;
+        public Dictionary<string, string> vars = new Dictionary<string, string>();
         public GetTask(XmlDocument xd, XmlElement root)
         {
             InitializeComponent();
@@ -80,11 +82,11 @@ namespace FMU_Test
             {
                 rule.SetAttribute("TaskPeriod", "5");//没有这项会报错
             }
-            if(t.events != "")
+            if (t.events != "")
             {
                 rule.SetAttribute("Events", t.events.Replace(" ", "======"));//空格要变转义符号，但在xml里变&会自动再次转义，所以先用奇怪符号替换，保存后再转义
             }
-            else if(isevent)
+            else if (isevent)
             {
                 rule.SetAttribute("Events", ee[0].eventname);
             }
@@ -121,24 +123,51 @@ namespace FMU_Test
         private void buttonAddevent_Click(object sender, EventArgs e)
         {
             //添加触发事件
-            GetEvent getEvent = new GetEvent();
-            if (getEvent.ShowDialog() == DialogResult.OK)
+            if (loaded)
             {
-                Event eve = getEvent.eve;
-                if (CheckCopy(ee, eve))
+                GetEvent2 getEvent = new GetEvent2(vars);
+                if (getEvent.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("触发条件名重复，请重新添加！", "警告");
-                }
-                else
-                {
-                    evecount++;
-                    Array.Resize(ref ee, evecount);
-                    ee[ee.Length - 1] = eve;
-                    textBoxevecount.Text = evecount.ToString();
-                    if (evecount > 1)
+                    Event eve = getEvent.eve;
+                    if (CheckCopy(ee, eve))
                     {
-                        buttonrelation.Enabled = true;
-                        isrelation = false;
+                        MessageBox.Show("触发条件名重复，请重新添加！", "警告");
+                    }
+                    else
+                    {
+                        evecount++;
+                        Array.Resize(ref ee, evecount);
+                        ee[ee.Length - 1] = eve;
+                        textBoxevecount.Text = evecount.ToString();
+                        if (evecount > 1)
+                        {
+                            buttonrelation.Enabled = true;
+                            isrelation = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                GetEvent getEvent = new GetEvent();
+                if (getEvent.ShowDialog() == DialogResult.OK)
+                {
+                    Event eve = getEvent.eve;
+                    if (CheckCopy(ee, eve))
+                    {
+                        MessageBox.Show("触发条件名重复，请重新添加！", "警告");
+                    }
+                    else
+                    {
+                        evecount++;
+                        Array.Resize(ref ee, evecount);
+                        ee[ee.Length - 1] = eve;
+                        textBoxevecount.Text = evecount.ToString();
+                        if (evecount > 1)
+                        {
+                            buttonrelation.Enabled = true;
+                            isrelation = false;
+                        }
                     }
                 }
             }
@@ -228,7 +257,7 @@ namespace FMU_Test
                 buttonAddevent.Enabled = false;
                 isevent = false;
             }
-            else if (comboBoxtrigger.SelectedItem.ToString() == "Period") 
+            else if (comboBoxtrigger.SelectedItem.ToString() == "Period")
             {
                 textBoxperiod.Enabled = true;
                 buttonAddevent.Enabled = false;

@@ -49,8 +49,12 @@ namespace FMU_Test
             this.buttonCall = new System.Windows.Forms.Button();
             this.buttonFMU = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonparameter = new System.Windows.Forms.Button();
+            this.buttonloadserver = new System.Windows.Forms.Button();
             this.buttonOpenxml = new System.Windows.Forms.Button();
             this.buttonGetTask = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxloadsxml = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxxml = new System.Windows.Forms.TextBox();
             this.richTextBoxinfo = new System.Windows.Forms.RichTextBox();
@@ -101,7 +105,7 @@ namespace FMU_Test
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(770, 110);
+            this.groupBox1.Size = new System.Drawing.Size(883, 110);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SFTP文件部署";
@@ -110,7 +114,7 @@ namespace FMU_Test
             // 
             this.buttonsftpdel.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonsftpdel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonsftpdel.Location = new System.Drawing.Point(660, 46);
+            this.buttonsftpdel.Location = new System.Drawing.Point(774, 76);
             this.buttonsftpdel.Name = "buttonsftpdel";
             this.buttonsftpdel.Size = new System.Drawing.Size(94, 20);
             this.buttonsftpdel.TabIndex = 8;
@@ -121,7 +125,7 @@ namespace FMU_Test
             // checkBoxpyTask
             // 
             this.checkBoxpyTask.AutoSize = true;
-            this.checkBoxpyTask.Location = new System.Drawing.Point(441, 22);
+            this.checkBoxpyTask.Location = new System.Drawing.Point(661, 48);
             this.checkBoxpyTask.Name = "checkBoxpyTask";
             this.checkBoxpyTask.Size = new System.Drawing.Size(162, 16);
             this.checkBoxpyTask.TabIndex = 2;
@@ -159,7 +163,7 @@ namespace FMU_Test
             // checkBoxtask
             // 
             this.checkBoxtask.AutoSize = true;
-            this.checkBoxtask.Location = new System.Drawing.Point(623, 22);
+            this.checkBoxtask.Location = new System.Drawing.Point(661, 23);
             this.checkBoxtask.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxtask.Name = "checkBoxtask";
             this.checkBoxtask.Size = new System.Drawing.Size(120, 16);
@@ -184,7 +188,7 @@ namespace FMU_Test
             // 
             this.textBoxsftplog.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxsftplog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxsftplog.Location = new System.Drawing.Point(505, 52);
+            this.textBoxsftplog.Location = new System.Drawing.Point(508, 23);
             this.textBoxsftplog.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxsftplog.Name = "textBoxsftplog";
             this.textBoxsftplog.ReadOnly = true;
@@ -227,7 +231,7 @@ namespace FMU_Test
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(439, 52);
+            this.label5.Location = new System.Drawing.Point(442, 23);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
@@ -293,8 +297,12 @@ namespace FMU_Test
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonparameter);
+            this.groupBox2.Controls.Add(this.buttonloadserver);
             this.groupBox2.Controls.Add(this.buttonOpenxml);
             this.groupBox2.Controls.Add(this.buttonGetTask);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.textBoxloadsxml);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.textBoxxml);
             this.groupBox2.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -302,16 +310,40 @@ namespace FMU_Test
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(154, 123);
+            this.groupBox2.Size = new System.Drawing.Size(269, 123);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "设置任务";
+            // 
+            // buttonparameter
+            // 
+            this.buttonparameter.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonparameter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonparameter.Location = new System.Drawing.Point(143, 20);
+            this.buttonparameter.Name = "buttonparameter";
+            this.buttonparameter.Size = new System.Drawing.Size(112, 20);
+            this.buttonparameter.TabIndex = 7;
+            this.buttonparameter.Text = "查看参数列表";
+            this.buttonparameter.UseVisualStyleBackColor = false;
+            this.buttonparameter.Click += new System.EventHandler(this.buttonparameter_Click);
+            // 
+            // buttonloadserver
+            // 
+            this.buttonloadserver.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.buttonloadserver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonloadserver.Location = new System.Drawing.Point(20, 20);
+            this.buttonloadserver.Name = "buttonloadserver";
+            this.buttonloadserver.Size = new System.Drawing.Size(112, 20);
+            this.buttonloadserver.TabIndex = 7;
+            this.buttonloadserver.Text = "载入服务器信息";
+            this.buttonloadserver.UseVisualStyleBackColor = false;
+            this.buttonloadserver.Click += new System.EventHandler(this.buttonloadserver_Click);
             // 
             // buttonOpenxml
             // 
             this.buttonOpenxml.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonOpenxml.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonOpenxml.Location = new System.Drawing.Point(20, 87);
+            this.buttonOpenxml.Location = new System.Drawing.Point(143, 83);
             this.buttonOpenxml.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOpenxml.Name = "buttonOpenxml";
             this.buttonOpenxml.Size = new System.Drawing.Size(112, 20);
@@ -324,7 +356,7 @@ namespace FMU_Test
             // 
             this.buttonGetTask.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonGetTask.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonGetTask.Location = new System.Drawing.Point(20, 24);
+            this.buttonGetTask.Location = new System.Drawing.Point(20, 83);
             this.buttonGetTask.Margin = new System.Windows.Forms.Padding(2);
             this.buttonGetTask.Name = "buttonGetTask";
             this.buttonGetTask.Size = new System.Drawing.Size(112, 20);
@@ -333,21 +365,43 @@ namespace FMU_Test
             this.buttonGetTask.UseVisualStyleBackColor = false;
             this.buttonGetTask.Click += new System.EventHandler(this.buttonGetTask_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 56);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "服务器xml:";
+            // 
+            // textBoxloadsxml
+            // 
+            this.textBoxloadsxml.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxloadsxml.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxloadsxml.Location = new System.Drawing.Point(90, 56);
+            this.textBoxloadsxml.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxloadsxml.Name = "textBoxloadsxml";
+            this.textBoxloadsxml.ReadOnly = true;
+            this.textBoxloadsxml.Size = new System.Drawing.Size(52, 14);
+            this.textBoxloadsxml.TabIndex = 6;
+            this.textBoxloadsxml.Text = "未载入";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 60);
+            this.label7.Location = new System.Drawing.Point(146, 56);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 12);
+            this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 5;
-            this.label7.Text = "xml文件：";
+            this.label7.Text = "xml文件:";
             // 
             // textBoxxml
             // 
             this.textBoxxml.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxxml.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxxml.Location = new System.Drawing.Point(89, 60);
+            this.textBoxxml.Location = new System.Drawing.Point(203, 56);
             this.textBoxxml.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxxml.Name = "textBoxxml";
             this.textBoxxml.ReadOnly = true;
@@ -363,7 +417,7 @@ namespace FMU_Test
             this.richTextBoxinfo.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxinfo.Name = "richTextBoxinfo";
             this.richTextBoxinfo.ReadOnly = true;
-            this.richTextBoxinfo.Size = new System.Drawing.Size(770, 205);
+            this.richTextBoxinfo.Size = new System.Drawing.Size(882, 255);
             this.richTextBoxinfo.TabIndex = 2;
             this.richTextBoxinfo.Text = "";
             // 
@@ -386,7 +440,7 @@ namespace FMU_Test
             this.groupBox3.Controls.Add(this.buttonlogin);
             this.groupBox3.Controls.Add(this.buttonexit);
             this.groupBox3.Font = new System.Drawing.Font("新宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(169, 124);
+            this.groupBox3.Location = new System.Drawing.Point(283, 124);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -604,7 +658,7 @@ namespace FMU_Test
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(788, 470);
+            this.ClientSize = new System.Drawing.Size(904, 520);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBoxinfo);
             this.Controls.Add(this.groupBox2);
@@ -672,6 +726,10 @@ namespace FMU_Test
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxxml;
         private System.Windows.Forms.Button buttonsftpdel;
+        private System.Windows.Forms.Button buttonparameter;
+        private System.Windows.Forms.Button buttonloadserver;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxloadsxml;
     }
 }
 

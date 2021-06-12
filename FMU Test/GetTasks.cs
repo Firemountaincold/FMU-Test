@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -12,6 +13,8 @@ namespace FMU_Test
         public TipTools tip = new TipTools();
         public int num = 0;
         public string[] name = new string[0];
+        public bool loaded = false;
+        public Dictionary<string, string> vars = new Dictionary<string, string>();
         public GetTasks()
         {
             InitializeComponent();
@@ -25,6 +28,11 @@ namespace FMU_Test
         {
             //添加任务
             GetTask getTask = new GetTask(xmlDocument, root);
+            getTask.loaded = loaded;
+            if (loaded)
+            {
+                getTask.vars = vars;
+            }
             if (getTask.ShowDialog() == DialogResult.OK)
             {
                 if (CheckCopy(name, getTask.name)) 

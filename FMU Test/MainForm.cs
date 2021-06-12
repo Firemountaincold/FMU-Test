@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Configuration;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -22,6 +23,7 @@ namespace FMU_Test
         //全局量
         public string FMUpath = "";
         public string Callpath = "";
+        public string sxmlpath = "";
         public string ip;
         public string port;
         public string userid;
@@ -33,6 +35,7 @@ namespace FMU_Test
         //标志
         public bool logflag = false;
         public bool sftplogflag = false;
+        public bool readxml = false;
         //配置文件修改
         Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
@@ -223,6 +226,15 @@ namespace FMU_Test
         {
             //生成Task.xml
             GetTasks getTasks = new GetTasks();
+            if (readxml)
+            {
+                if (MessageBox.Show("检测到您读取了服务器信息，是否使用服务器信息中的变量生成Task.xml？", "询问", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    XmlTransfer xt = new XmlTransfer(sxmlpath);
+                    getTasks.loaded = true;
+                    getTasks.vars = xt.Read10_VarAndType();
+                }
+            }
             if (getTasks.ShowDialog() == DialogResult.OK)
             {
                 info.AddInfo("创建成功！已保存到" + Application.StartupPath + "\\XML文件\\Task.xml", 1);
@@ -836,6 +848,45 @@ namespace FMU_Test
                 textBoxxml.Text = "未生成";
                 textBoxxml.ForeColor = Color.Black;
                 return false;
+            }
+        }
+
+        private void buttonloadserver_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (!Directory.Exists(Application.StartupPath + "\\配置文件"))
+            {
+                Directory.CreateDirectory(Application.StartupPath + "\\配置文件");
+            }
+            openFileDialog.InitialDirectory = Application.StartupPath + "\\配置文件";
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "xml文件(*.xml)|*.xml";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                sxmlpath = openFileDialog.FileName;
+                info.AddInfo("已载入" + sxmlpath, 1);
+                readxml = true;
+                textBoxloadsxml.Text = "已载入";
+                textBoxloadsxml.ForeColor = Color.Green;
+            }
+        }
+
+        private void buttonparameter_Click(object sender, EventArgs e)
+        {
+            if (readxml)
+            {
+                XmlTransfer xt = new XmlTransfer(sxmlpath);
+                Dictionary<string, string> vars = xt.Read10_VarAndType();
+                info.AddInfo("读取到的参数如下：", 1);
+                foreach (var v in vars)
+                {
+                    info.AddInfo(rn + "参数名：" + v.Key + "   参数类型：" + v.Value, 3);
+                }
+                info.AddInfo("\r\n", 3);
+            }
+            else
+            {
+                MessageBox.Show("请先读取服务器xml文件！", "警告");
             }
         }
     }

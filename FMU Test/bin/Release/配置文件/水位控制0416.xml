@@ -1,0 +1,736 @@
+<Project schemaVersion="1.0" xmlns="www.iec.ch/public/TC65SC65BWG7TF10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.iec.ch/public/TC65SC65BWG7TF10 IEC61131_10_Ed1_0.xsd">
+  <FileHeader companyName="HDU" productName="CASS" productVersion="2.0" />
+  <ContentHeader name="实验十一水位控制" creationDateTime="2021-04-16T10:48:04" version="2.0" modificationDateTime="2021-04-16T10:48:04" organization="HDU" author="HDU" language="EN">
+    <AddDataInfo>
+      <Info name="Encryption" vendor="" />
+      <Info name="C" vendor="" />
+      <Info name="Library" vendor="" />
+    </AddDataInfo>
+    <AddData>
+      <Data name="Encryption" handleUnknown="preserve">
+        <ExportConfiguration>
+          <ExportPou>
+          </ExportPou>
+          <noExportPou>
+          </noExportPou>
+        </ExportConfiguration>
+      </Data>
+      <Data name="C" handleUnknown="preserve">
+        <C-Configuration>
+        </C-Configuration>
+      </Data>
+      <Data name="Library" handleUnknown="preserve">
+        <Library-Configuration>
+        </Library-Configuration>
+      </Data>
+    </AddData>
+  </ContentHeader>
+  <Types>
+    <GlobalNamespace>
+      <NamespaceDecl name="POU1" />
+      <NamespaceDecl name="POU2">
+        <Program name="ST_CONTROL">
+          <AddData>
+            <Data name="ST_CONTROL_VarCode" handleUnknown="preserve">
+              <Content><![CDATA[PROGRAM ST_CONTROL
+
+
+TYPE
+
+END_TYPE
+
+VAR
+RANGEAI:UINT:=1;(* cass:1 和利时:7.5*)
+RANGEAO:UINT:=1;(*CASS:1 和利时:3*)
+AUTO_MODE AT %I0 :BOOL;(*自动模式 AT %I0*)
+SWITCH_ON AT %I1 :BOOL;(*启动/停止开关 AT %I1*)
+AUTO_DOOR1UP AT %I2 :BOOL;(*自动阀+1 AT %I2*)
+AUTO_DOOR1DOWN AT %I3 :BOOL;(*自动阀-1 AT %I3*)
+HAND_MODE AT %I4 :BOOL;(*手动模式 AT %I4*)
+SOFT_MODE AT %I5 :BOOL;(*软操作模式 AT %I5*)
+
+AUTO_DOOR1VALUE AT %VD2000 :UINT:=0;(*自动阀值  输出*)
+BIG_V AT %VD1000 :UINT;(*主桶*)
+SET_BIG_V :REAL:=800;
+CV AT %VD1002:UINT;(*实际值*)
+SV AT %VD1004 :UINT;(*目标值 设置水位*)
+
+
+
+I0:REAL:=0;
+(*1主水桶水位PID控制 2副水桶水位PID控制*)
+Kp1:REAL:=0.3;
+Ki1:REAL:=0.3;
+Kd1:REAL:=5;
+P1:REAL:=0;
+I1:REAL:=0;
+D1:REAL:=0;
+RES1:REAL;
+
+Kp2:REAL:=0.3;
+Ki2:REAL:=0.3;
+Kd2:REAL:=10;
+P2:REAL:=0;
+I2:REAL:=0;
+D2:REAL:=0;
+RES2:REAL;
+
+RUNMODE:INT:=0;(*0 关闭 1 开启 2软操作 3自动 4手动*)
+
+TON1:TON;
+TON2:TON;
+TON1Q:BOOL;
+TON2Q:BOOL;
+
+
+
+Pre_err1:REAL;
+Cur_err1:REAL;
+PSV1:REAL;
+PCV1:REAL;
+Pre_err2:REAL;
+Cur_err2:REAL;
+PSV2:REAL;
+PCV2:REAL;
+
+END_VAR
+
+VAR_INPUT
+
+END_VAR
+
+VAR_OUTPUT
+
+END_VAR
+]]></Content>
+            </Data>
+          </AddData>
+          <Vars accessSpecifier="public">
+            <Variable name="RANGEAI">
+              <AddData>
+                <Data name="RANGEAI_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="1" />
+              </InitialValue>
+            </Variable>
+            <Variable name="RANGEAO">
+              <AddData>
+                <Data name="RANGEAO_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="1" />
+              </InitialValue>
+            </Variable>
+            <Variable name="AUTO_MODE">
+              <AddData>
+                <Data name="AUTO_MODE_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i0]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="0" />
+            </Variable>
+            <Variable name="SWITCH_ON">
+              <AddData>
+                <Data name="SWITCH_ON_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i1]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="1" />
+            </Variable>
+            <Variable name="AUTO_DOOR1UP">
+              <AddData>
+                <Data name="AUTO_DOOR1UP_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i2]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="2" />
+            </Variable>
+            <Variable name="AUTO_DOOR1DOWN">
+              <AddData>
+                <Data name="AUTO_DOOR1DOWN_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i3]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="3" />
+            </Variable>
+            <Variable name="HAND_MODE">
+              <AddData>
+                <Data name="HAND_MODE_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i4]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="4" />
+            </Variable>
+            <Variable name="SOFT_MODE">
+              <AddData>
+                <Data name="SOFT_MODE_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%i5]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="I" address="5" />
+            </Variable>
+            <Variable name="AUTO_DOOR1VALUE">
+              <AddData>
+                <Data name="AUTO_DOOR1VALUE_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%vd2000]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+              <Address location="V" address="16000" />
+            </Variable>
+            <Variable name="BIG_V">
+              <AddData>
+                <Data name="BIG_V_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%vd1000]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="V" address="8000" />
+            </Variable>
+            <Variable name="SET_BIG_V">
+              <AddData>
+                <Data name="SET_BIG_V_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="800" />
+              </InitialValue>
+            </Variable>
+            <Variable name="CV">
+              <AddData>
+                <Data name="CV_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%vd1002]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="V" address="8016" />
+            </Variable>
+            <Variable name="SV">
+              <AddData>
+                <Data name="SV_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[%vd1004]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>UINT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+              <Address location="V" address="8032" />
+            </Variable>
+            <Variable name="I0">
+              <AddData>
+                <Data name="I0_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Kp1">
+              <AddData>
+                <Data name="Kp1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0.3" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Ki1">
+              <AddData>
+                <Data name="Ki1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0.3" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Kd1">
+              <AddData>
+                <Data name="Kd1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="5" />
+              </InitialValue>
+            </Variable>
+            <Variable name="P1">
+              <AddData>
+                <Data name="P1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="I1">
+              <AddData>
+                <Data name="I1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="D1">
+              <AddData>
+                <Data name="D1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="RES1">
+              <AddData>
+                <Data name="RES1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Kp2">
+              <AddData>
+                <Data name="Kp2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0.3" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Ki2">
+              <AddData>
+                <Data name="Ki2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0.3" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Kd2">
+              <AddData>
+                <Data name="Kd2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="10" />
+              </InitialValue>
+            </Variable>
+            <Variable name="P2">
+              <AddData>
+                <Data name="P2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="I2">
+              <AddData>
+                <Data name="I2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="D2">
+              <AddData>
+                <Data name="D2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="RES2">
+              <AddData>
+                <Data name="RES2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="RUNMODE">
+              <AddData>
+                <Data name="RUNMODE_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>INT</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="0" />
+              </InitialValue>
+            </Variable>
+            <Variable name="TON1">
+              <AddData>
+                <Data name="TON1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>TON</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="TON2">
+              <AddData>
+                <Data name="TON2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>TON</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="TON1Q">
+              <AddData>
+                <Data name="TON1Q_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="TON2Q">
+              <AddData>
+                <Data name="TON2Q_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>BOOL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Pre_err1">
+              <AddData>
+                <Data name="Pre_err1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Cur_err1">
+              <AddData>
+                <Data name="Cur_err1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="PSV1">
+              <AddData>
+                <Data name="PSV1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="PCV1">
+              <AddData>
+                <Data name="PCV1_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Pre_err2">
+              <AddData>
+                <Data name="Pre_err2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="Cur_err2">
+              <AddData>
+                <Data name="Cur_err2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="PSV2">
+              <AddData>
+                <Data name="PSV2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+            <Variable name="PCV2">
+              <AddData>
+                <Data name="PCV2_CassAddress" handleUnknown="preserve">
+                  <Content><![CDATA[]]></Content>
+                </Data>
+              </AddData>
+              <Type>
+                <TypeName>REAL</TypeName>
+              </Type>
+              <InitialValue>
+                <SimpleValue value="" />
+              </InitialValue>
+            </Variable>
+          </Vars>
+          <MainBody>
+            <BodyContent xsi:type="ST">
+              <ST><![CDATA[
+IF SWITCH_ON=FALSE THEN
+	RUNMODE := 0;
+ELSIF SOFT_MODE=TRUE THEN
+	RUNMODE := 2;
+ELSIF AUTO_MODE=TRUE THEN
+	RUNMODE := 3;
+ELSIF HAND_MODE=TRUE THEN
+	RUNMODE := 4;
+ELSE
+	RUNMODE := 1;
+END_IF;
+IF RUNMODE=3 THEN
+	TON1(IN := NOT TON1Q,PT := T#100MS,Q => TON1Q);
+	IF(TON1Q=TRUE) THEN
+		
+		Cur_err1 := PSV1 - BIG_V / RANGEAI;
+		P1 := Kp1 * Cur_err1;
+		I1 := I0 + Ki1 * Cur_err1;
+		IF((BIG_V/RANGEAI - PCV1) < -1 OR (BIG_V/RANGEAI - PCV1) > 1)  THEN	
+			D1 := Kd1 * (Cur_err1 - Pre_err1);
+		ELSIF Cur_err1<10 AND Cur_err1>-10 THEN
+		D1 := Kd1 * (Cur_err1 - Pre_err1);
+		END_IF;
+		Pre_err1 := SET_BIG_V - BIG_V/RANGEAI;
+		PSV1 :=SET_BIG_V;
+		PCV1 := BIG_V/RANGEAI;
+		RES1 := P1 + I1 + D1;
+		IF(RES1>0) THEN
+			AUTO_DOOR1VALUE := AUTO_DOOR1VALUE+REAL_TO_UINT(RES1*RANGEAO);
+		ELSE
+			AUTO_DOOR1VALUE := AUTO_DOOR1VALUE-REAL_TO_UINT(-RES1*RANGEAO);
+		END_IF;
+		IF AUTO_DOOR1VALUE>60000 THEN
+			AUTO_DOOR1VALUE := 0;
+			
+		ELSIF AUTO_DOOR1VALUE>50000 THEN
+			AUTO_DOOR1VALUE := 50000;
+		END_IF;
+		
+	END_IF;
+
+	TON2(IN := NOT TON2Q,PT := T#500MS,Q => TON2Q);
+	IF(TON2Q=TRUE) THEN
+
+	Cur_err2 := PSV2 - CV/RANGEAI;
+	P2 := Kp2 * Cur_err2;
+	I2 := I0 + Ki2 * Cur_err2;
+	IF((CV/RANGEAI - PCV2) < -1 OR (CV/RANGEAI - PCV2) > 1)  THEN	
+	D2 := Kd2 * (Cur_err2 - Pre_err2);
+	ELSIF Cur_err2<10 AND Cur_err2>-10 THEN
+	D2 := Kd2 * (Cur_err2 - Pre_err2);
+	END_IF;
+	Pre_err2 := (SV/RANGEAI+10)- CV/RANGEAI;
+		PSV2 := (SV/RANGEAI+10);
+		PCV2 := CV;
+		RES2 := P2 + I2 + D2;
+
+		SET_BIG_V:= BIG_V/RANGEAI+RES2;
+		IF SET_BIG_V>60000 THEN
+			SET_BIG_V := 0;
+		END_IF;
+		
+	END_IF;
+	
+	
+END_IF;
+
+END_PROGRAM
+
+]]></ST>
+            </BodyContent>
+          </MainBody>
+        </Program>
+      </NamespaceDecl>
+      <NamespaceDecl name="POU3" />
+      <NamespaceDecl name="POU4" />
+      <NamespaceDecl name="POU5" />
+    </GlobalNamespace>
+  </Types>
+  <Instances />
+</Project>

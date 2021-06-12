@@ -1,0 +1,199 @@
+[测试]2021/6/5 14:59:00 已载入C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\配置文件\CutTest3CASS-10.XML
+[测试]2021/6/5 14:59:01 读取到的参数如下：
+
+                        参数名：X17   参数类型：BOOL
+                        参数名：X16   参数类型：BOOL
+                        参数名：X15   参数类型：BOOL
+                        参数名：X14   参数类型：BOOL
+                        参数名：X13   参数类型：BOOL
+                        参数名：X12   参数类型：BOOL
+                        参数名：X11   参数类型：BOOL
+                        参数名：X10   参数类型：BOOL
+                        参数名：X7   参数类型：BOOL
+                        参数名：X6   参数类型：BOOL
+                        参数名：X5   参数类型：BOOL
+                        参数名：X4   参数类型：BOOL
+                        参数名：X3   参数类型：BOOL
+                        参数名：X2   参数类型：BOOL
+                        参数名：X1   参数类型：BOOL
+                        参数名：X0   参数类型：BOOL
+                        参数名：Y17   参数类型：BOOL
+                        参数名：Y16   参数类型：BOOL
+                        参数名：Y15   参数类型：BOOL
+                        参数名：Y14   参数类型：BOOL
+                        参数名：Y13   参数类型：BOOL
+                        参数名：Y12   参数类型：BOOL
+                        参数名：Y11   参数类型：BOOL
+                        参数名：Y10   参数类型：BOOL
+                        参数名：Y7   参数类型：BOOL
+                        参数名：Y6   参数类型：BOOL
+                        参数名：Y5   参数类型：BOOL
+                        参数名：Y4   参数类型：BOOL
+                        参数名：Y3   参数类型：BOOL
+                        参数名：Y2   参数类型：BOOL
+                        参数名：Y1   参数类型：BOOL
+                        参数名：Y0   参数类型：BOOL
+                        参数名：M107   参数类型：BOOL
+                        参数名：M106   参数类型：BOOL
+                        参数名：M105   参数类型：BOOL
+                        参数名：M104   参数类型：BOOL
+                        参数名：M103   参数类型：BOOL
+                        参数名：M102   参数类型：BOOL
+                        参数名：M101   参数类型：BOOL
+                        参数名：M100   参数类型：BOOL
+                        参数名：cut_EQ8_OUT   参数类型：BOOL
+                        参数名：cut_EQ7_OUT   参数类型：BOOL
+                        参数名：cut_EQ6_OUT   参数类型：BOOL
+                        参数名：cut_EQ5_OUT   参数类型：BOOL
+                        参数名：cut_EQ4_OUT   参数类型：BOOL
+                        参数名：cut_EQ3_OUT   参数类型：BOOL
+                        参数名：cut_EQ2_OUT   参数类型：BOOL
+                        参数名：cut_EQ1_OUT   参数类型：BOOL
+                        参数名：cut_EQ0_OUT   参数类型：BOOL
+                        参数名：cut_Step8   参数类型：BOOL
+                        参数名：cut_Step7   参数类型：BOOL
+                        参数名：cut_Step6   参数类型：BOOL
+                        参数名：cut_Step5   参数类型：BOOL
+                        参数名：cut_Step4   参数类型：BOOL
+                        参数名：cut_Step3   参数类型：BOOL
+                        参数名：cut_Step2   参数类型：BOOL
+                        参数名：cut_Step1   参数类型：BOOL
+                        参数名：cut_Step0   参数类型：BOOL
+                        参数名：SM0   参数类型：BOOL
+                        参数名：SM1   参数类型：BOOL
+                        参数名：RS0_Reset   参数类型：BOOL
+                        参数名：RS0_SET   参数类型：BOOL
+                        参数名：RS0   参数类型：RS
+                        参数名：ALL_ON   参数类型：BOOL
+                        参数名：RS0_Q   参数类型：BOOL
+                        参数名：RUN_Cut   参数类型：BOOL
+                        参数名：AutoDoCut   参数类型：BOOL
+                        参数名：MatFull   参数类型：BOOL
+                        参数名：MatVoid   参数类型：BOOL
+                        参数名：RUNStart   参数类型：BOOL
+                        参数名：Warning   参数类型：BOOL
+                        参数名：CutErr   参数类型：BOOL
+                        参数名：MachineHandErr   参数类型：BOOL
+                        参数名：ReturnCutErr   参数类型：BOOL
+                        参数名：cstep   参数类型：INT
+                        参数名：SimAutoDo   参数类型：BOOL
+                        参数名：SimX4   参数类型：BOOL
+                        参数名：r_tr1   参数类型：R_TRIG
+                        参数名：sr0   参数类型：SR
+                        参数名：temp   参数类型：BOOL
+                        参数名：temp1   参数类型：BOOL
+                        参数名：temp2   参数类型：BOOL
+                        参数名：temp3   参数类型：BOOL
+                        参数名：Step1M100_Done   参数类型：BOOL
+                        参数名：cut_TON1   参数类型：TON
+                        参数名：cut_TON1_ET   参数类型：TIME
+                        参数名：cut_TON1_PT   参数类型：TIME
+                        参数名：cut_TON1_Q   参数类型：BOOL
+                        参数名：mT0   参数类型：BOOL
+                        参数名：cut_TON2   参数类型：TON
+                        参数名：cut_TON2_ET   参数类型：TIME
+                        参数名：cut_TON2_PT   参数类型：TIME
+                        参数名：cut_TON2_Q   参数类型：BOOL
+                        参数名：mT1   参数类型：BOOL
+                        参数名：Step2M100   参数类型：BOOL
+                        参数名：cut_TON3   参数类型：TON
+                        参数名：cut_TON3_ET   参数类型：TIME
+                        参数名：cut_TON3_PT   参数类型：TIME
+                        参数名：cut_TON3_Q   参数类型：BOOL
+                        参数名：mT2   参数类型：BOOL
+                        参数名：Step3M103   参数类型：BOOL
+                        参数名：cut_TON4   参数类型：TON
+                        参数名：cut_TON4_ET   参数类型：TIME
+                        参数名：cut_TON4_PT   参数类型：TIME
+                        参数名：cut_TON4_Q   参数类型：BOOL
+                        参数名：mT3   参数类型：BOOL
+                        参数名：Step4M103   参数类型：BOOL
+                        参数名：cut_TON5   参数类型：TON
+                        参数名：cut_TON5_ET   参数类型：TIME
+                        参数名：cut_TON5_PT   参数类型：TIME
+                        参数名：cut_TON5_Q   参数类型：BOOL
+                        参数名：mT4   参数类型：BOOL
+                        参数名：Step5M104   参数类型：BOOL
+                        参数名：cut_TON6   参数类型：TON
+                        参数名：cut_TON6_ET   参数类型：TIME
+                        参数名：cut_TON6_PT   参数类型：TIME
+                        参数名：cut_TON6_Q   参数类型：BOOL
+                        参数名：mT5   参数类型：BOOL
+                        参数名：rs1   参数类型：RS
+                        参数名：rs2   参数类型：RS
+                        参数名：rs3   参数类型：RS
+                        参数名：rs4   参数类型：RS
+                        参数名：rs5   参数类型：RS
+                        参数名：rs6   参数类型：RS
+                        参数名：rs7   参数类型：RS
+                        参数名：rs8   参数类型：RS
+                        参数名：rs9   参数类型：RS
+                        参数名：rs10   参数类型：RS
+                        参数名：rs11   参数类型：RS
+                        参数名：rs12   参数类型：RS
+                        参数名：rs13   参数类型：RS
+                        参数名：rs14   参数类型：RS
+                        参数名：rs15   参数类型：RS
+                        参数名：rs16   参数类型：RS
+                        参数名：sr1   参数类型：SR
+                        参数名：sr2   参数类型：SR
+                        参数名：sr3   参数类型：SR
+                        参数名：sr4   参数类型：SR
+                        参数名：sr5   参数类型：SR
+                        参数名：sr6   参数类型：SR
+                        参数名：sr7   参数类型：SR
+                        参数名：sr8   参数类型：SR
+                        参数名：sr9   参数类型：SR
+                        参数名：sr10   参数类型：SR
+              参数名：sr4。参数类型：SR。
+                        参数名：sr5。参数类型：SR。
+                        参数名：sr6。参数类型：SR。
+                        参数名：sr7。参数类型：SR。
+                        参数名：sr8。参数类型：SR。
+                        参数名：sr9。参数类型：SR。
+                        参数名：sr10。参数类型：SR。
+。参数类型：BOOL。
+                        参数名：Step3M103。参数类型：BOOL。
+                        参数名：cut_TON4。参数类型：TON。
+                        参数名：cut_TON4_ET。参数类型：TIME。
+                        参数名：cut_TON4_PT。参数类型：TIME。
+                        参数名：cut_TON4_Q。参数类型：BOOL。
+                        参数名：mT3。参数类型：BOOL。
+                        参数名：Step4M103。参数类型：BOOL。
+                        参数名：cut_TON5。参数类型：TON。
+                        参数名：cut_TON5_ET。参数类型：TIME。
+                        参数名：cut_TON5_PT。参数类型：TIME。
+                        参数名：cut_TON5_Q。参数类型：BOOL。
+                        参数名：mT4。参数类型：BOOL。
+                        参数名：Step5M104。参数类型：BOOL。
+                        参数名：cut_TON6。参数类型：TON。
+                        参数名：cut_TON6_ET。参数类型：TIME。
+                        参数名：cut_TON6_PT。参数类型：TIME。
+                        参数名：cut_TON6_Q。参数类型：BOOL。
+                        参数名：mT5。参数类型：BOOL。
+                        参数名：rs1。参数类型：RS。
+                        参数名：rs2。参数类型：RS。
+                        参数名：rs3。参数类型：RS。
+                        参数名：rs4。参数类型：RS。
+                        参数名：rs5。参数类型：RS。
+                        参数名：rs6。参数类型：RS。
+                        参数名：rs7。参数类型：RS。
+                        参数名：rs8。参数类型：RS。
+                        参数名：rs9。参数类型：RS。
+                        参数名：rs10。参数类型：RS。
+                        参数名：rs11。参数类型：RS。
+                        参数名：rs12。参数类型：RS。
+                        参数名：rs13。参数类型：RS。
+                        参数名：rs14。参数类型：RS。
+                        参数名：rs15。参数类型：RS。
+                        参数名：rs16。参数类型：RS。
+                        参数名：sr1。参数类型：SR。
+                        参数名：sr2。参数类型：SR。
+                        参数名：sr3。参数类型：SR。
+                        参数名：sr4。参数类型：SR。
+                        参数名：sr5。参数类型：SR。
+                        参数名：sr6。参数类型：SR。
+                        参数名：sr7。参数类型：SR。
+                        参数名：sr8。参数类型：SR。
+                        参数名：sr9。参数类型：SR。
+                        参数名：sr10。参数类型：SR。
