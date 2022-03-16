@@ -1,4 +1,4 @@
-﻿
+
 namespace FMU_Test
 {
     partial class LogIn
@@ -117,10 +117,10 @@ namespace FMU_Test
             // 
             this.buttonok.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttonok.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonok.Location = new System.Drawing.Point(32, 178);
+            this.buttonok.Location = new System.Drawing.Point(31, 178);
             this.buttonok.Margin = new System.Windows.Forms.Padding(2);
             this.buttonok.Name = "buttonok";
-            this.buttonok.Size = new System.Drawing.Size(94, 20);
+            this.buttonok.Size = new System.Drawing.Size(113, 20);
             this.buttonok.TabIndex = 17;
             this.buttonok.Text = "登录";
             this.buttonok.UseVisualStyleBackColor = false;
@@ -130,10 +130,10 @@ namespace FMU_Test
             // 
             this.buttoncancel.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.buttoncancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttoncancel.Location = new System.Drawing.Point(160, 178);
+            this.buttoncancel.Location = new System.Drawing.Point(148, 178);
             this.buttoncancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttoncancel.Name = "buttoncancel";
-            this.buttoncancel.Size = new System.Drawing.Size(94, 20);
+            this.buttoncancel.Size = new System.Drawing.Size(106, 20);
             this.buttoncancel.TabIndex = 18;
             this.buttoncancel.Text = "取消";
             this.buttoncancel.UseVisualStyleBackColor = false;

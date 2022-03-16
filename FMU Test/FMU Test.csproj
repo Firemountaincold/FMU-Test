@@ -7,11 +7,26 @@
     <ProjectGuid>{1830BCD6-2F1F-4F14-8ACC-2C5BF902447D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FMU_Test</RootNamespace>
-    <AssemblyName>FMU Test</AssemblyName>
+    <AssemblyName>FMU部署工具</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,8 +48,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Data server.ico</ApplicationIcon>
+    <ApplicationIcon>ft.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -47,11 +69,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,30 +88,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Events.Designer.cs">
-      <DependentUpon>Events.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GetCal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GetCal.Designer.cs">
-      <DependentUpon>GetCal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GetEvent2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GetEvent2.Designer.cs">
-      <DependentUpon>GetEvent2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GetEvent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GetEvent.Designer.cs">
-      <DependentUpon>GetEvent.cs</DependentUpon>
-    </Compile>
     <Compile Include="GetTasks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,31 +106,34 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetTask.cs">
+    <Compile Include="Parameter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GetTask.Designer.cs">
-      <DependentUpon>GetTask.cs</DependentUpon>
+    <Compile Include="Parameter.Designer.cs">
+      <DependentUpon>Parameter.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasks.Designer.cs">
+      <DependentUpon>Tasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="RESTful.cs" />
+    <Compile Include="SFTPExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SFTPExplorer.Designer.cs">
+      <DependentUpon>SFTPExplorer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools.cs" />
-    <EmbeddedResource Include="Events.resx">
-      <DependentUpon>Events.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GetCal.resx">
-      <DependentUpon>GetCal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GetEvent2.resx">
-      <DependentUpon>GetEvent2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GetEvent.resx">
-      <DependentUpon>GetEvent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GetTask.resx">
-      <DependentUpon>GetTask.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Welcome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Welcome.Designer.cs">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GetTasks.resx">
       <DependentUpon>GetTasks.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +143,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Parameter.resx">
+      <DependentUpon>Parameter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -147,7 +154,17 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tasks.resx">
+      <DependentUpon>Tasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SFTPExplorer.resx">
+      <DependentUpon>SFTPExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Welcome.resx">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -163,7 +180,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data server.ico" />
+    <Content Include="ft.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

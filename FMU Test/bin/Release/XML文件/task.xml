@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tasks xmlns:tasks="http://www.hollysys.com/IAS/control">
+  <Task Name="task1">
+    <Rule TaskType="repeat" TaskTrigger="Periodevent" TaskPeriod="1" Events="event1">
+      <Event Name="event1" Type="Tag" Tag="Tag1" Judge="&gt;" Value="0" />
+    </Rule>
+    <Cals>
+      <Cal Name="cal1" URI="cals/FMU_Simulation.py" />
+    </Cals>
+  </Task>
+</Tasks>

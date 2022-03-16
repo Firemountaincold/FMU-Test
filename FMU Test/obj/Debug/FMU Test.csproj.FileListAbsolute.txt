@@ -29,11 +29,6 @@ C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Debug\Renci.SshNet.dll
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Debug\Newtonsoft.Json.xml
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Debug\Renci.SshNet.xml
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Debug\Renci.SshNet.Async.xml
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.csprojAssemblyReference.cache
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.Events.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetCal.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetEvent.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetTask.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.LogIn.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.MainForm.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.Properties.Resources.resources
@@ -43,3 +38,6 @@ C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.csproj.CopyComple
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.exe
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.pdb
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.GetTasks.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU Test.csproj.AssemblyReference.cache
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.SFTPExplorer.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Debug\FMU_Test.Parameter.resources

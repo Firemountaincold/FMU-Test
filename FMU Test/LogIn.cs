@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Windows.Forms;
 
@@ -11,33 +11,37 @@ namespace FMU_Test
         public string userid;
         public string password;
         public string type;
-        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        public LogIn(string type)
+        Configuration config;
+
+        public LogIn(string type, Configuration config)
         {
             InitializeComponent();
             //同时用于两个登录窗口，所以需要两种初始化
             this.type = type;
+            this.config = config;
             if (type == "fmu")
             {
-                Text = "登录RESTful API";
+                Text = "配置RESTful";
                 textBoxip.Text = ConfigurationManager.AppSettings["fmuip"]; 
                 textBoxport.Text = ConfigurationManager.AppSettings["fmuport"];
                 textBoxuserid.Text = ConfigurationManager.AppSettings["fmuuser"];
                 textBoxpassword.Text = ConfigurationManager.AppSettings["fmupw"];
+                buttonok.Text = "保存并登录";
             }
             else if (type == "sftp")
             {
-                Text = "登录SFTP";
+                Text = "配置SFTP";
                 textBoxip.Text = ConfigurationManager.AppSettings["sftpip"];
                 textBoxport.Text = ConfigurationManager.AppSettings["sftpport"];
                 textBoxuserid.Text = ConfigurationManager.AppSettings["sftpuser"];
                 textBoxpassword.Text = ConfigurationManager.AppSettings["sftppw"];
+                buttonok.Text = "保存并登录";
             }
         }
 
         private void buttonok_Click(object sender, EventArgs e)
         {
-            //登录，并询问是否保存改变的信息
+            //保存改变的信息
             if (textBoxip.Text != "" && textBoxpassword.Text != "" && textBoxport.Text != "" && textBoxuserid.Text != "")
             {
                 ip = textBoxip.Text;
@@ -46,24 +50,21 @@ namespace FMU_Test
                 password = textBoxpassword.Text;
                 if (!Compare())
                 {
-                    if (MessageBox.Show("检测到登录信息改变，是否保存现在的登录信息？", "询问", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (type == "fmu")
                     {
-                        if (type == "fmu")
-                        {
-                            config.AppSettings.Settings["fmuip"].Value = ip;
-                            config.AppSettings.Settings["fmuport"].Value = port;
-                            config.AppSettings.Settings["fmuuser"].Value = userid;
-                            config.AppSettings.Settings["fmupw"].Value = password;
-                        }
-                        else if (type == "sftp")
-                        {
-                            config.AppSettings.Settings["sftpip"].Value = ip;
-                            config.AppSettings.Settings["sftpport"].Value = port;
-                            config.AppSettings.Settings["sftpuser"].Value = userid;
-                            config.AppSettings.Settings["sftppw"].Value = password;
-                        }
-                        config.Save(ConfigurationSaveMode.Modified);
+                        config.AppSettings.Settings["fmuip"].Value = ip;
+                        config.AppSettings.Settings["fmuport"].Value = port;
+                        config.AppSettings.Settings["fmuuser"].Value = userid;
+                        config.AppSettings.Settings["fmupw"].Value = password;
                     }
+                    else if (type == "sftp")
+                    {
+                        config.AppSettings.Settings["sftpip"].Value = ip;
+                        config.AppSettings.Settings["sftpport"].Value = port;
+                        config.AppSettings.Settings["sftpuser"].Value = userid;
+                        config.AppSettings.Settings["sftppw"].Value = password;
+                    }
+                    config.Save(ConfigurationSaveMode.Modified);
                 }
                 DialogResult = DialogResult.OK;
             }

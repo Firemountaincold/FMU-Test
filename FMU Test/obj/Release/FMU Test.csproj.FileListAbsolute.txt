@@ -19,20 +19,12 @@ C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.CoreC
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.CopyComplete
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.exe
 C:\Users\lenovo\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.pdb
-C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU Test.exe.config
-C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU Test.exe
-C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU Test.pdb
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Newtonsoft.Json.dll
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Renci.SshNet.Async.dll
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Renci.SshNet.dll
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Newtonsoft.Json.xml
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Renci.SshNet.xml
 C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\Renci.SshNet.Async.xml
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csprojAssemblyReference.cache
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.Events.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.GetCal.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.GetEvent.resources
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.GetTask.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.GetTasks.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.LogIn.resources
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.MainForm.resources
@@ -40,6 +32,13 @@ C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.Properties.Reso
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.GenerateResource.cache
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.CoreCompileInputs.cache
 C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.CopyComplete
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.exe
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.pdb
-C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.GetEvent2.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.Parameter.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.SFTPExplorer.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.Welcome.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU_Test.Tasks.resources
+C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU部署工具.exe.config
+C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU部署工具.exe
+C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\FMU部署工具.pdb
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU部署工具.exe
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU部署工具.pdb
+C:\Users\llz\source\repos\FMU Test\FMU Test\obj\Release\FMU Test.csproj.AssemblyReference.cache

@@ -1,0 +1,18 @@
+[测试]2021/7/30 14:58:50 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/30 14:58:53 SFTP服务器登陆成功。
+[测试]2021/7/30 14:58:53 开始登录RESTful接口……
+[测试]2021/7/30 14:58:55 已获得种子：32wbg1zstkqurvn7l9eyfpc4a6，正在获取令牌……
+[测试]2021/7/30 14:58:57 已获得令牌：1e0706a4fee37c6ef91aff7a05b70315，登陆成功。
+[测试]2021/7/30 14:58:57 开始获取平台信息，当前流水号为：1
+[测试]2021/7/30 14:59:00 控制器运行状态为：STOP
+[测试]2021/7/30 14:59:04 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/30 14:59:06 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/30 14:59:10 已安装的控制模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/30 14:59:10 信息获取完成，当前流水号为：4
+[测试]2021/7/30 15:00:07 启动NOP GET操作。当前流水号为：5
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。

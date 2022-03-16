@@ -1,0 +1,169 @@
+[测试]2021/7/16 9:26:50 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/16 9:26:52 SFTP服务器登陆成功。
+[测试]2021/7/16 9:26:52 开始登录RESTful接口……
+[测试]2021/7/16 9:26:54 已获得种子：ahjge0ti4dqybz5x21nfpwvol7，正在获取令牌……
+[测试]2021/7/16 9:26:56 已获得令牌：98a7b4f139afca5bbf94d20e97472adc，登陆成功。
+[测试]2021/7/16 9:26:56 开始获取平台信息，当前流水号为：1
+[测试]2021/7/16 9:26:58 控制器运行状态为：STOP
+[测试]2021/7/16 9:27:02 平台系统：Linux
+                        系统版本：4.19.132-rt59
+                        Python版本：/bin/sh: python: command not found
+                        Gcc版本：/bin/sh: gcc: command not found
+                        AI版本：3.0
+[测试]2021/7/16 9:27:05 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                        调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 9:27:08 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 9:27:08 信息获取完成，当前流水号为：4
+[测试]2021/7/16 9:28:05 启动NOP GET操作。当前流水号为：5
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:29:00 启动NOP GET操作。当前流水号为：6
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:29:55 启动NOP GET操作。当前流水号为：7
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:30:50 启动NOP GET操作。当前流水号为：8
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:31:45 启动NOP GET操作。当前流水号为：9
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:32:41 启动NOP GET操作。当前流水号为：10
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:33:35 启动NOP GET操作。当前流水号为：11
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:34:30 启动NOP GET操作。当前流水号为：12
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:35:25 启动NOP GET操作。当前流水号为：13
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 9:36:20 启动NOP GET操作。当前流水号为：14
+                        Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:35:28 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/16 15:35:30 SFTP服务器登陆成功。
+[测试]2021/7/16 15:35:30 开始登录RESTful接口……
+[测试]2021/7/16 15:35:32 已获得种子：81zm4htkel7jfsovpd5bg3u9xq，正在获取令牌……
+[测试]2021/7/16 15:35:35 已获得令牌：fdfd0af05840ae440ec544ed4b5149c4，登陆成功。
+[测试]2021/7/16 15:35:35 开始获取平台信息，当前流水号为：1
+[测试]2021/7/16 15:35:38 控制器运行状态为：STOP
+[测试]2021/7/16 15:35:43 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/16 15:35:46 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 15:35:49 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 15:35:49 信息获取完成，当前流水号为：4
+[测试]2021/7/16 15:36:03 已载入C:\Users\llz\source\repos\FMU Test\2.2.7.13\FMU Test\bin\Release\配置文件\FMU_Simulation.fmu
+[测试]2021/7/16 15:36:07 已载入C:\Users\llz\source\repos\FMU Test\2.2.7.13\FMU Test\bin\Release\配置文件\FMU_Simulation.py
+[测试]2021/7/16 15:36:30 已上传FMU_Simulation.fmu。共574911字节。
+[测试]2021/7/16 15:36:30 已上传FMU_Simulation.py。共1433字节。
+[测试]2021/7/16 15:36:47 启动NOP GET操作。当前流水号为：5
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:37:35 创建成功！已保存到C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\XML文件\task.xml
+[测试]2021/7/16 15:37:35 已载入C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\XML文件\task.xml
+[测试]2021/7/16 15:37:35 已添加的任务：task1
+[测试]2021/7/16 15:37:40 已上传task.xml。共398字节。
+[测试]2021/7/16 15:37:42 启动NOP GET操作。当前流水号为：6
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:38:21 开始获取平台信息，当前流水号为：7
+[测试]2021/7/16 15:38:23 控制器运行状态为：STOP
+[测试]2021/7/16 15:38:26 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/16 15:38:29 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 15:38:31 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 15:38:31 信息获取完成，当前流水号为：10
+[测试]2021/7/16 15:38:54 启动PyRunStat POST操作。当前流水号为：11
+                         返回消息：运行调度成功！
+[测试]2021/7/16 15:38:58 开始获取平台信息，当前流水号为：12
+[测试]2021/7/16 15:39:01 控制器运行状态为：RUN
+[测试]2021/7/16 15:39:06 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/16 15:39:08 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 15:39:11 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 15:39:11 信息获取完成，当前流水号为：15
+[测试]2021/7/16 15:39:21 启动PyRunStat POST操作。当前流水号为：16
+                         返回消息：运行调度成功！
+[测试]2021/7/16 15:40:18 启动NOP GET操作。当前流水号为：17
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:41:18 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/16 15:41:21 SFTP服务器登陆成功。
+[测试]2021/7/16 15:41:21 开始登录RESTful接口……
+[测试]2021/7/16 15:41:22 已获得种子：noztlx76ub1ps8veg5qah942ri，正在获取令牌……
+[测试]2021/7/16 15:41:25 已获得令牌：54572277f3bd6daf6e0d480a030115f1，登陆成功。
+[测试]2021/7/16 15:41:25 开始获取平台信息，当前流水号为：1
+[测试]2021/7/16 15:41:27 控制器运行状态为：STOP
+[测试]2021/7/16 15:41:31 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/16 15:41:33 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 15:41:35 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 15:41:35 信息获取完成，当前流水号为：4
+[测试]2021/7/16 15:42:33 启动NOP GET操作。当前流水号为：5
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:43:27 启动NOP GET操作。当前流水号为：6
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:44:22 启动NOP GET操作。当前流水号为：7
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:45:17 启动NOP GET操作。当前流水号为：8
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:46:13 启动NOP GET操作。当前流水号为：9
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:47:08 启动NOP GET操作。当前流水号为：10
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:47:13 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/16 15:47:16 SFTP服务器登陆成功。
+[测试]2021/7/16 15:47:16 开始登录RESTful接口……
+[测试]2021/7/16 15:47:18 已获得种子：1iu69fxvpo7kyzchbj4m3qs02e，正在获取令牌……
+[测试]2021/7/16 15:47:19 已获得令牌：48d2b9b8412e6335168cbb663c80616f，登陆成功。
+[测试]2021/7/16 15:47:19 开始获取平台信息，当前流水号为：1
+[测试]2021/7/16 15:47:21 控制器运行状态为：STOP
+[测试]2021/7/16 15:47:25 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/16 15:47:28 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/16 15:47:31 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/16 15:47:31 信息获取完成，当前流水号为：4
+[测试]2021/7/16 15:48:28 启动NOP GET操作。当前流水号为：5
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:49:23 启动NOP GET操作。当前流水号为：6
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:49:45 已载入C:\Users\llz\source\repos\FMU Test\FMU Test\bin\Release\XML文件\task.xml
+[测试]2021/7/16 15:50:18 启动NOP GET操作。当前流水号为：7
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:51:13 启动NOP GET操作。当前流水号为：8
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:52:08 启动NOP GET操作。当前流水号为：9
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:53:03 启动NOP GET操作。当前流水号为：10
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:53:58 启动NOP GET操作。当前流水号为：11
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:54:53 启动NOP GET操作。当前流水号为：12
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:55:48 启动NOP GET操作。当前流水号为：13
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:56:43 启动NOP GET操作。当前流水号为：14
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:57:38 启动NOP GET操作。当前流水号为：15
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:58:33 启动NOP GET操作。当前流水号为：16
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 15:59:28 启动NOP GET操作。当前流水号为：17
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 16:00:23 启动NOP GET操作。当前流水号为：18
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 16:01:18 启动NOP GET操作。当前流水号为：19
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。
+[测试]2021/7/16 16:02:13 启动NOP GET操作。当前流水号为：20
+                         Token有效时间自动刷新成功。每隔55秒刷新一次。

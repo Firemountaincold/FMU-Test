@@ -1,11 +1,10 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using System.Collections;
-using System.Xml;
-using System.Collections.Generic;
 using Renci.SshNet;
+using System;
+using System.Collections;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace FMU_Test
 {
@@ -56,6 +55,7 @@ namespace FMU_Test
     public class InfoTools
     {
         public RichTextBox tb = new RichTextBox();
+        public bool islog = true;
 
         public InfoTools(RichTextBox tb)
         {
@@ -71,16 +71,28 @@ namespace FMU_Test
                 tb.BeginInvoke(new Action(() => { tb.AppendText("["); }));
                 AddColorInfo("测试", Color.Green);
                 tb.BeginInvoke(new Action(() => { tb.AppendText("]" + DateTime.Now + " " + info + "\r\n"); }));
+                if (islog)
+                {
+                    Savelog("[测试]" + DateTime.Now + " " + info + "\r\n");
+                }
             }
             else if (type == 2)
             {
                 tb.BeginInvoke(new Action(() => { tb.AppendText("["); }));
                 AddColorInfo("警告", Color.Red);
                 tb.BeginInvoke(new Action(() => { tb.AppendText("]" + DateTime.Now + " " + info + "\r\n"); }));
+                if (islog)
+                {
+                    Savelog("[警告]" + DateTime.Now + " " + info + "\r\n");
+                }
             }
             else if (type == 3)
             {
                 tb.BeginInvoke(new Action(() => { tb.AppendText(info); }));
+                if (islog)
+                {
+                    Savelog(info);
+                }
             }
             tb.BeginInvoke(new Action(() => { tb.ScrollToCaret(); }));
         }
@@ -88,14 +100,32 @@ namespace FMU_Test
         public void AddColorInfo(string info, Color color)
         {
             // 用于输出带颜色的信息
-            tb.BeginInvoke(new Action(() => { 
-                tb.SelectionStart = tb.TextLength; 
+            tb.BeginInvoke(new Action(() =>
+            {
+                tb.SelectionStart = tb.TextLength;
                 tb.SelectionLength = 0;
                 tb.SelectionColor = color;
                 tb.AppendText(info);
                 tb.SelectionColor = tb.ForeColor;
                 tb.ScrollToCaret();
             }));
+        }
+
+        public void Savelog(string log)
+        {
+            //保存日志
+            try
+            {
+                string path = Application.StartupPath + "\\运行日志\\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";
+                StreamWriter sw = new StreamWriter(path, true);
+                sw.Flush();
+                sw.Write(log);
+                sw.Close();
+            }
+            catch(Exception e)
+            {
+                AddInfo(e.Message, 2);
+            }
         }
     }
 
@@ -110,7 +140,7 @@ namespace FMU_Test
         {
             // 构造
             sftp = new SftpClient(ip, Int32.Parse(port), user, pwd);
-            
+            sftp.OperationTimeout = TimeSpan.FromSeconds(1);
         }
 
         public bool Connect()
@@ -154,6 +184,11 @@ namespace FMU_Test
                 using (var file = File.OpenRead(localPath))
                 {
                     sftp.UploadFile(file, remotePath);
+                    var issuccess = CheckFile(remotePath);
+                    if (!issuccess)
+                    {
+                        throw new Exception(string.Format("未检测到上传的文件。"));
+                    }
                     return file.Length;
                 }
             }
@@ -163,13 +198,14 @@ namespace FMU_Test
             }
         }
 
-        public void Get(string remotePath, string localPath)
+        public long Get(string remotePath, string localPath)
         {
             // SFTP获取文件
             try
             {
                 var byt = sftp.ReadAllBytes(remotePath);
                 File.WriteAllBytes(localPath, byt);
+                return byt.LongLength;
             }
             catch (Exception ex)
             {
@@ -191,7 +227,7 @@ namespace FMU_Test
             }
         }
 
-        public ArrayList GetFileList(string remotePath, string fileSuffix)
+        public ArrayList GetFileList(string remotePath)
         {
             // 获取SFTP文件列表
             try
@@ -201,10 +237,15 @@ namespace FMU_Test
                 foreach (var file in files)
                 {
                     string name = file.Name;
-                    if (name.Length > (fileSuffix.Length + 1) && fileSuffix == name.Substring(name.Length - fileSuffix.Length))
+                    string path = file.FullName;
+                    bool isdir = file.IsDirectory;
+                    if (!file.OthersCanRead)
                     {
-                        objList.Add(name);
+                        file.OthersCanRead = true;
                     }
+                    bool isotherread = file.OthersCanRead;
+                    SFTPinfo s = new SFTPinfo(name, path, isdir, isotherread);
+                    objList.Add(s);
                 }
                 return objList;
             }
@@ -214,17 +255,36 @@ namespace FMU_Test
             }
         }
 
-        public void Move(string oldRemotePath, string newRemotePath)
+        public bool CheckFile(string RemotePath)
         {
-            // 移动SFTP文件
+            // 检查SFTP文件
             try
             {
-                sftp.RenameFile(oldRemotePath, newRemotePath);
+                return sftp.Get(RemotePath) != null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(string.Format("SFTP文件移动失败，原因：{0}", ex.Message));
+                return false;
             }
+        }
+    }
+
+    public class SFTPinfo
+    {
+        //SFTP文件信息类
+        public string name;
+        public string path;
+        public bool isdir;
+        public bool isOtherRead;
+
+        public SFTPinfo() { }
+
+        public SFTPinfo(string name, string path, bool isdir, bool isotherread)
+        {
+            this.name = name;
+            this.path = path;
+            this.isdir = isdir;
+            isOtherRead = isotherread;
         }
     }
 
@@ -237,10 +297,12 @@ namespace FMU_Test
             xr = new XmlTextReader(xmlpath);
         }
 
-        public Dictionary<string, string> Read10_VarAndType()
+        public ArrayList Read10_VarAndType()
         {
             //读取_10格式的xml
-            Dictionary<string, string> vars = new Dictionary<string, string>();
+            ArrayList vars = new ArrayList();
+            string xnamespace = "";
+            string xprogram = "";
             string var = "";
             string typename = "";
             while (xr.Read())
@@ -249,6 +311,14 @@ namespace FMU_Test
                 xr.WhitespaceHandling = WhitespaceHandling.None;
                 if (nt == XmlNodeType.Element)
                 {
+                    if (xr.Name == "NamespaceDecl")
+                    {
+                        xnamespace = xr.GetAttribute("name");
+                    }
+                    if (xr.Name == "Program")
+                    {
+                        xprogram = xr.GetAttribute("name");
+                    }
                     if (xr.Name == "Variable")
                     {
                         var = xr.GetAttribute("name");
@@ -257,11 +327,30 @@ namespace FMU_Test
                     {
                         xr.Read();
                         typename = xr.Value;
-                        vars.Add(var, typename);
+                        Xml10 xv = new Xml10(xnamespace, xprogram, typename, var);
+                        vars.Add(xv);
                     }
                 }
             }
             return vars;
+        }
+    }
+
+    public class Xml10
+    {
+        public string xnamespace;
+        public string xprogram;
+        public string xtype;
+        public string xvar;
+
+        public Xml10() { }
+
+        public Xml10(string xnamespace, string xprogram, string xtype, string xvar)
+        {
+            this.xnamespace = xnamespace;
+            this.xprogram = xprogram;
+            this.xtype = xtype;
+            this.xvar = xvar;
         }
     }
 }

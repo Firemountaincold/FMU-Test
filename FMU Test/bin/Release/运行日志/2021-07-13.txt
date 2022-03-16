@@ -1,0 +1,51 @@
+[测试]2021/7/13 14:28:02 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/13 14:28:05 SFTP服务器登陆成功。
+[测试]2021/7/13 14:28:05 开始登录RESTful接口……
+[测试]2021/7/13 14:28:06 已获得种子：jmvd1e8onikbp94tuz25salh30，正在获取令牌……
+[测试]2021/7/13 14:28:09 已获得令牌：5238423146b8aaf9b3ede5a3aca53246，登陆成功。
+[测试]2021/7/13 14:28:09 开始获取平台信息，当前流水号为：1
+[测试]2021/7/13 14:28:11 控制器运行状态为：RUN
+[测试]2021/7/13 14:28:15 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/13 14:28:17 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/13 14:28:20 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/13 14:28:20 信息获取完成，当前流水号为：4
+[测试]2021/7/13 14:51:25 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/13 14:51:28 SFTP服务器登陆成功。
+[测试]2021/7/13 14:51:28 开始登录RESTful接口……
+[测试]2021/7/13 14:51:29 已获得种子：mlqohd9k413crspyjui2vxbe57，正在获取令牌……
+[测试]2021/7/13 14:51:31 已获得令牌：b87823fabeb73cd7fcab91c8f71cfb84，登陆成功。
+[测试]2021/7/13 14:51:31 开始获取平台信息，当前流水号为：1
+[测试]2021/7/13 14:51:33 控制器运行状态为：RUN
+[测试]2021/7/13 14:51:38 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/13 14:51:40 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/13 14:51:42 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/13 14:51:42 信息获取完成，当前流水号为：4
+[测试]2021/7/13 14:51:58 返回失败提示，正在自动重新执行任务。
+[测试]2021/7/13 14:52:00 启动PyRunStat POST操作。当前流水号为：6
+                         返回消息：运行调度成功！
+[测试]2021/7/13 14:52:21 开始登陆SFTP服务器：sftp://128.0.0.252:22
+[测试]2021/7/13 14:52:23 SFTP服务器登陆成功。
+[测试]2021/7/13 14:52:23 开始登录RESTful接口……
+[测试]2021/7/13 14:52:24 已获得种子：6f8hjyoc1t94zsvnlmeq7xrbgu，正在获取令牌……
+[测试]2021/7/13 14:52:26 已获得令牌：936b4c85d43ce5cd428e83f0e29797ba，登陆成功。
+[测试]2021/7/13 14:52:26 开始获取平台信息，当前流水号为：1
+[测试]2021/7/13 14:52:29 控制器运行状态为：STOP
+[测试]2021/7/13 14:52:32 平台系统：Linux
+                         系统版本：4.19.132-rt59
+                         Python版本：/bin/sh: python: command not found
+                         Gcc版本：/bin/sh: gcc: command not found
+                         AI版本：3.0
+[测试]2021/7/13 14:52:34 调度策略根目录：/run/media/xvda/env/edgeCtrl/test/
+                         调度策略文件路径：/run/media/xvda/env/edgeCtrl/test/task.xml
+[测试]2021/7/13 14:52:37 已安装的推理模型有：FMU_Simulation.fmu FMU_Simulation.py aitask.py cal1.py cal2.py cal2_pyfmi.py cal3.py cal4.py test.py zhoujian2-arm64.fmu zhoujian2_log.txt zhoujian2_result.mat
+[测试]2021/7/13 14:52:37 信息获取完成，当前流水号为：4
